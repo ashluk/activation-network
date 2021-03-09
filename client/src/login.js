@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "./axios";
 import { Link } from "react-router-dom";
-
 export default class Registration extends React.Component {
     constructor() {
         super();
@@ -10,16 +9,12 @@ export default class Registration extends React.Component {
         };
     }
     handleClick() {
-        console.log("user clicked buootn");
+        console.log("user clicked login button");
         axios
-            .post("/registration", this.state)
+            .post("/login", this.state)
             .then(({ data }) => {
-                console.log("what is data", data);
+                console.log("what is login data", data);
                 if (data.success) {
-                    //if everything works redirect -- location.replace redirects
-                    console.log("what is data after", data);
-
-                    console.log(data);
                     location.replace("/");
                 } else {
                     this.setState({
@@ -38,7 +33,6 @@ export default class Registration extends React.Component {
         console.log("the name of input field user is typing in", e.target.name);
         this.setState(
             {
-                //in this case [] means that it is a variable
                 [e.target.name]: e.target.value,
             },
             () => console.log("this. state after setState", this.state)
@@ -48,18 +42,9 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div>
-                <h1>Registration</h1>
+                <h1>Login</h1>
                 {this.state.error && <p>something went wrong</p>}
-                <input
-                    name="first"
-                    placeholder="first"
-                    onChange={(e) => this.handleChange(e)}
-                />
-                <input
-                    name="last"
-                    placeholder="last"
-                    onChange={(e) => this.handleChange(e)}
-                />
+
                 <input
                     name="email"
                     placeholder="email"
@@ -72,7 +57,7 @@ export default class Registration extends React.Component {
                     onChange={(e) => this.handleChange(e)}
                 />
                 <button onClick={() => this.handleClick()}>submit</button>
-                <Link to="/login">Click here to log in!</Link>
+                <Link to="/register">Click here to register!</Link>
             </div>
         );
     }
