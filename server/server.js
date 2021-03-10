@@ -81,15 +81,9 @@ app.post("/login", (req, res) => {
     if (email == "") {
         console.log("!email");
         res.json({ success: false });
-        /*res.render("login", {
-            err: "ERROR! -- provide email",
-        });*/
     } else if (password == "") {
         console.log("!password");
         res.json({ success: false });
-        /*res.render("login", {
-            err: "ERROR! -- provide password",
-        });*/
     }
     db.passwordCompare(email)
         .then(({ rows }) => {
@@ -111,18 +105,11 @@ app.post("/login", (req, res) => {
                 .catch((err) => {
                     console.log("error in compare", err);
                     res.json({ success: false });
-                    /*res.render("login", {
-                        err: "passwords do not match",
-                    });*/
                 });
         })
         .catch((err) => {
             console.log("error in login", err);
             res.json({ success: false });
-
-            /*res.render("login", {
-                err: "error in passwordCompare catch",
-            });*/
         });
 });
 
@@ -130,7 +117,7 @@ app.post("/login", (req, res) => {
 app.get("*", function (req, res) {
     // runs if the user goes to literally any route except /welcome
     console.log("req.session.userId", req.session.userId);
-    if (!req.session.userId) {
+    if (req.session.userId) {
         // if the user is NOT logged in, redirect them to /welcome, which is the only page
         // they're allowed to see
         //console.log("can yous ee me");
@@ -141,10 +128,6 @@ app.get("*", function (req, res) {
         res.sendFile(path.join(__dirname, "..", "client", "index.html"));
     }
 });
-
-/*app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "..", "client", "index.html"));
-});*/
 
 app.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
