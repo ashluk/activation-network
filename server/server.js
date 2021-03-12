@@ -50,7 +50,7 @@ const uploader = multer({
 });
 
 //////////////////////UPLOADER/////////////////////////////////
-app.post("/uploader", uploader.single("file"), s3.upload, (req, res) => {
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     console.log("hit thie s3 route");
     //const { title, username, description } = req.body;
     const { imageUrl } = req.file;
