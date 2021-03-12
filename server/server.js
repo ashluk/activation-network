@@ -4,6 +4,10 @@ const compression = require("compression");
 const path = require("path");
 const db = require("./db");
 const ses = require("./ses");
+const multer = require("multer");
+const uidSafe = require("uid-safe");
+const s3 = require("./s3");
+
 const cryptoRandomString = require("crypto-random-string");
 
 const { hash, compare } = require("./bc.js");
@@ -27,6 +31,55 @@ app.use(compression());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 
+const diskStorage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function (req, file, callback) {
+        uidSafe(24).then(function (uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    },
+});
+
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 3000000,
+    },
+});
+
+//////////////////////UPLOADER/////////////////////////////////
+app.post("/uploader", uploader.single("file"), s3.upload, (req, res) => {
+    console.log("hit thie s3 route");
+    //const { title, username, description } = req.body;
+    const { imageUrl } = req.file;
+
+    const fullUrl = "https://s3.amazonaws.com/indreamsimages/" + imageUrl;
+    //console.log("fullurl", fullUrl);
+    /*const imgObject = {
+        url: fullUrl,
+        username: username,
+        title: title,
+        description: description,
+    };
+    console.log("imgObject in server", imgObject);*/
+
+    db.addImages(fullUrl, req.session.userId)
+        .then(({ rows }) => {
+            /*let id = rows;
+            console.log("id", id);*/
+            res.json({
+                imageUrl: rows[0].fullUrl,
+                success: true,
+            });
+            console.log("rows in s3upload", rows);
+        })
+        .catch((err) => {
+            console.log("err in addImages", err);
+        });
+});
+////////////////////WELCOME////////////////////////////////
 app.get("./welcome", (req, res) => {
     //is going to run if the user puts /welcome in the url bar
     if (req.session.userId) {
@@ -40,7 +93,7 @@ app.get("./welcome", (req, res) => {
 });
 
 /////////////////REGISTER ROUTE///////////////////////
-app.get("/registration", (req, res) => {});
+//app.get("/registration", (req, res) => {});
 
 app.post("/registration", (req, res) => {
     const { first, last, email, password } = req.body;
@@ -200,6 +253,7 @@ app.post("./verify", (req, res) => {
             });
     });
 });
+//INSERT A GET USER ./USER POST ROUTE HERE
 
 ///////THIS ROUTE SHOULD ALWAYS GO AT THE BOTTOM BEFORE APP.LISTEN//////////
 app.get("*", function (req, res) {

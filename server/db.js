@@ -51,12 +51,10 @@ module.exports.newPassword = (password, email) => {
     return db.query(q, params);
 };
 ////////////////UPLOADER/////////////////
-module.exports.addImages = (url, username, title, description) => {
-    const q = `
-    INSERT INTO images (url, username, title, description)
-    VALUES  ($1, $2, $3, $4)
-    RETURNING id
-      `;
-    const params = [url, username, title, description];
+module.exports.addImages = (imageUrl, id) => {
+    const q = `UPDATE users
+    SET imageUrl = $1
+    WHERE id = $2 `;
+    const params = [imageUrl, id];
     return db.query(q, params);
 };
