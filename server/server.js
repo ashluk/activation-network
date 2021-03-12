@@ -3,6 +3,8 @@ const app = express();
 const compression = require("compression");
 const path = require("path");
 const db = require("./db");
+const ses = require("./ses");
+const cryptoRandomString = require("crypto-random-string");
 
 const { hash, compare } = require("./bc.js");
 const cookieSession = require("cookie-session");
@@ -73,7 +75,7 @@ app.post("/registration", (req, res) => {
 
 ///////////////////LOGIN ROUTE/////////////////////////////
 ////LOGIN ROUTE
-app.get("/login", (req, res) => {});
+//app.get("/login", (req, res) => {});
 app.post("/login", (req, res) => {
     const password = req.body.password;
     const email = req.body.email;
@@ -94,30 +96,116 @@ app.post("/login", (req, res) => {
                 .then((match) => {
                     if (match === true) {
                         req.session.userId = rows[0].id;
-                        res.redirect("welcome");
+                        //res.redirect("welcome");
                         console.log("matched id");
+                        res.json({
+                            success: true,
+                        });
                     } else {
                         res.json({
+                            success: false,
                             error: "password incorrect",
                         });
                     }
                 })
                 .catch((err) => {
                     console.log("error in compare", err);
-                    res.json({ success: false });
                 });
         })
         .catch((err) => {
             console.log("error in login", err);
-            res.json({ success: false });
         });
+});
+///////////////////PASSWORD RESET ROUTE////////////////////
+/*app.get("/reset", (req, res) => {
+
+});*/
+app.post("/reset", (req, res) => {
+    const email = req.body.email;
+    //const body = "this is your new code";
+    const subject = "password reset";
+    db.codeCompare(email)
+        .then(({ rows }) => {
+            if (rows.length) {
+                const secretCode = cryptoRandomString({
+                    length: 6,
+                });
+                db.secretCode(secretCode, email).then(() => {
+                    ses.sendEmail(email, secretCode, subject);
+                    res.json({
+                        success: true,
+                        alert: "check your email",
+                    });
+                });
+            } else {
+                res.json({
+                    success: false,
+                    error: "no email match",
+                });
+            }
+        })
+        .catch((err) => {
+            console.log("error in codeCompare", err);
+        });
+});
+app.post("./verify", (req, res) => {
+    console.log("in verify route", req.body);
+    console.log("req.session", req.session);
+    const email = req.body.email;
+    const password = req.body.password;
+    const secret = req.body.password;
+    db.getSecretCode(secret).then(({ rows }) => {
+        compare(secret, rows[0].secret)
+            .then((match) => {
+                if (match === true) {
+                    req.session.secret = rows[0].secret;
+                    console.log("matched code");
+                    hash(password)
+                        .then((hashedPassword) => {
+                            db.newPassword(hashedPassword, rows[0].email)
+                                .then(({ rows }) => {
+                                    console.log("rows: ", rows);
+                                    req.session.userId = rows[0].id;
+
+                                    res.json({
+                                        success: true,
+                                        alert: "now change your password",
+                                    });
+                                })
+                                .catch((err) => {
+                                    console.log("registration error", err);
+
+                                    res.json({ success: false });
+                                });
+                        })
+                        .catch((err) => {
+                            console.log("error in hash", err);
+
+                            res.json({ success: false });
+                        });
+
+                    res.json({
+                        success: true,
+                    });
+                } else {
+                    res.json({
+                        success: false,
+                        error: "code incorrect",
+                    });
+                }
+            })
+            .catch((err) => {
+                console.log("error in compare", err);
+                res.json({ success: false });
+            });
+    });
 });
 
 ///////THIS ROUTE SHOULD ALWAYS GO AT THE BOTTOM BEFORE APP.LISTEN//////////
 app.get("*", function (req, res) {
     // runs if the user goes to literally any route except /welcome
     console.log("req.session.userId", req.session.userId);
-    if (req.session.userId) {
+    if (!req.session.userId && req.url != "/welcome") {
         // if the user is NOT logged in, redirect them to /welcome, which is the only page
         // they're allowed to see
         //console.log("can yous ee me");
