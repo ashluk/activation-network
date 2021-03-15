@@ -20,7 +20,7 @@ export default class Registration extends React.Component {
                     console.log("what is data after", data);
 
                     console.log(data);
-                    location.replace("/");
+                    location.replace("/profile");
                 } else {
                     this.setState({
                         error: true,

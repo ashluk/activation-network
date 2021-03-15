@@ -9,6 +9,7 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL UNIQUE CHECK(email <> ''),
     password VARCHAR NOT NULL CHECK (password <> ''),
     imageUrl VARCHAR,
+    bio VARCHAR, 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

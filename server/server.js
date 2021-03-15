@@ -45,13 +45,13 @@ const diskStorage = multer.diskStorage({
 const uploader = multer({
     storage: diskStorage,
     limits: {
-        fileSize: 3000000,
+        fileSize: 2097152,
     },
 });
 
 //////////////////////UPLOADER/////////////////////////////////
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-    console.log("hit thie s3 route");
+    console.log("hit this s3 route");
     //const { title, username, description } = req.body;
     const { imageUrl } = req.file;
 
@@ -70,7 +70,7 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
             /*let id = rows;
             console.log("id", id);*/
             res.json({
-                imageUrl: rows[0].fullUrl,
+                imageUrl: rows[0].imageUrl,
                 success: true,
             });
             console.log("rows in s3upload", rows);
@@ -253,6 +253,31 @@ app.post("./verify", (req, res) => {
             });
     });
 });
+///////////////////////////BIO ROUTE///////////////////////////
+app.post("/bioeditor", (req, res) => {
+    console.log("i am in the bio editor");
+    db.addBio(bio, req.session.userId)
+        .then(({ rows }) => {
+            res.json({
+                bio: rows[0].bio,
+            });
+            console.log("rows in bio upload", rows);
+        })
+        .catch((err) => {
+            console.log("err in addImages", err);
+        });
+});
+app.get('/user', (req,res) => {
+    console.log('i am in user req session userId'req.session.userId)
+    db.getUser(req.session.userId).then(({rows})=> {
+        res.json(({rows}));
+    }).catch((err) => {
+                console.log("error in user", err);
+                res.json({ success: false });
+            });
+
+
+}) 
 //INSERT A GET USER ./USER POST ROUTE HERE
 
 ///////THIS ROUTE SHOULD ALWAYS GO AT THE BOTTOM BEFORE APP.LISTEN//////////

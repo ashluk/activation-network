@@ -41,9 +41,6 @@ module.exports.getSecretCode = (secret) => {
     return db.query(q, params);
 };
 module.exports.newPassword = (password, email) => {
-    /*const q = `INSERT INTO users (password)
-    values ($1)
-    RETURNING id`;*/
     const q = `UPDATE users
     SET password = $1
     WHERE email = $2 `;
@@ -51,10 +48,25 @@ module.exports.newPassword = (password, email) => {
     return db.query(q, params);
 };
 ////////////////UPLOADER/////////////////
-module.exports.addImages = (imageUrl, id) => {
+module.exports.addImages = (imageUrl, userId) => {
     const q = `UPDATE users
     SET imageUrl = $1
     WHERE id = $2 `;
-    const params = [imageUrl, id];
+    const params = [imageUrl, userId];
+    return db.query(q, params);
+};
+
+//////////////BIO////////////////////
+module.exports.addBio = (bio, userId) => {
+    const q = `UPDATE users
+    SET bio = $1
+    WHERE id = $2 `;
+    const params = [bio, userId];
+    return db.query(q, params);
+};
+////////////GET USER////////////
+module.exports.getUser = (id) => {
+    const q = `SELECT first, last, imageUrl, bio FROM users WHERE id = $1`;
+    const params = [id];
     return db.query(q, params);
 };
