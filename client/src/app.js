@@ -20,25 +20,28 @@ export default class App extends Component {
             uploaderIsVisible: false,
             bio: "",
         };
+        this.imageUploadInApp = this.imageUploadInApp.bind(this);
+        /*this.componentDidMount = this.componentDidMount.bind(this);
+        this.toggleUploader = this.toggleUploader.bind(this);*/
     }
     componentDidMount() {
         console.log("the app mounted");
-        /* axios
+        axios
             .get("./user")
             .then(({ data }) => {
                 console.log("data.rows", data.rows[0]);
-                this.setState = {
+                this.setState({
                     first: data.rows[0].first,
                     last: data.rows[0].last,
-                    imageUrl: data.rows[0].imageUrl,
+                    imageUrl: data.rows[0].imageurl,
                     bio: data.rows[0].bio,
-                };
+                });
             })
             .catch((err) => {
                 console.log("error in axios user get", err);
-            });*/
+            });
 
-        var replacingThis = this;
+        /*var replacingThis = this;
         axios
             .get("/user")
             .then(function (response) {
@@ -47,18 +50,20 @@ export default class App extends Component {
 
                 replacingThis.first = response.data[0].first;
                 replacingThis.last = response.data[0].last;
+                replacingThis.bio = response.data[0].bio;
                 replacingThis.imageUrl = response.data[0].imageUrl;
             })
             .catch(function (err) {
                 console.log("error in imageID axios", err);
-            });
+            });*/
         // here is where we want to make an axios request to 'get' info about logged in user (first name, last name, and profilePicUrl / imageUrl)
         // an axios route '/user' is a good path for it
         // when we have the info from the server, add it to the state of the component (i.e. setState)
     }
     imageUploadInApp(imageUrl) {
+        console.log("imageUrl", imageUrl);
         this.setState({
-            imageUrl: this.imageUrl,
+            imageUrl: imageUrl,
         });
     }
     toggleUploader() {
@@ -69,7 +74,7 @@ export default class App extends Component {
     }
     bioInApp(arg) {
         this.setState({
-            bio: this.bio,
+            bio: bio,
         });
     }
 

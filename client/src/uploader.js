@@ -12,7 +12,9 @@ export default class Uploader extends Component {
         console.log("uploader mounderd");
     }
     handleChange(e) {
-        this.file = e.target.files[0];
+        this.setState({
+            file: e.target.files[0],
+        });
 
         //we HAVE to call this.setState to store input into state
     }
@@ -23,11 +25,9 @@ export default class Uploader extends Component {
         formData.append("file", this.state.file);
         axios
             .post("/upload", formData)
-            .then(({ response }) => {
-                console.log("response from post", response.data);
-                this.props.imageUploadInApp(response.data.imageUrl);
-                //var newImage = response.data.imgObject;
-                // console.log("replacingThis.images", this.images);
+            .then(({ data }) => {
+                console.log("response from post", data);
+                this.props.imageUploadInApp(data.imageUrl);
             })
             .catch(function (err) {
                 console.log("err in axios catch", err);

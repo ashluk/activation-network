@@ -45,17 +45,17 @@ const diskStorage = multer.diskStorage({
 const uploader = multer({
     storage: diskStorage,
     limits: {
-        fileSize: 2097152,
+        fileSize: 4000000,
     },
 });
 
 //////////////////////UPLOADER/////////////////////////////////
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-    console.log("hit this s3 route");
+    console.log("hit this s3 route", req.file);
     //const { title, username, description } = req.body;
-    const { imageUrl } = req.file;
+    const { filename } = req.file;
 
-    const fullUrl = "https://s3.amazonaws.com/indreamsimages/" + imageUrl;
+    const fullUrl = "https://s3.amazonaws.com/indreamsimages/" + filename;
     //console.log("fullurl", fullUrl);
     /*const imgObject = {
         url: fullUrl,
@@ -65,15 +65,16 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     };
     console.log("imgObject in server", imgObject);*/
 
+    console.log("req.session", req.session);
     db.addImages(fullUrl, req.session.userId)
         .then(({ rows }) => {
+            // console.log("fullUrl", fullUrl);
             /*let id = rows;
             console.log("id", id);*/
             res.json({
-                imageUrl: rows[0].imageUrl,
+                imageUrl: rows[0].imageurl,
                 success: true,
             });
-            console.log("rows in s3upload", rows);
         })
         .catch((err) => {
             console.log("err in addImages", err);
@@ -175,7 +176,6 @@ app.post("/login", (req, res) => {
 });*/
 app.post("/reset", (req, res) => {
     const email = req.body.email;
-    //const body = "this is your new code";
     const subject = "password reset";
     db.codeCompare(email)
         .then(({ rows }) => {
@@ -254,7 +254,7 @@ app.post("./verify", (req, res) => {
     });
 });
 ///////////////////////////BIO ROUTE///////////////////////////
-app.post("/bioeditor", (req, res) => {
+app.post("/updatebio", (req, res) => {
     console.log("i am in the bio editor");
     db.addBio(bio, req.session.userId)
         .then(({ rows }) => {
@@ -267,18 +267,17 @@ app.post("/bioeditor", (req, res) => {
             console.log("err in addImages", err);
         });
 });
-app.get('/user', (req,res) => {
-    console.log('i am in user req session userId'req.session.userId)
-    db.getUser(req.session.userId).then(({rows})=> {
-        res.json(({rows}));
-    }).catch((err) => {
-                console.log("error in user", err);
-                res.json({ success: false });
-            });
-
-
-}) 
-//INSERT A GET USER ./USER POST ROUTE HERE
+app.get("/user", (req, res) => {
+    console.log("i am in user req session userId", req.session.userId);
+    db.getUser(req.session.userId)
+        .then(({ rows }) => {
+            res.json({ rows });
+        })
+        .catch((err) => {
+            console.log("error in user", err);
+            res.json({ success: false });
+        });
+});
 
 ///////THIS ROUTE SHOULD ALWAYS GO AT THE BOTTOM BEFORE APP.LISTEN//////////
 app.get("*", function (req, res) {

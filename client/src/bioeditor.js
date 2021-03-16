@@ -7,25 +7,42 @@ export default class Bioeditor extends Component {
         this.state = {
             editMode: true,
             bio: this.props.bio,
+            bioInProgress: undefined,
         };
+        console.log("writing", this.state.bioInProgress);
     }
 
     componentDidMount() {
         console.log("uploader mounted");
+        this.setState({
+            bioInProgress: this.props.bio,
+        });
     }
-    handleChange(e) {
-        this.file = e.target.files[0];
 
-        //we HAVE to call this.setState to store input into state
+    handleChange(e) {
+        console.log(
+            "the name of input field user is typing in",
+            e.target.value
+        );
+
+        this.setState(
+            {
+                bioInProgress: e.target.value,
+            },
+            () => console.log("this. state after setState", this.state)
+        );
     }
     editBio() {
-        this.setState({ editMode: true });
+        this.setState({
+            editMode: true,
+            bioInProgress: this.state.bioInProgress,
+        });
     }
 
     bioEditorMethod() {
-        console.log("bio editor", this.props.bio);
+        console.log("bio editor", this.state.bioInProgress);
         axios
-            .post("/bioeditor")
+            .post("/updatebio")
             .then((response) => {
                 console.log("response from post", response.data);
 
@@ -40,16 +57,22 @@ export default class Bioeditor extends Component {
             return (
                 <div className="noedit">
                     <h1>i am the bio editor</h1>
-                    <input
-                        name="bio"
-                        placeholder="bio"
+                    <textarea
                         onChange={(e) => this.handleChange(e)}
-                    />
+                        defaultValue={this.props.bio}
+                    ></textarea>
+                    <button onClick={(e) => this.bioEditorMethod(e)}>
+                        EDIT BIO
+                    </button>
                 </div>
             );
         } else {
             return (
                 <div className="edit">
+                    <textarea
+                        onChange={(e) => this.handleChange(e)}
+                        defaultValue={this.props.bio}
+                    ></textarea>
                     <button onClick={(e) => this.bioEditorMethod(e)}>
                         EDIT BIO
                     </button>

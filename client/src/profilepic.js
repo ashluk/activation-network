@@ -1,10 +1,6 @@
 export default function Profilepic({ first, last, imageUrl, toggleUploader }) {
     //this is rendering a default image if there is no imageUrl provided
     imageUrl = imageUrl || "computercat.png"; //we need to add a default.png into the public folder
-    /*console.log(
-        "props being passed down from app (props is always an object)",
-        props
-    );*/
 
     return (
         <div>

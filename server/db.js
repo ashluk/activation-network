@@ -17,6 +17,7 @@ module.exports.addUser = (first, last, email, password) => {
 };
 //////////////////PASSWORD/////////////////////////
 module.exports.passwordCompare = (email) => {
+    console.log("email db", email);
     const q = `SELECT password, id FROM users WHERE email = $1 `;
     const params = [email];
     return db.query(q, params);
@@ -51,7 +52,8 @@ module.exports.newPassword = (password, email) => {
 module.exports.addImages = (imageUrl, userId) => {
     const q = `UPDATE users
     SET imageUrl = $1
-    WHERE id = $2 `;
+    WHERE id = $2
+    RETURNING imageurl `;
     const params = [imageUrl, userId];
     return db.query(q, params);
 };
@@ -66,7 +68,7 @@ module.exports.addBio = (bio, userId) => {
 };
 ////////////GET USER////////////
 module.exports.getUser = (id) => {
-    const q = `SELECT first, last, imageUrl, bio FROM users WHERE id = $1`;
+    const q = `SELECT first, last, imageurl, bio FROM users WHERE id = $1`;
     const params = [id];
     return db.query(q, params);
 };

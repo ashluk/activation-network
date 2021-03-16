@@ -7,12 +7,14 @@ export default function Profile(props) {
         <div>
             <Profilepic
                 imageUrl={props.imageUrl}
+                first={props.first}
                 toggleUploader={() => props.toggleUploader()}
             />
             <Bioeditor
                 bioInApp={(arg) => props.bioInApp(arg)}
                 bio={props.bio}
             />
+            <button>LOGOUT</button>
         </div>
     );
 }
