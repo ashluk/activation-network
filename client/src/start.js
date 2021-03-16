@@ -3,14 +3,13 @@ import ReactDOM from "react-dom";
 import Welcome from "./welcome";
 import App from "./app";
 
+/////////this is how we would import hooks
+/*import {useStatefulFields} from "./hooks/useStatefulFields";
+const [values, handleChange] = useStatefulFields();*/
+
 let elem;
 const userLoggedIn = location.pathname != "/welcome";
 
-/*if (location.pathname === "/welcome") {
-    elem = <Welcome />;
-} else {
-    elem = <p>my main page of website</p>;
-}*/
 if (userLoggedIn) {
     elem = <App />;
 } else {

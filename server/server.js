@@ -49,37 +49,6 @@ const uploader = multer({
     },
 });
 
-//////////////////////UPLOADER/////////////////////////////////
-app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-    console.log("hit this s3 route", req.file);
-    //const { title, username, description } = req.body;
-    const { filename } = req.file;
-
-    const fullUrl = "https://s3.amazonaws.com/indreamsimages/" + filename;
-    //console.log("fullurl", fullUrl);
-    /*const imgObject = {
-        url: fullUrl,
-        username: username,
-        title: title,
-        description: description,
-    };
-    console.log("imgObject in server", imgObject);*/
-
-    console.log("req.session", req.session);
-    db.addImages(fullUrl, req.session.userId)
-        .then(({ rows }) => {
-            // console.log("fullUrl", fullUrl);
-            /*let id = rows;
-            console.log("id", id);*/
-            res.json({
-                imageUrl: rows[0].imageurl,
-                success: true,
-            });
-        })
-        .catch((err) => {
-            console.log("err in addImages", err);
-        });
-});
 ////////////////////WELCOME////////////////////////////////
 app.get("./welcome", (req, res) => {
     //is going to run if the user puts /welcome in the url bar
@@ -253,13 +222,35 @@ app.post("./verify", (req, res) => {
             });
     });
 });
-///////////////////////////BIO ROUTE///////////////////////////
-app.post("/updatebio", (req, res) => {
-    console.log("i am in the bio editor");
-    db.addBio(bio, req.session.userId)
+//////////////////////UPLOADER/////////////////////////////////
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+    console.log("hit this s3 route", req.file);
+    //const { title, username, description } = req.body;
+    const { filename } = req.file;
+
+    const fullUrl = "https://s3.amazonaws.com/indreamsimages/" + filename;
+
+    console.log("req.session", req.session);
+    db.addImages(fullUrl, req.session.userId)
         .then(({ rows }) => {
             res.json({
-                bio: rows[0].bio,
+                imageUrl: rows[0].imageurl,
+                success: true,
+            });
+        })
+        .catch((err) => {
+            console.log("err in addImages", err);
+        });
+});
+///////////////////////////BIO ROUTE///////////////////////////
+app.post("/updatebio", (req, res) => {
+    //console.log("i am in the bio editor", req.session);
+    console.log("req.body", req.body.bio);
+    db.addBio(req.body.bio, req.session.userId)
+        .then(({ rows }) => {
+            res.json({
+                //bio: rows[0].bio,
+                success: true,
             });
             console.log("rows in bio upload", rows);
         })
@@ -267,6 +258,8 @@ app.post("/updatebio", (req, res) => {
             console.log("err in addImages", err);
         });
 });
+
+///////////////////////GET USER//////////////////////////////
 app.get("/user", (req, res) => {
     console.log("i am in user req session userId", req.session.userId);
     db.getUser(req.session.userId)
@@ -278,6 +271,8 @@ app.get("/user", (req, res) => {
             res.json({ success: false });
         });
 });
+///////////////////////GET OTHER USER//////////////////////////
+app.get("/user/:id.json");
 
 ///////THIS ROUTE SHOULD ALWAYS GO AT THE BOTTOM BEFORE APP.LISTEN//////////
 app.get("*", function (req, res) {

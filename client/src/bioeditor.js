@@ -6,16 +6,16 @@ export default class Bioeditor extends Component {
         super(props);
         this.state = {
             editMode: true,
-            bio: this.props.bio,
-            bioInProgress: undefined,
+            //bio: this.props.bio,
+            bio: undefined,
         };
-        console.log("writing", this.state.bioInProgress);
+        console.log("writing", this.state.bio);
     }
 
     componentDidMount() {
         console.log("uploader mounted");
         this.setState({
-            bioInProgress: this.props.bio,
+            bio: this.props.bio,
         });
     }
 
@@ -27,7 +27,7 @@ export default class Bioeditor extends Component {
 
         this.setState(
             {
-                bioInProgress: e.target.value,
+                bio: e.target.value,
             },
             () => console.log("this. state after setState", this.state)
         );
@@ -35,34 +35,35 @@ export default class Bioeditor extends Component {
     editBio() {
         this.setState({
             editMode: true,
-            bioInProgress: this.state.bioInProgress,
+            bio: this.state.bio,
         });
     }
 
     bioEditorMethod() {
-        console.log("bio editor", this.state.bioInProgress);
+        console.log("bio editor", this.state.bio);
         axios
-            .post("/updatebio")
+            .post("/updatebio", { bio: this.state.bio })
             .then((response) => {
                 console.log("response from post", response.data);
-
-                this.props.bioEditorInApp(response.data);
+                console.log("this.props", this.props);
+                this.props.bioInApp(this.state.bio);
             })
             .catch(function (err) {
                 console.log("err in axios catch", err);
             });
     }
     render() {
-        if (this.state.edit) {
+        if (this.state.bio === null) {
             return (
-                <div className="noedit">
+                <div className="add">
                     <h1>i am the bio editor</h1>
                     <textarea
                         onChange={(e) => this.handleChange(e)}
                         defaultValue={this.props.bio}
                     ></textarea>
+
                     <button onClick={(e) => this.bioEditorMethod(e)}>
-                        EDIT BIO
+                        ADD BIO
                     </button>
                 </div>
             );

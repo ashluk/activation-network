@@ -26,3 +26,5 @@ export default class OtherProfile extends Component {
         );
     }
 }
+
+//this.props.match.params.id is what we need to see the other id

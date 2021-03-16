@@ -72,7 +72,7 @@ export default class App extends Component {
             uploaderIsVisible: !this.state.uploaderIsVisible, //this means that we will make it the opposite of what we have --  true becomes false, false becomes true
         });
     }
-    bioInApp(arg) {
+    bioInApp(bio) {
         this.setState({
             bio: bio,
         });
@@ -100,7 +100,7 @@ export default class App extends Component {
                                 last={this.state.last}
                                 imageUrl={this.state.imageUrl}
                                 bio={this.state.bio}
-                                bioInApp={(arg) => this.bioInApp(arg)}
+                                bioInApp={(bio) => this.bioInApp(bio)}
                                 toggleUploader={() => this.toggleUploader()}
                             />
                         )}
