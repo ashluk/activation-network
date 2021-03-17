@@ -11,8 +11,8 @@ export default function Profile(props) {
                 toggleUploader={() => props.toggleUploader()}
             />
             <Bioeditor
-                bioInApp={(bio) => props.bioInApp(bio)}
                 bio={props.bio}
+                bioInApp={(bio) => props.bioInApp(bio)}
             />
             <button className="logout">LOGOUT</button>
         </div>

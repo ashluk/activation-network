@@ -9,9 +9,14 @@ export default function FindPeople() {
             setResultUsers(data.users);
         });
     }, []);
-    useEffect(function () {
-        axios.get("/user" + searchTerm);
-    }, []);
+    useEffect(
+        function () {
+            axios.get("/user/" + searchTerm).then(({ data }) => {
+                setResultUsers(data.users);
+            });
+        },
+        [searchTerm]
+    );
     return (
         <>
             {resultUsers &&

@@ -274,16 +274,42 @@ app.get("/user", (req, res) => {
 ///////////////////////GET OTHER USER//////////////////////////
 app.get("/user/:id.json", (req, res) => {
     console.log("other profile id", req.params.id);
-    db.getUser(req.params.id)
-        .then(({ rows }) => {
-            res.json(rows);
-        })
-        .catch((err) => {
-            console.log("error in user", err);
-            res.json({ success: false });
+    console.log("current id", req.session.id);
+    if (req.session.id == req.params.id) {
+        res.json({
+            success: false,
         });
+    } else {
+        db.getUser(req.params.id)
+            .then(({ rows }) => {
+                res.json(rows);
+            })
+            .catch((err) => {
+                console.log("error in user", err);
+                res.json({ success: false });
+            });
+    }
 });
 ///////////////////FIND PEOPLE////////////////////////
+app.get("/users/most-recent", (req, res) => {
+    db.mostRecentUser()
+        .then(({ rows }) => {
+            console.log("rows in most recent", rows);
+            res.json({ mostRecent: rows });
+        })
+        .catch((err) => {
+            console.log("error in mostrecent", err);
+        });
+});
+app.get("users/:val", (req, res) => {
+    db.findUser(val)
+        .then(({ rows }) => {
+            res.json({ resultUsers: rows });
+        })
+        .catch((err) => {
+            console.log("error in finduser", err);
+        });
+});
 
 ///////THIS ROUTE SHOULD ALWAYS GO AT THE BOTTOM BEFORE APP.LISTEN//////////
 app.get("*", function (req, res) {

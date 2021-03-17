@@ -72,3 +72,15 @@ module.exports.getUser = (id) => {
     const params = [id];
     return db.query(q, params);
 };
+//////////////FIND PEOPLE/////////////////
+
+module.exports.mostRecentUser = () => {
+    const q = `SELECT * FROM users ORDER BY id DESC LIMIT 3`;
+    return db.query(q);
+};
+module.exports.findUser = (val) => {
+    const q = `SELECT * FROM users
+WHERE first ILIKE $1 or last ILIKE $1`;
+    const params = [val + "%"];
+    return db.query(q, params);
+};

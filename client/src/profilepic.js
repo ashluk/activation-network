@@ -10,7 +10,7 @@ export default function Profilepic({
 
     return (
         <div>
-            <h1>
+            <h1 className="profile-name">
                 {first} {last}
             </h1>
             <img
@@ -22,7 +22,6 @@ export default function Profilepic({
                 width="200"
                 height="200"
             />
-            <p>{bio}</p>
         </div>
     );
 }

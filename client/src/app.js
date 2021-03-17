@@ -8,6 +8,7 @@ import Logo from "./logo";
 import { BrowserRouter, Route } from "react-router-dom";
 import OtherProfile from "./otherprofile";
 import Profile from "./profile";
+import FindPeople from "./findpeople";
 
 export default class App extends Component {
     constructor() {
@@ -40,25 +41,6 @@ export default class App extends Component {
             .catch((err) => {
                 console.log("error in axios user get", err);
             });
-
-        /*var replacingThis = this;
-        axios
-            .get("/user")
-            .then(function (response) {
-                console.log("response in axios", response);
-                console.log("response", response.data);
-
-                replacingThis.first = response.data[0].first;
-                replacingThis.last = response.data[0].last;
-                replacingThis.bio = response.data[0].bio;
-                replacingThis.imageUrl = response.data[0].imageUrl;
-            })
-            .catch(function (err) {
-                console.log("error in imageID axios", err);
-            });*/
-        // here is where we want to make an axios request to 'get' info about logged in user (first name, last name, and profilePicUrl / imageUrl)
-        // an axios route '/user' is a good path for it
-        // when we have the info from the server, add it to the state of the component (i.e. setState)
     }
     imageUploadInApp(imageUrl) {
         console.log("imageUrl", imageUrl);
@@ -82,15 +64,15 @@ export default class App extends Component {
         return (
             <BrowserRouter>
                 <div>
-                    <h1>Hello from App</h1>
                     <Logo />
-                    <Profilepic
-                        first={this.state.first}
-                        last={this.state.last}
-                        imageUrl={this.state.imageUrl}
-                        toggleUploader={() => this.toggleUploader()} //whatever we call these on the left hand side will become the name of the property
-                    />
-
+                    <div className="currentuser">
+                        <Profilepic
+                            first={this.state.first}
+                            last={this.state.last}
+                            imageUrl={this.state.imageUrl}
+                            toggleUploader={() => this.toggleUploader()} //whatever we call these on the left hand side will become the name of the property
+                        />
+                    </div>
                     <Route
                         exact
                         path="/"
@@ -110,6 +92,17 @@ export default class App extends Component {
                         path="/user/:id"
                         render={(props) => (
                             <OtherProfile
+                                key={props.match.url}
+                                match={props.match}
+                                history={props.history}
+                            />
+                        )}
+                    />
+
+                    <Route
+                        path="/users"
+                        render={(props) => (
+                            <FindPeople
                                 key={props.match.url}
                                 match={props.match}
                                 history={props.history}
