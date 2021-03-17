@@ -1,12 +1,17 @@
-export default function Profilepic({ first, last, imageUrl, toggleUploader }) {
+export default function Profilepic({
+    first,
+    last,
+    imageUrl,
+    bio,
+    toggleUploader,
+}) {
     //this is rendering a default image if there is no imageUrl provided
     imageUrl = imageUrl || "computercat.png"; //we need to add a default.png into the public folder
 
     return (
         <div>
-            <h2>this is where the profile pic would go </h2>;
             <h1>
-                my name is {first} {last}
+                {first} {last}
             </h1>
             <img
                 onClick={toggleUploader}
@@ -17,6 +22,7 @@ export default function Profilepic({ first, last, imageUrl, toggleUploader }) {
                 width="200"
                 height="200"
             />
+            <p>{bio}</p>
         </div>
     );
 }

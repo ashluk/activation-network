@@ -14,7 +14,7 @@ export default function Profile(props) {
                 bioInApp={(bio) => props.bioInApp(bio)}
                 bio={props.bio}
             />
-            <button>LOGOUT</button>
+            <button className="logout">LOGOUT</button>
         </div>
     );
 }

@@ -272,7 +272,18 @@ app.get("/user", (req, res) => {
         });
 });
 ///////////////////////GET OTHER USER//////////////////////////
-app.get("/user/:id.json");
+app.get("/user/:id.json", (req, res) => {
+    console.log("other profile id", req.params.id);
+    db.getUser(req.params.id)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => {
+            console.log("error in user", err);
+            res.json({ success: false });
+        });
+});
+///////////////////FIND PEOPLE////////////////////////
 
 ///////THIS ROUTE SHOULD ALWAYS GO AT THE BOTTOM BEFORE APP.LISTEN//////////
 app.get("*", function (req, res) {

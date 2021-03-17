@@ -27,7 +27,7 @@ export default class App extends Component {
     componentDidMount() {
         console.log("the app mounted");
         axios
-            .get("./user")
+            .get("/user")
             .then(({ data }) => {
                 console.log("data.rows", data.rows[0]);
                 this.setState({
@@ -107,7 +107,7 @@ export default class App extends Component {
                     />
 
                     <Route
-                        path="user/:id"
+                        path="/user/:id"
                         render={(props) => (
                             <OtherProfile
                                 key={props.match.url}

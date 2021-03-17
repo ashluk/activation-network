@@ -37,9 +37,7 @@ export default class Uploader extends Component {
         return (
             <div>
                 <div className="modal">
-                    <h2 className="uploader-text">
-                        This is my uploader component!
-                    </h2>
+                    <h2 className="uploader-text"></h2>
                     <div
                         className="x"
                         onClick={() => this.props.toggleUploader()}
@@ -54,7 +52,7 @@ export default class Uploader extends Component {
                         accept="image/*"
                     ></input>
                     <h2 onClick={(e) => this.imageUploadMethod(e)}>
-                        Click here to run method in uploader!
+                        Upload a photo?{" "}
                     </h2>
                 </div>
             </div>
