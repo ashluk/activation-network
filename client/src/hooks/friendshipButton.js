@@ -4,6 +4,7 @@ import axios from "../axios";
 export function FriendshipButton(props) {
     console.log("props in friendship", props);
     const [buttonText, setButtonText] = useState();
+    console.log("button text", buttonText);
 
     useEffect(function () {
         axios
@@ -35,7 +36,8 @@ export function FriendshipButton(props) {
 
     return (
         <div>
-            <button> {buttonText}</button>
+            <button> {buttonText?.buttonText} </button>
         </div>
     );
 }
+//if button text render that if not blank

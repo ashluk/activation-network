@@ -321,19 +321,77 @@ app.get("/friendshipstatus/:id", (req, res) => {
     const otherUser = req.params.id;
     db.checkFriendship(loggedInUser, otherUser)
         .then(({ rows }) => {
-            // if (rows === 0 )
+            if (rows[0] == undefined) {
+                res.json({ buttonText: "REQUEST FRIENDSHIP" });
+            } else if (rows[0].accepted) {
+                res.json({ buttonText: "END FRIENDSHIP" });
+            } else if (
+                rows[0].accepted == false &&
+                rows[0].sender_id == loggedInUser
+            ) {
+                res.json({ buttonText: "CANCEL REQUEST" });
+            } else if (
+                rows[0].accepted == false &&
+                rows[0].sender_id == otherUser
+            ) {
+                res.json({ buttonText: "ACCEPT REQUEST" });
+            }
+            //if rows [0] if acceppted = true end friendship
+            // if accepted = false
             //check in here what we recieved back from db
             //if else blocks that send different hard coded button texts depenednt on the response
             //if(not friends ) res.json {buttonText: 'be my friend?'}
-            console.log("rows in friendshipstatus", rows);
-            res.json({ buttonText: "REQUEST FRIENDSHIP" });
+            console.log("rows in friendshipstatus", rows[0]);
         })
         .catch((err) => {
             console.log("error in friendshipstatus", err);
         });
 });
 
-app.post("/");
+app.post("/requestfriendship/:id", (req, res) => {
+    const loggedInUser = req.session.userId;
+    const otherUser = req.params.id;
+    db.requestFriendship(loggedInUser, otherUser)
+        .then(() => {
+            res.json({});
+        })
+        .catch((err) => {
+            console.log("err in req friendship", err);
+        });
+});
+app.post("/endfriendship/:id", (req, res) => {
+    const loggedInUser = req.session.userId;
+    const otherUser = req.params.id;
+    db.endFriendship(loggedInUser, otherUser)
+        .then(() => {
+            res.json({});
+        })
+        .catch((err) => {
+            console.log("err in end friendship", err);
+        });
+});
+app.post("/cancelrequest/:id", (req, res) => {
+    const loggedInUser = req.session.userId;
+    const otherUser = req.params.id;
+    db.cancelRequest(loggedInUser, otherUser)
+        .then(() => {
+            res.json({});
+        })
+        .catch((err) => {
+            console.log("err in cancelRequest", err);
+        });
+});
+app.post("/acceptrequest/:id", (req, res) => {
+    const loggedInUser = req.session.userId;
+    const otherUser = req.params.id;
+    db.acceptRequest(loggedInUser, otherUser)
+        .then(() => {
+            res.json({});
+        })
+        .catch((err) => {
+            console.log("err in acceptRequest", err);
+        });
+});
 
 ///////THIS ROUTE SHOULD ALWAYS GO AT THE BOTTOM BEFORE APP.LISTEN//////////
 app.get("*", function (req, res) {
