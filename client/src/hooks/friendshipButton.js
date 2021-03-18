@@ -4,12 +4,10 @@ export function FriendshipButton(props) {
     console.log("props in friendship", props);
     const [buttonText, setButtonText] = useState();
     axios
-        .get(`/friendshipstatus`)
+        .get(`/friendshipstatus/${props.match.params.id}`)
 
         .then(({ data }) => {
             console.log("what is data in axios friendshipStatus", data);
-
-            this.setState({ otherUser: data[0] });
         })
         .catch((err) => {
             console.log("error in axios user:id", err);

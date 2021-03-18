@@ -314,9 +314,16 @@ app.get("/users/:val", (req, res) => {
 });
 
 ////////////FRIEND REQUESTING/////////////////////
-app.get("/friendshipstatus", (req, res) => {
+app.get("/friendshipstatus/:id", (req, res) => {
     console.log("req.params.id", req.params.id);
-    console.log("req.session.id", req.session.id);
+    console.log("req.session.id", req.session);
+    db.checkFriendship()
+        .then(({ rows }) => {
+            console.log("rows in friendshipstatus", rows);
+        })
+        .catch((err) => {
+            console.log("error in friendshipstatus", err);
+        });
 });
 
 ///////THIS ROUTE SHOULD ALWAYS GO AT THE BOTTOM BEFORE APP.LISTEN//////////

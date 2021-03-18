@@ -85,3 +85,11 @@ LIMIT 6`;
     const params = [val + "%"];
     return db.query(q, params);
 };
+///////////////////FRIENDSHIP////////////////////
+module.exports.checkFriendship = (recId, sendId) => {
+    const q = `SELECT * FROM friendships 
+    WHERE (recipient_id = $1 AND sender_id = $2) 
+    OR (recipient_id = $2 AND sender_id = $1);`;
+    const params = [recId, sendId];
+    return db.query(q, params);
+};
