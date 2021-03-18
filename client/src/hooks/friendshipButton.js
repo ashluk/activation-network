@@ -18,6 +18,19 @@ export function FriendshipButton(props) {
             });
     }, []);
 
+    /*handleClick() {
+        console.log("REQUEST CLICKED");
+        axios
+            .post(`/requestfriendship/${props.otherUserId}`)
+            .then(({ data }) => {
+                console.log("what is data", data);
+                
+            })
+            .catch((err) => {
+                console.log("err in friendrequest post", err);
+            });
+    };*/
+
     //we want a useeffect that will act as componont did mount and we can do this by passing to use effect a second arg that is an empty array
     //our axios request will go inside of this.
 
