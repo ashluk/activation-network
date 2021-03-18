@@ -80,7 +80,8 @@ module.exports.mostRecentUser = () => {
 };
 module.exports.findUser = (val) => {
     const q = `SELECT * FROM users
-WHERE first ILIKE $1 or last ILIKE $1`;
+WHERE first ILIKE $1 or last ILIKE $1
+LIMIT 6`;
     const params = [val + "%"];
     return db.query(q, params);
 };

@@ -100,7 +100,7 @@ export default class App extends Component {
                     />
 
                     <Route
-                        path="/users"
+                        path="/users/"
                         render={(props) => (
                             <FindPeople
                                 key={props.match.url}

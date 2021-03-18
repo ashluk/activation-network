@@ -301,14 +301,22 @@ app.get("/users/most-recent", (req, res) => {
             console.log("error in mostrecent", err);
         });
 });
-app.get("users/:val", (req, res) => {
-    db.findUser(val)
+app.get("/users/:val", (req, res) => {
+    console.log("req.params.val", req.params.val);
+    db.findUser(req.params.val)
         .then(({ rows }) => {
+            console.log("results in users.val", rows);
             res.json({ resultUsers: rows });
         })
         .catch((err) => {
             console.log("error in finduser", err);
         });
+});
+
+////////////FRIEND REQUESTING/////////////////////
+app.get("/friendshipstatus", (req, res) => {
+    console.log("req.params.id", req.params.id);
+    console.log("req.session.id", req.session.id);
 });
 
 ///////THIS ROUTE SHOULD ALWAYS GO AT THE BOTTOM BEFORE APP.LISTEN//////////

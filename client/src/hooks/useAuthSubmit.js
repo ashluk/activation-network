@@ -1,7 +1,7 @@
 ///replacing submit function
 import axios from "axios";
 import { useState } from "react";
-/////////WE NEED TO USE REQUIRE OUT OWN AXIOS BECAUSE OF CSRF (LOOK INTO HOW TO DO THIS)
+/////////WE NEED TO USE REQUIRE OUR OWN AXIOS BECAUSE OF CSRF (LOOK INTO HOW TO DO THIS)
 export function useAuthSubmit(url, values) {
     const [error, setError] = useState();
     //to set an error we need to use state

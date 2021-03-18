@@ -1,27 +1,45 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function FindPeople() {
     const [searchTerm, setSearchTerm] = useState();
     const [resultUsers, setResultUsers] = useState();
-    useEffect(function () {
-        axios.get("/users/most-recent").then(({ data }) => {
-            setResultUsers(data.users);
-        });
-    }, []);
+    console.log("searchterm current", searchTerm);
+
     useEffect(
         function () {
-            axios.get("/user/" + searchTerm).then(({ data }) => {
-                setResultUsers(data.users);
-            });
+            if (searchTerm === undefined) {
+                axios.get("/users/most-recent").then(({ data }) => {
+                    setResultUsers(data.mostRecent);
+                    //console.log("setresult", data.mostRecent);
+                });
+            } else {
+                axios.get("/users/" + searchTerm).then(({ data }) => {
+                    setResultUsers(data.resultUsers);
+                });
+            }
         },
         [searchTerm]
     );
+
     return (
         <>
             {resultUsers &&
                 resultUsers.map(function (user) {
-                    return <div key={user.id}>{user.first}</div>;
+                    return (
+                        <div key={user.id}>
+                            <Link to={`/user/${user.id}`}>
+                                <img
+                                    src={user.imageurl}
+                                    id="findimage"
+                                    width="200"
+                                    height="200"
+                                />
+                            </Link>
+                            {user.first} {user.last}
+                        </div>
+                    );
                 })}
             <input
                 defaultValue={searchTerm}

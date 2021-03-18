@@ -1,5 +1,7 @@
 import { Component } from "react";
 import axios from "./axios";
+import FriendshipButton from "./hooks/friendshipButton";
+import { BrowserRouter, Route } from "react-router-dom";
 
 export default class OtherProfile extends Component {
     constructor(props) {
@@ -53,5 +55,10 @@ export default class OtherProfile extends Component {
         );
     }
 }
+
+/* <BrowserRouter>
+                    <FriendshipButton />
+                </BrowserRouter>
+*/
 
 //this.props.match.params.id is what we need to see the other id
