@@ -1,7 +1,6 @@
 import { Component } from "react";
 import axios from "./axios";
-import FriendshipButton from "./hooks/friendshipButton";
-import { BrowserRouter, Route } from "react-router-dom";
+import { FriendshipButton } from "./hooks/friendshipButton";
 
 export default class OtherProfile extends Component {
     constructor(props) {
@@ -51,14 +50,9 @@ export default class OtherProfile extends Component {
                     height="200"
                 />
                 <h2>{this.state.otherUser.bio}</h2>
+                <FriendshipButton otherUserId={this.props.match.params.id} />
             </div>
         );
     }
 }
-
-/* <BrowserRouter>
-                    <FriendshipButton />
-                </BrowserRouter>
-*/
-
-//this.props.match.params.id is what we need to see the other id
+//otherUserId - {this.props.match.params.id} creates a property that i am passing down to friendshipbutton

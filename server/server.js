@@ -261,7 +261,7 @@ app.post("/updatebio", (req, res) => {
 
 ///////////////////////GET USER//////////////////////////////
 app.get("/user", (req, res) => {
-    console.log("i am in user req session userId", req.session.userId);
+    // console.log("i am in user req session userId", req.session.userId);
     db.getUser(req.session.userId)
         .then(({ rows }) => {
             res.json({ rows });
@@ -273,9 +273,9 @@ app.get("/user", (req, res) => {
 });
 ///////////////////////GET OTHER USER//////////////////////////
 app.get("/user/:id.json", (req, res) => {
-    console.log("other profile id", req.params.id);
-    console.log("current id", req.session.id);
-    if (req.session.id == req.params.id) {
+    //console.log("other profile id", req.params.id);
+    //console.log("current id", req.session.userId);
+    if (req.session.userId == req.params.id) {
         res.json({
             success: false,
         });
@@ -302,7 +302,7 @@ app.get("/users/most-recent", (req, res) => {
         });
 });
 app.get("/users/:val", (req, res) => {
-    console.log("req.params.val", req.params.val);
+    // console.log("req.params.val", req.params.val);
     db.findUser(req.params.val)
         .then(({ rows }) => {
             console.log("results in users.val", rows);
@@ -315,16 +315,25 @@ app.get("/users/:val", (req, res) => {
 
 ////////////FRIEND REQUESTING/////////////////////
 app.get("/friendshipstatus/:id", (req, res) => {
-    console.log("req.params.id", req.params.id);
-    console.log("req.session.id", req.session);
-    db.checkFriendship()
+    console.log("req.params.id HELLO", req.params.id);
+    console.log("req.session.id HELLO", req.session.userId);
+    const loggedInUser = req.session.userId;
+    const otherUser = req.params.id;
+    db.checkFriendship(loggedInUser, otherUser)
         .then(({ rows }) => {
+            // if (rows === 0 )
+            //check in here what we recieved back from db
+            //if else blocks that send different hard coded button texts depenednt on the response
+            //if(not friends ) res.json {buttonText: 'be my friend?'}
             console.log("rows in friendshipstatus", rows);
+            res.json({ buttonText: "REQUEST FRIENDSHIP" });
         })
         .catch((err) => {
             console.log("error in friendshipstatus", err);
         });
 });
+
+app.post("/");
 
 ///////THIS ROUTE SHOULD ALWAYS GO AT THE BOTTOM BEFORE APP.LISTEN//////////
 app.get("*", function (req, res) {
