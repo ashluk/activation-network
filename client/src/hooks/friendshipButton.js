@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "../axios";
 
 export function FriendshipButton(props) {
-    console.log("props in friendship", props);
     const [buttonText, setButtonText] = useState();
-    console.log("button text", buttonText);
+    // console.log("props in friendship", props);
+    //console.log("button text", buttonText);
 
     useEffect(function () {
         axios
@@ -17,19 +17,50 @@ export function FriendshipButton(props) {
                 console.log("error in axios friendshipstatyus", err);
             });
     }, []);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("i was clicked@@@@@@!!!!!");
+        //this is preventing the auto reload
+        if (buttonText === "REQUEST FRIENDSHIP") {
+            axios
+                .post(`/requestfriendship/${props.otherUserId}`)
+                .then(({ data }) => {
+                    console.log("data in requestfriendship AXIOS", data);
 
-    /*handleClick() {
-        console.log("REQUEST CLICKED");
-        axios
-            .post(`/requestfriendship/${props.otherUserId}`)
-            .then(({ data }) => {
-                console.log("what is data", data);
-                
-            })
-            .catch((err) => {
-                console.log("err in friendrequest post", err);
-            });
-    };*/
+                    setButtonText("CANCEL REQUEST");
+                })
+                .catch((err) => {
+                    console.log("error in requestfriendship post", err);
+                });
+        } else if (buttonText === "END FRIENDSHIP") {
+            axios
+                .post(`/endfriendship/${props.otherUserId}`)
+                .then(({ data }) => {
+                    setButtonText("REQUEST FRIENDSHIP");
+                })
+                .catch((err) => {
+                    console.log("error in endfriendship post", err);
+                });
+        } else if (buttonText === "CANCEL REQUEST") {
+            axios
+                .post(`/cancelrequest/${props.otherUserId}`)
+                .then(({ data }) => {
+                    setButtonText("REQUEST FRIENDSHIP");
+                })
+                .catch((err) => {
+                    console.log("error in cancelrequest post", err);
+                });
+        } else if (buttonText === "ACCEPT REQUEST") {
+            axios
+                .post(`/acceptrequest/${props.otherUserId}`)
+                .then(({ data }) => {
+                    setButtonText("END FRIENDSHIP");
+                })
+                .catch((err) => {
+                    console.log("error in acceptrequest post", err);
+                });
+        }
+    };
 
     //we want a useeffect that will act as componont did mount and we can do this by passing to use effect a second arg that is an empty array
     //our axios request will go inside of this.
@@ -49,7 +80,10 @@ export function FriendshipButton(props) {
 
     return (
         <div>
-            <button> {buttonText?.buttonText} </button>
+            <button onClick={(e) => handleSubmit(e)}>
+                {" "}
+                {buttonText?.buttonText}{" "}
+            </button>
         </div>
     );
 }

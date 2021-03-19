@@ -339,8 +339,7 @@ app.get("/friendshipstatus/:id", (req, res) => {
             //if rows [0] if acceppted = true end friendship
             // if accepted = false
             //check in here what we recieved back from db
-            //if else blocks that send different hard coded button texts depenednt on the response
-            //if(not friends ) res.json {buttonText: 'be my friend?'}
+
             console.log("rows in friendshipstatus", rows[0]);
         })
         .catch((err) => {
@@ -353,7 +352,9 @@ app.post("/requestfriendship/:id", (req, res) => {
     const otherUser = req.params.id;
     db.requestFriendship(loggedInUser, otherUser)
         .then(() => {
-            res.json({});
+            res.json({
+                success: true,
+            });
         })
         .catch((err) => {
             console.log("err in req friendship", err);
@@ -364,7 +365,7 @@ app.post("/endfriendship/:id", (req, res) => {
     const otherUser = req.params.id;
     db.endFriendship(loggedInUser, otherUser)
         .then(() => {
-            res.json({});
+            res.json({ success: true });
         })
         .catch((err) => {
             console.log("err in end friendship", err);
@@ -375,7 +376,7 @@ app.post("/cancelrequest/:id", (req, res) => {
     const otherUser = req.params.id;
     db.cancelRequest(loggedInUser, otherUser)
         .then(() => {
-            res.json({});
+            res.json({ success: true });
         })
         .catch((err) => {
             console.log("err in cancelRequest", err);
@@ -386,7 +387,7 @@ app.post("/acceptrequest/:id", (req, res) => {
     const otherUser = req.params.id;
     db.acceptRequest(loggedInUser, otherUser)
         .then(() => {
-            res.json({});
+            res.json({ success: true });
         })
         .catch((err) => {
             console.log("err in acceptRequest", err);
