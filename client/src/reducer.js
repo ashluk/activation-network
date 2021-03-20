@@ -15,6 +15,7 @@ export default function reducer(state = {}, action) {
         state = {
             ...state,
             friendData: action.friendDelete,
+            //////in here i need to figure out how to map or filter the additional data being addeed
         };
     } else if (action.type === "ACCEPT_FRIEND") {
         state = {
