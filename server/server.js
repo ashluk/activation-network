@@ -7,6 +7,12 @@ const ses = require("./ses");
 const multer = require("multer");
 const uidSafe = require("uid-safe");
 const s3 = require("./s3");
+//////////SOCKET I:O BOILERPLATE///////////
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+    allowRequest: (req, callback) =>
+        callback(null, req.headers.referer.startsWith("http://localhost:3000")),
+});
 
 const cryptoRandomString = require("crypto-random-string");
 
@@ -19,13 +25,13 @@ app.use(
         maxAge: 1000 * 60 * 60 * 24 * 14,
     })
 );
-const csurf = require("csurf");
+/*const csurf = require("csurf");
 app.use(csurf());
 
 app.use(function (req, res, next) {
     res.cookie("mytoken", req.csrfToken());
     next();
-});
+});*/
 
 app.use(compression());
 app.use(express.json());
@@ -346,10 +352,10 @@ app.get("/friendshipstatus/:id", (req, res) => {
             console.log("error in friendshipstatus", err);
         });
 });
-
 app.post("/requestfriendship/:id", (req, res) => {
     const loggedInUser = req.session.userId;
     const otherUser = req.params.id;
+    console.log("i was requested in friendship SERVER");
     db.requestFriendship(loggedInUser, otherUser)
         .then(() => {
             res.json({
@@ -393,6 +399,45 @@ app.post("/acceptrequest/:id", (req, res) => {
             console.log("err in acceptRequest", err);
         });
 });
+///////////////////REDUX FRIENDS///////////////////////
+
+app.get("/getfriends", (req, res) => {
+    const loggedInUser = req.session.userId;
+    db.getFriends(loggedInUser)
+        .then(({ rows }) => {
+            console.log("what is in rows", rows);
+            res.json({ rows });
+        })
+        .catch((err) => {
+            console.log("err in getFriends", err);
+        });
+});
+
+/*app.post("/hot/:id", (req, res) => {
+    const user = users.find((user) => user.id == req.params.id);
+    if (user) {
+        user.hot = true;
+    }
+    res.json({
+        success: !!user,
+    });
+});
+
+app.post("/not/:id", (req, res) => {
+    const user = users.find((user) => user.id == req.params.id);
+    if (user) {
+        user.hot = false;
+    }
+    res.json({
+        success: !!user,
+    });
+});*/
+
+///////////////////LOGOUT/////////////////////
+app.get("/logout", (req, res) => {
+    req.session = undefined;
+    res.redirect("/welcome");
+});
 
 ///////THIS ROUTE SHOULD ALWAYS GO AT THE BOTTOM BEFORE APP.LISTEN//////////
 app.get("*", function (req, res) {
@@ -410,6 +455,14 @@ app.get("*", function (req, res) {
     }
 });
 
-app.listen(process.env.PORT || 3001, function () {
+server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
+});
+
+io.on("connection", (socket) => {
+    console.log("socket with id connected", socket.id);
+
+    socket.on("disconnect", () => {
+        console.log(`Socket with if ${socket.id} just disconnected`);
+    });
 });

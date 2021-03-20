@@ -5,15 +5,29 @@
 
 export default function reducer(state = {}, action) {
     //series of IF statements...
-    if (action.type === "UPDATE_STATE_SOMEHOW") {
+    if (action.type === "RECIEVE_FRIENDS") {
+        state = {
+            ...state,
+            friendData: action.friendData,
+        };
         //update state here
+    } else if (action.type === "DELETE_FRIEND") {
+        state = {
+            ...state,
+            friendData: action.friendDelete,
+        };
+    } else if (action.type === "ACCEPT_FRIEND") {
+        state = {
+            ...state,
+            friendData: action.acceptFriend,
+        };
     }
-    //we need multiple IF statments -- examples below
-    //IF action.type === unfriend -- change state
-    //IF action.type === friends and wannabees --- change stat
-    //last thing we do is return state
     return state;
 }
+//we need multiple IF statments -- examples below
+//IF action.type === unfriend -- change state
+//IF action.type === friends and wannabees --- change stat
+//last thing we do is return state
 
 //it is REALLY important to not MUTATE state. this means we will need to CLONE
 //useful methods for this are filter and map.

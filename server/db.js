@@ -109,7 +109,7 @@ module.exports.endFriendship = (recipient_id, sender_id) => {
     return db.query(q, params);
 };
 
-module.exports.acceptFriendship = (recipient_id, sender_id) => {
+module.exports.acceptRequest = (recipient_id, sender_id) => {
     const q = `UPDATE friendships SET accepted = true
    WHERE (recipient_id = $1 AND sender_id = $2) 
     OR (recipient_id = $2 AND sender_id = $1);`;
@@ -121,5 +121,16 @@ module.exports.cancelRequest = (recipient_id, sender_id) => {
    WHERE (recipient_id = $1 AND sender_id = $2) 
     OR (recipient_id = $2 AND sender_id = $1);`;
     const params = [recipient_id, sender_id];
+    return db.query(q, params);
+};
+
+module.exports.getFriends = (userid) => {
+    const q = ` SELECT users.id, first, last, imageurl, accepted
+    FROM friendships
+    JOIN users
+    ON (accepted = false AND recipient_id = $1 AND sender_id = users.id)
+    OR (accepted = true AND recipient_id = $1 AND sender_id = users.id)
+    OR (accepted = true AND recipient_id = $1 AND sender_id = users.id);`;
+    const params = [userid];
     return db.query(q, params);
 };

@@ -1,5 +1,6 @@
 import Profilepic from "./profilepic";
 import Bioeditor from "./bioeditor";
+import Logout from "./logout";
 
 export default function Profile(props) {
     console.log("props in profile", props);
@@ -14,7 +15,7 @@ export default function Profile(props) {
                 bio={props.bio}
                 bioInApp={(bio) => props.bioInApp(bio)}
             />
-            <button className="logout">LOGOUT</button>
+            <Logout />
         </div>
     );
 }

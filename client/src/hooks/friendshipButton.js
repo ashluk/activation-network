@@ -10,16 +10,19 @@ export function FriendshipButton(props) {
         axios
             .get(`/friendshipstatus/${props.otherUserId}`)
             .then(({ data }) => {
-                console.log("what is data in axios friendshipStatus", data);
-                setButtonText(data);
+                console.log(
+                    "what is data in axios friendshipStatus",
+                    data.buttonText
+                );
+                setButtonText(`${data.buttonText}`);
             })
             .catch((err) => {
-                console.log("error in axios friendshipstatyus", err);
+                console.log("error in axios friendshipstatus", err);
             });
     }, []);
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("i was clicked@@@@@@!!!!!");
+        console.log("i was clicked@@@@@@!!!!!", buttonText);
         //this is preventing the auto reload
         if (buttonText === "REQUEST FRIENDSHIP") {
             axios
@@ -80,10 +83,7 @@ export function FriendshipButton(props) {
 
     return (
         <div>
-            <button onClick={(e) => handleSubmit(e)}>
-                {" "}
-                {buttonText?.buttonText}{" "}
-            </button>
+            <button onClick={(e) => handleSubmit(e)}> {buttonText} </button>
         </div>
     );
 }
