@@ -10,46 +10,62 @@ export default function Friends() {
             state.friendData &&
             state.friendData.filter((friend) => friend.accepted == true)
     );
+    console.log("what is friend in friend", friend);
     const wannabe = useSelector(
         (state) =>
             state.friendData &&
             state.friendData.filter((wannabe) => wannabe.accepted == false)
     );
+
     useEffect(() => {
-        !user && dispatch(getFriends());
+        !friend && dispatch(getFriends());
     }, []);
 
     if (!friend && !wannabe) {
         return null;
     }
+    console.log("what is wannabe in friend", wannabe);
 
     return (
         <div id="friends-and-wannabes">
-            {friend[0] ? (
-                <div className="friend">
-                    <img src={friend[0].imageUrl} />
-                </div>
-            ) : (
-                "Everybody is already hot or not"
-            )}
-            {wannabe[0] ? (
-                <div className="wannabe">
-                    <img src={wannabe[0].imageUrl} />
-                </div>
-            ) : (
-                "Everybody is already hot or not"
-            )}
-            <button onClick={() => dispatch(unFriend(friend.id))}>
-                DELETE
-            </button>
-            <button onClick={() => dispatch(acceptFriend(wannabe.id))}>
-                ACCEPT
-            </button>
-
-            <nav>
-                <Link to="/hot">See who&apos;s hot</Link>
-                <Link to="/not">See who&apos;s not</Link>
-            </nav>
+            {friend &&
+                friend.map(function (user) {
+                    return (
+                        <div key={user.id}>
+                            <img
+                                src={user.imageurl}
+                                id="findimage"
+                                width="200"
+                                height="200"
+                            />
+                            {user.first} {user.last}
+                            <button onClick={() => dispatch(unFriend(user.id))}>
+                                UNFRIEND
+                            </button>
+                        </div>
+                    );
+                })}
+            {wannabe &&
+                wannabe.map(function (user) {
+                    return (
+                        <div key={user.id}>
+                            <img
+                                src={user.imageurl}
+                                id="findimage"
+                                width="200"
+                                height="200"
+                            />
+                            <button
+                                onClick={() => dispatch(acceptFriend(user.id))}
+                            >
+                                ACCEPT
+                            </button>
+                            {user.first} {user.last}
+                        </div>
+                    );
+                })}
         </div>
     );
 }
+// <Link to="/hot">See who&apos;s hot</Link>
+//    <Link to="/not">See who&apos;s not</Link>

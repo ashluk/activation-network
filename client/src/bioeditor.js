@@ -52,30 +52,30 @@ export default class Bioeditor extends Component {
                 console.log("err in axios catch", err);
             });
     }
-    render() {
-        if (this.state.bio === null) {
-            return (
-                <div className="add">
-                    <h1>i am the bio editor</h1>
-                    <textarea
-                        onChange={(e) => this.handleChange(e)}
-                        defaultValue={this.props.bio}
-                    ></textarea>
 
-                    <button onClick={(e) => this.bioEditorMethod(e)}>
-                        ADD BIO
-                    </button>
-                </div>
-            );
-        } else {
+    render() {
+        if (this.props.bio) {
             return (
                 <div className="edit">
                     <textarea
                         onChange={(e) => this.handleChange(e)}
                         defaultValue={this.props.bio}
                     ></textarea>
+
                     <button onClick={(e) => this.bioEditorMethod(e)}>
                         EDIT BIO
+                    </button>
+                </div>
+            );
+        } else {
+            return (
+                <div className="add">
+                    <textarea
+                        onChange={(e) => this.handleChange(e)}
+                        defaultValue={this.props.bio}
+                    ></textarea>
+                    <button onClick={(e) => this.bioEditorMethod(e)}>
+                        ADD BIO
                     </button>
                     ;
                 </div>

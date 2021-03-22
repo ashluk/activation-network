@@ -20,7 +20,7 @@ export default class Registration extends React.Component {
                     console.log("what is data after", data);
 
                     console.log(data);
-                    location.replace("/profile");
+                    location.replace("/");
                 } else {
                     this.setState({
                         error: true,
@@ -48,31 +48,35 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div>
-                <h1>Registration</h1>
-                {this.state.error && <p>something went wrong</p>}
-                <input
-                    name="first"
-                    placeholder="first"
-                    onChange={(e) => this.handleChange(e)}
-                />
-                <input
-                    name="last"
-                    placeholder="last"
-                    onChange={(e) => this.handleChange(e)}
-                />
-                <input
-                    name="email"
-                    placeholder="email"
-                    onChange={(e) => this.handleChange(e)}
-                />
-                <input
-                    name="password"
-                    placeholder="password"
-                    type="password"
-                    onChange={(e) => this.handleChange(e)}
-                />
-                <button onClick={() => this.handleClick()}>submit</button>
-                <Link to="/login">Click here to log in!</Link>
+                <div id="regforms">
+                    <h1>Registration</h1>
+                    {this.state.error && <p>something went wrong</p>}
+                    <input
+                        name="first"
+                        placeholder="first"
+                        onChange={(e) => this.handleChange(e)}
+                    />
+                    <input
+                        name="last"
+                        placeholder="last"
+                        onChange={(e) => this.handleChange(e)}
+                    />
+                    <input
+                        name="email"
+                        placeholder="email"
+                        onChange={(e) => this.handleChange(e)}
+                    />
+                    <input
+                        name="password"
+                        placeholder="password"
+                        type="password"
+                        onChange={(e) => this.handleChange(e)}
+                    />
+                    <button onClick={() => this.handleClick()}>submit</button>
+                </div>
+                <div id="linkto">
+                    <Link to="/login">Click here to log in!</Link>
+                </div>
             </div>
         );
     }

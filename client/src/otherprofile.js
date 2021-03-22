@@ -35,8 +35,7 @@ export default class OtherProfile extends Component {
     }
     render() {
         return (
-            <div>
-                <h2>this is where the profile pic would go </h2>;
+            <div id="other-profile">
                 <h1>
                     my name is {this.state.otherUser.first}{" "}
                     {this.state.otherUser.last}

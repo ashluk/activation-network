@@ -10,7 +10,9 @@ export default function Welcome() {
                 <div>
                     <Route exact path="/" component={Registration} />
                     <Route path="/login" component={Login} />
-                    <Route path="/reset" component={Reset} />
+                    <div id="resetforms">
+                        <Route path="/reset" component={Reset} />
+                    </div>
                 </div>
             </HashRouter>
             ;

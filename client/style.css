@@ -1,20 +1,32 @@
 body {
-    background-color: ghostwhite;
+    /* align-content: center;
+    justify-content: center;
+    grid-template-rows: 500px;
+    grid-template-columns: 1fr 1fr 1fr;*/
+    background-color: rgb(37, 37, 39);
+    color: ghostwhite;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    text-transform: uppercase;
+    font-weight: 100;
+    letter-spacing: -1.5px;
 }
 .spiced {
     color: blueviolet;
 }
-.logo {
+#logo {
     position: fixed;
-    top: 30px;
+    text-align-last: center;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 20px;
     left: 580px;
 }
 
-#profilepic {
+/*#profilepic {
     position: fixed;
     top: 30px;
     right: 30px;
-}
+}*/
 
 .modal {
     z-index: 1;
@@ -45,6 +57,93 @@ body {
     /*visibility: invisible;*/
 }
 
+#other-profile {
+    position: absolute;
+    top: 150px;
+    left: 400px;
+    width: 300px;
+    height: 300px;
+}
 .currentuser {
-    color: greenyellow;
+    position: absolute;
+    top: 0px;
+    right: 30px;
+    width: 300px;
+    height: 300px;
+}
+#find-people {
+    position: relative;
+    top: 150px;
+    left: 450px;
+
+    padding-top: 10px;
+}
+#profile-in-profile {
+    position: absolute;
+    top: 150px;
+    left: 400px;
+    width: 300px;
+    height: 300px;
+}
+#top-right {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    font: 200;
+    text-decoration: none;
+}
+a {
+    text-decoration: none;
+    position: relative;
+    top: 10px;
+    right: 20px;
+    font: 200;
+    color: rgb(247, 214, 211);
+}
+.add {
+    display: flex;
+    flex-direction: column;
+}
+.edit {
+    display: flex;
+    flex-direction: column;
+}
+
+#regforms {
+    position: fixed;
+    top: 150px;
+    left: 350px;
+}
+#loginforms {
+    position: fixed;
+    top: 150px;
+    left: 450px;
+}
+#resetforms {
+    position: fixed;
+    top: 150px;
+    left: 500px;
+}
+#linkto {
+    position: fixed;
+    top: 250px;
+    left: 370px;
+}
+#linktologin {
+    position: fixed;
+    top: 250px;
+    left: 470px;
+}
+#navlinks {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    top: 5px;
+    left: 30px;
+}
+.chat-container {
+    height: 300px;
+    width: 400px;
+    overflow-y: auto;
 }

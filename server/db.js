@@ -37,7 +37,7 @@ module.exports.secretCode = (secret, email) => {
     return db.query(q, params);
 };
 module.exports.getSecretCode = (secret) => {
-    const q = `SELECT secret FROM reset_codes WHERE CURRENT_TIMESTAMP - created_at < INTERVAL '10 minutes `;
+    const q = `SELECT secret FROM reset_codes WHERE CURRENT_TIMESTAMP - created_at < INTERVAL '10 minutes' `;
     const params = [secret];
     return db.query(q, params);
 };
@@ -134,3 +134,4 @@ module.exports.getFriends = (userid) => {
     const params = [userid];
     return db.query(q, params);
 };
+/////////////////////CHAT/////////////////////////////

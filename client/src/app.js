@@ -9,6 +9,10 @@ import { BrowserRouter, Route } from "react-router-dom";
 import OtherProfile from "./otherprofile";
 import Profile from "./profile";
 import FindPeople from "./findpeople";
+import Friends from "./friends";
+import { Link } from "react-router-dom";
+import Logout from "./logout";
+import Chat from "./chat";
 
 export default class App extends Component {
     constructor() {
@@ -63,8 +67,19 @@ export default class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div>
+                <div id="navlinks">
+                    <Link to="/friends">FRIENDS</Link>
+
+                    <Link to="/users/">FIND PEOPLE</Link>
+                    <Link to="/chat">CHAT</Link>
+                    <Link to="/">PROFILE</Link>
+                </div>
+                <div id="logo">
+                    <h1>CATBOOK</h1>
                     <Logo />
+                </div>
+
+                <div id="top-left">
                     <div className="currentuser">
                         <Profilepic
                             first={this.state.first}
@@ -72,7 +87,10 @@ export default class App extends Component {
                             imageUrl={this.state.imageUrl}
                             toggleUploader={() => this.toggleUploader()} //whatever we call these on the left hand side will become the name of the property
                         />
+
+                        <Logout />
                     </div>
+
                     <Route
                         exact
                         path="/"
@@ -109,20 +127,29 @@ export default class App extends Component {
                             />
                         )}
                     />
-
-                    <h2 onClick={() => this.toggleUploader()}>
-                        toggling uploader visibility
-                    </h2>
-                    {this.state.uploaderIsVisible && (
-                        <Uploader
-                            imageUploadInApp={this.imageUploadInApp}
-                            // methodInApp={(arg) => this.methodInApp(arg)}
-                            toggleUploader={() => this.toggleUploader()}
+                </div>
+                <h2 onClick={() => this.toggleUploader()}></h2>
+                {this.state.uploaderIsVisible && (
+                    <Uploader
+                        imageUploadInApp={this.imageUploadInApp}
+                        // methodInApp={(arg) => this.methodInApp(arg)}
+                        toggleUploader={() => this.toggleUploader()}
+                    />
+                )}
+                <Route
+                    path="/friends"
+                    render={(props) => (
+                        <Friends
+                            key={props.match.url}
+                            match={props.match}
+                            history={props.history}
                         />
                     )}
-                </div>
+                />
+                <Route path="/chat" component={Chat} />
             </BrowserRouter>
         );
     }
 }
 //this conditionally renders Uploader   {this.state.uploaderIsVisible && <Uploader />} -- this is also how to pass a function
+/* */

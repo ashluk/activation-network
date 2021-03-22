@@ -20,14 +20,15 @@ export async function getFriends() {
 }
 
 export async function unFriend(userId) {
-    const { data } = await axios.post(`/endfriendship/${userId}`);
+    console.log("userid in end friendship", userId);
+    await axios.post(`/endfriendship/${userId}`);
     return {
         type: "DELETE_FRIEND",
         friendDelete: userId,
     };
 }
 export async function acceptFriend(userId) {
-    const { data } = await axios.post(`/acceptrequest/${userId}`);
+    await axios.post(`/acceptrequest/${userId}`);
     return {
         type: "ACCEPT_FRIEND",
         acceptFriend: userId,

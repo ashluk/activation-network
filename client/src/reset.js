@@ -31,7 +31,7 @@ export default class ResetPassword extends React.Component {
     }
     updatePass() {
         axios
-            .post("./reset", this.state)
+            .post("/verify", this.state)
             .then(({ data }) => {
                 if (data.success) {
                     this.setState({ step: 3 });
@@ -59,6 +59,7 @@ export default class ResetPassword extends React.Component {
     }
     render() {
         const { step } = this.state;
+
         if (step == 1) {
             return (
                 <div>
@@ -90,6 +91,7 @@ export default class ResetPassword extends React.Component {
                 </div>
             );
         }
+
         if (step == 3) {
             return (
                 <div>

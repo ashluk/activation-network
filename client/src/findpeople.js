@@ -25,26 +25,28 @@ export default function FindPeople() {
 
     return (
         <>
-            {resultUsers &&
-                resultUsers.map(function (user) {
-                    return (
-                        <div key={user.id}>
-                            <Link to={`/user/${user.id}`}>
-                                <img
-                                    src={user.imageurl}
-                                    id="findimage"
-                                    width="200"
-                                    height="200"
-                                />
-                            </Link>
-                            {user.first} {user.last}
-                        </div>
-                    );
-                })}
-            <input
-                defaultValue={searchTerm}
-                onChange={({ target }) => setSearchTerm(target.value)}
-            />
+            <div id="find-people">
+                <input
+                    defaultValue={searchTerm}
+                    onChange={({ target }) => setSearchTerm(target.value)}
+                />
+                {resultUsers &&
+                    resultUsers.map(function (user) {
+                        return (
+                            <div key={user.id}>
+                                <Link to={`/user/${user.id}`}>
+                                    <img
+                                        src={user.imageurl}
+                                        id="findimage"
+                                        width="200"
+                                        height="200"
+                                    />
+                                </Link>
+                                {user.first} {user.last}
+                            </div>
+                        );
+                    })}
+            </div>
         </>
     );
 }

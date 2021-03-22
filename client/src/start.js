@@ -8,6 +8,7 @@ import reduxPromise from "redux-promise";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import reducer from "./reducer";
+import { init } from "./sockets";
 
 //store created here with two arguments, first is reducer, second is the requirement from devtools which is wrapped in the compose with dev tools
 const store = createStore(
@@ -23,6 +24,7 @@ let elem;
 const userLoggedIn = location.pathname != "/welcome";
 
 if (userLoggedIn) {
+    init(store);
     elem = (
         //provider is a component
         //we are creating a prop called store with the value of store

@@ -19,12 +19,20 @@ const cryptoRandomString = require("crypto-random-string");
 const { hash, compare } = require("./bc.js");
 const cookieSession = require("cookie-session");
 
-app.use(
+/*app.use(
     cookieSession({
         secret: `I'm always hungry.`,
         maxAge: 1000 * 60 * 60 * 24 * 14,
     })
-);
+);*/
+const cookieSessionMiddlewear = cookieSession({
+    secret: `I'm always hungry.`,
+    maxAge: 1000 * 60 * 60 * 24 * 14,
+});
+app.use(cookieSessionMiddlewear);
+io.use(function (socket, next) {
+    cookieSessionMiddlewear(socket.request, socket.request.res, next);
+});
 /*const csurf = require("csurf");
 app.use(csurf());
 
@@ -176,57 +184,63 @@ app.post("/reset", (req, res) => {
             console.log("error in codeCompare", err);
         });
 });
-app.post("./verify", (req, res) => {
+app.post("/verify", (req, res) => {
     console.log("in verify route", req.body);
-    console.log("req.session", req.session);
+    //console.log("req.session", req.session);
     const email = req.body.email;
-    const password = req.body.password;
-    const secret = req.body.password;
-    db.getSecretCode(secret).then(({ rows }) => {
-        compare(secret, rows[0].secret)
-            .then((match) => {
-                if (match === true) {
-                    req.session.secret = rows[0].secret;
-                    console.log("matched code");
-                    hash(password)
-                        .then((hashedPassword) => {
-                            db.newPassword(hashedPassword, rows[0].email)
-                                .then(({ rows }) => {
-                                    console.log("rows: ", rows);
-                                    req.session.userId = rows[0].id;
+    const password = req.body.newpassword;
+    const secret = req.body.code;
+    db.getSecretCode(secret)
+        .then(({ rows }) => {
+            console.log("rows in verify", rows);
+            compare(secret, rows[0].secret)
+                .then((match) => {
+                    if (match === true) {
+                        req.session.secret = rows[0].secret;
+                        console.log("matched code");
+                        hash(password)
+                            .then((hashedPassword) => {
+                                db.newPassword(hashedPassword, rows[0].email)
+                                    .then(({ rows }) => {
+                                        console.log("rows: ", rows);
+                                        req.session.userId = rows[0].id;
 
-                                    res.json({
-                                        success: true,
-                                        alert: "now change your password",
+                                        res.json({
+                                            success: true,
+                                            alert: "now change your password",
+                                        });
+                                    })
+                                    .catch((err) => {
+                                        console.log("registration error", err);
+
+                                        res.json({ success: false });
                                     });
-                                })
-                                .catch((err) => {
-                                    console.log("registration error", err);
+                            })
+                            .catch((err) => {
+                                console.log("error in hash", err);
 
-                                    res.json({ success: false });
-                                });
-                        })
-                        .catch((err) => {
-                            console.log("error in hash", err);
+                                res.json({ success: false });
+                            });
 
-                            res.json({ success: false });
+                        res.json({
+                            success: true,
                         });
-
-                    res.json({
-                        success: true,
-                    });
-                } else {
-                    res.json({
-                        success: false,
-                        error: "code incorrect",
-                    });
-                }
-            })
-            .catch((err) => {
-                console.log("error in compare", err);
-                res.json({ success: false });
-            });
-    });
+                    } else {
+                        res.json({
+                            success: false,
+                            error: "code incorrect",
+                        });
+                    }
+                })
+                .catch((err) => {
+                    console.log("error in compare", err);
+                    res.json({ success: false });
+                });
+        })
+        .catch((err) => {
+            console.log("error in verify", err);
+            res.json({ success: false });
+        });
 });
 //////////////////////UPLOADER/////////////////////////////////
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
@@ -404,9 +418,9 @@ app.post("/acceptrequest/:id", (req, res) => {
 app.get("/getfriends", (req, res) => {
     const loggedInUser = req.session.userId;
     db.getFriends(loggedInUser)
-        .then(({ rows }) => {
-            console.log("what is in rows", rows);
-            res.json({ rows });
+        .then((data) => {
+            console.log("get friends rows", data.rows);
+            res.json(data.rows);
         })
         .catch((err) => {
             console.log("err in getFriends", err);
@@ -461,8 +475,31 @@ server.listen(process.env.PORT || 3001, function () {
 
 io.on("connection", (socket) => {
     console.log("socket with id connected", socket.id);
+    io.on("connection", function (socket) {
+        if (!socket.request.session.userId) {
+            return socket.disconnect(true);
+        }
 
+        const userId = socket.request.session.userId;
+
+        console.log("userid in sockets", userId);
+        /* db.getLastTenMessages().then((result) => {
+            console.log("result.rows", result.rows);
+            io.socket.emit("chatMessages", result.rows.reverse());
+        });*/
+    });
+    socket.on("my amazing chat message", (msg) => {
+        console.log("message inside of amazing chat", msg);
+        //send the message to all the connected clients
+        //need two things before sending message to clients
+        //1 add to the db
+        //2 is find out information (i.e name and image) of user who sent the message
+        //done with another db query
+        io.sockets.emit("sending back to client", msg);
+    });
     socket.on("disconnect", () => {
         console.log(`Socket with if ${socket.id} just disconnected`);
     });
+
+    console.log("socket id", socket.id);
 });

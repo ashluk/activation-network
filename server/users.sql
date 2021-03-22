@@ -19,3 +19,4 @@ CREATE TABLE reset_codes (
     secret VARCHAR NOT NULL,
      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
+

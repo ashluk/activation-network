@@ -5,22 +5,29 @@
 
 export default function reducer(state = {}, action) {
     //series of IF statements...
-    if (action.type === "RECIEVE_FRIENDS") {
+    if (action.type == "RECEIVE_FRIENDS") {
         state = {
             ...state,
             friendData: action.friendData,
         };
         //update state here
-    } else if (action.type === "DELETE_FRIEND") {
+    } else if (action.type == "DELETE_FRIEND") {
         state = {
             ...state,
-            friendData: action.friendDelete,
-            //////in here i need to figure out how to map or filter the additional data being addeed
+            friendData: state.friendData.filter(
+                (friendData) => friendData.id != action.friendDelete
+            ),
         };
-    } else if (action.type === "ACCEPT_FRIEND") {
+    } else if (action.type == "ACCEPT_FRIEND") {
         state = {
             ...state,
-            friendData: action.acceptFriend,
+            friendData: state.friendData.map((friendData) => {
+                if (friendData.id == action.acceptFriend) {
+                    return { ...friendData, accepted: true };
+                } else {
+                    return friendData;
+                }
+            }),
         };
     }
     return state;

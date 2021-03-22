@@ -42,22 +42,26 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div>
-                <h1>Login</h1>
-                {this.state.error && <p>something went wrong</p>}
+                <div id="loginforms">
+                    <h1>Login</h1>
+                    {this.state.error && <p>something went wrong</p>}
 
-                <input
-                    name="email"
-                    placeholder="email"
-                    onChange={(e) => this.handleChange(e)}
-                />
-                <input
-                    name="password"
-                    placeholder="password"
-                    type="password"
-                    onChange={(e) => this.handleChange(e)}
-                />
-                <button onClick={() => this.handleClick()}>submit</button>
-                <Link to="/reset">Click here to reset password!</Link>
+                    <input
+                        name="email"
+                        placeholder="email"
+                        onChange={(e) => this.handleChange(e)}
+                    />
+                    <input
+                        name="password"
+                        placeholder="password"
+                        type="password"
+                        onChange={(e) => this.handleChange(e)}
+                    />
+                    <button onClick={() => this.handleClick()}>submit</button>
+                </div>
+                <div id="linktologin">
+                    <Link to="/reset">Click here to reset password!</Link>
+                </div>
             </div>
         );
     }

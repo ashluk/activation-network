@@ -9,7 +9,7 @@ export default function Profilepic({
     imageUrl = imageUrl || "computercat.png"; //we need to add a default.png into the public folder
 
     return (
-        <div>
+        <div id="pic-in-profilepic">
             <h1 className="profile-name">
                 {first} {last}
             </h1>
@@ -19,8 +19,9 @@ export default function Profilepic({
                 src={imageUrl}
                 id="profilepic"
                 alt={first}
-                width="200"
-                height="200"
+                bio={bio}
+                width="150"
+                height="150"
             />
         </div>
     );
