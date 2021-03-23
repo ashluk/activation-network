@@ -5,6 +5,8 @@ import axios from "./axios";
 import Profilepic from "./profilepic";
 import Uploader from "./uploader";
 import Logo from "./logo";
+import Backgroundimage from "./backgroundimage";
+
 import { BrowserRouter, Route } from "react-router-dom";
 import OtherProfile from "./otherprofile";
 import Profile from "./profile";
@@ -74,9 +76,12 @@ export default class App extends Component {
                     <Link to="/chat">CHAT</Link>
                     <Link to="/">PROFILE</Link>
                 </div>
+
                 <div id="logo">
-                    <h1>CATBOOK</h1>
                     <Logo />
+                </div>
+                <div id="backgroundimage">
+                    <Backgroundimage />
                 </div>
 
                 <div id="top-left">

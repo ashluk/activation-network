@@ -135,3 +135,27 @@ module.exports.getFriends = (userid) => {
     return db.query(q, params);
 };
 /////////////////////CHAT/////////////////////////////
+
+module.exports.getMessageSender = (userid) => {
+    const q = `SELECT first, last, imageurl from users WHERE id = $1`;
+    const params = [userid];
+    return db.query(q, params);
+};
+
+module.exports.getLastTenMessages = () => {
+    const q = ` SELECT chat.id, chat.message, chat.senderId, chat.created_at,
+    users.first, users.last, users.imageurl
+    FROM chat
+    JOIN users
+    ON (chat.senderId = users.id)
+    ORDER BY chat.id DESC LIMIT 10`;
+    return db.query(q);
+};
+
+module.exports.insertMessages = (message, senderId) => {
+    const q = `INSERT INTO chat (message, senderId) 
+    VALUES ($1, $2)
+    RETURNING *`;
+    const params = [message, senderId];
+    return db.query(q, params);
+};

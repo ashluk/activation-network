@@ -36,3 +36,17 @@ export async function acceptFriend(userId) {
 }
 
 //for part 9 we will need 3 action creator functions.....
+////////////////CHAT ////////////////////////////
+
+export async function mostRecentMessages(messages) {
+    return {
+        type: `ADD_MESSAGES`,
+        mostRecentMessages: messages,
+    };
+}
+export async function newMessage(message) {
+    return {
+        type: `ADD_MESSAGE`,
+        newMessage: message,
+    };
+}
