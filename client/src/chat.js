@@ -21,9 +21,9 @@ export default function Chat() {
             elemRef.current.currentHeight
         );
         const newScrollTop =
-            elemRef.current.scrollTop - elemRef.current.clientHeight;
+            elemRef.current.scrollHeight - elemRef.current.clientHeight;
         elemRef.current.scrollTop = newScrollTop;
-    }, []);
+    }, [chatMessages]);
 
     const keyCheck = (e) => {
         if (e.key === "Enter") {

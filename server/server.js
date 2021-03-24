@@ -33,13 +33,14 @@ app.use(cookieSessionMiddlewear);
 io.use(function (socket, next) {
     cookieSessionMiddlewear(socket.request, socket.request.res, next);
 });
-/*const csurf = require("csurf");
+////////////////CSRF/////////////////
+const csurf = require("csurf");
 app.use(csurf());
 
 app.use(function (req, res, next) {
     res.cookie("mytoken", req.csrfToken());
     next();
-});*/
+});
 
 app.use(compression());
 app.use(express.json());
@@ -190,52 +191,50 @@ app.post("/verify", (req, res) => {
     const email = req.body.email;
     const password = req.body.newpassword;
     const secret = req.body.code;
-    db.getSecretCode(secret)
+    db.getSecretCode(email)
         .then(({ rows }) => {
             console.log("rows in verify", rows);
-            compare(secret, rows[0].secret)
-                .then((match) => {
-                    if (match === true) {
-                        req.session.secret = rows[0].secret;
-                        console.log("matched code");
-                        hash(password)
-                            .then((hashedPassword) => {
-                                db.newPassword(hashedPassword, rows[0].email)
-                                    .then(({ rows }) => {
-                                        console.log("rows: ", rows);
-                                        req.session.userId = rows[0].id;
+            console.log("secret req.body in verify", req.body.code);
 
-                                        res.json({
-                                            success: true,
-                                            alert: "now change your password",
-                                        });
-                                    })
-                                    .catch((err) => {
-                                        console.log("registration error", err);
+            if (req.body.code == rows[0].secret) {
+                req.session.secret = rows[0].secret;
+                console.log("matched code");
+                console.log("what is password", password);
+                hash(password)
+                    .then((hashedPassword) => {
+                        console.log("hashed", hashedPassword);
+                        db.newPassword(hashedPassword, rows[0].email)
+                            .then(({ rows }) => {
+                                console.log("rows in newpassword: ", rows);
+                                req.session.userId = rows[0].id;
+                                req.session.password = rows[0].newpassword;
 
-                                        res.json({ success: false });
-                                    });
+                                res.json({
+                                    success: true,
+                                    alert: "now change your password",
+                                });
                             })
                             .catch((err) => {
-                                console.log("error in hash", err);
+                                console.log("registration error", err);
 
                                 res.json({ success: false });
                             });
+                    })
+                    .catch((err) => {
+                        console.log("error in hash", err);
 
-                        res.json({
-                            success: true,
-                        });
-                    } else {
-                        res.json({
-                            success: false,
-                            error: "code incorrect",
-                        });
-                    }
-                })
-                .catch((err) => {
-                    console.log("error in compare", err);
-                    res.json({ success: false });
+                        res.json({ success: false });
+                    });
+
+                res.json({
+                    success: true,
                 });
+            } else {
+                res.json({
+                    success: false,
+                    error: "code incorrect",
+                });
+            }
         })
         .catch((err) => {
             console.log("error in verify", err);

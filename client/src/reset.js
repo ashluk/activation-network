@@ -35,6 +35,7 @@ export default class ResetPassword extends React.Component {
             .then(({ data }) => {
                 if (data.success) {
                     this.setState({ step: 3 });
+                    // location.replace("/");
                 } else {
                     this.setState({
                         error: true,

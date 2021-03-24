@@ -36,11 +36,13 @@ module.exports.secretCode = (secret, email) => {
     const params = [secret, email];
     return db.query(q, params);
 };
-module.exports.getSecretCode = (secret) => {
-    const q = `SELECT secret FROM reset_codes WHERE CURRENT_TIMESTAMP - created_at < INTERVAL '10 minutes' `;
-    const params = [secret];
+module.exports.getSecretCode = (email) => {
+    const q = `SELECT secret FROM reset_codes WHERE email = $1
+    ORDER BY id DESC LIMIT 1 `;
+    const params = [email];
     return db.query(q, params);
 };
+// const q = `SELECT secret FROM reset_codes WHERE CURRENT_TIMESTAMP - created_at < INTERVAL '10 minutes' `;
 module.exports.newPassword = (password, email) => {
     const q = `UPDATE users
     SET password = $1
