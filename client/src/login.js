@@ -58,6 +58,7 @@ export default class Registration extends React.Component {
                         onChange={(e) => this.handleChange(e)}
                     />
                     <button onClick={() => this.handleClick()}>submit</button>
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}" />
                 </div>
                 <div id="linktologin">
                     <Link to="/reset">Click here to reset password!</Link>

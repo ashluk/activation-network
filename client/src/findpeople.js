@@ -31,6 +31,7 @@ export default function FindPeople() {
                     placeholder="looking for someone..."
                     onChange={({ target }) => setSearchTerm(target.value)}
                 />
+                <input type="hidden" name="_csrf" value="{{csrfToken}}" />
 
                 {resultUsers &&
                     resultUsers.map(function (user) {

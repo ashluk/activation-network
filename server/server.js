@@ -36,6 +36,10 @@ io.use(function (socket, next) {
 ////////////////CSRF/////////////////
 const csurf = require("csurf");
 app.use(csurf());
+/*app.use(function (req, res, next) {
+    res.locals.csrfToken = req.csrfToken();
+    next();
+}); */
 
 app.use(function (req, res, next) {
     res.cookie("mytoken", req.csrfToken());
@@ -203,11 +207,15 @@ app.post("/verify", (req, res) => {
                 hash(password)
                     .then((hashedPassword) => {
                         console.log("hashed", hashedPassword);
-                        db.newPassword(hashedPassword, rows[0].email)
+                        console.log("rows0email", email);
+                        db.newPassword(hashedPassword, email)
                             .then(({ rows }) => {
-                                console.log("rows in newpassword: ", rows);
-                                req.session.userId = rows[0].id;
-                                req.session.password = rows[0].newpassword;
+                                console.log(
+                                    "rows in newpassword: ",
+                                    rows[0].password
+                                );
+                                //req.session.userId = rows[0].id;
+                                req.session.password = rows[0].password;
 
                                 res.json({
                                     success: true,
@@ -225,10 +233,6 @@ app.post("/verify", (req, res) => {
 
                         res.json({ success: false });
                     });
-
-                res.json({
-                    success: true,
-                });
             } else {
                 res.json({
                     success: false,
@@ -482,7 +486,7 @@ io.on("connection", function (socket) {
                     .then(({ rows }) => {
                         console.log("rows in getMessageSender", rows);
 
-                        socket.emit("chatMessage", {
+                        io.emit("chatMessage", {
                             id: result.rows[0].id,
                             message: msg,
                             senderId: userId,
