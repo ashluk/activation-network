@@ -3,7 +3,9 @@ import { socket } from "./sockets";
 import { useSelector } from "react-redux";
 
 export default function Chat() {
-    const chatMessages = useSelector((state) => state && state.chatMessages);
+    const chatMessages = useSelector(
+        (state) => state && state.mostRecentMessages
+    );
     console.log("chatMessages", chatMessages);
     const elemRef = useRef();
     useEffect(() => {
@@ -36,10 +38,22 @@ export default function Chat() {
             <div id="chat-room">
                 <h1>Chat Room</h1>
                 <div className="chat-container" ref={elemRef}>
-                    <p>Chat Messages Will go here.........</p>
-                    <p>Chat Messages Will go here.........</p>
-                    <p>Chat Messages Will go here.........</p>
-                    <p>Chat Messages Will go here.........</p>
+                    {chatMessages &&
+                        chatMessages.map(function (user) {
+                            return (
+                                <div key={user.id}>
+                                    <div id="chat-message">
+                                        <div id="created-at">
+                                            {user.created_at}
+                                        </div>
+                                        <div id="chat-name">
+                                            {user.first} {user.last}
+                                        </div>
+                                        {user.message}
+                                    </div>
+                                </div>
+                            );
+                        })}
                 </div>
                 <textarea
                     placeholder="add your message here"

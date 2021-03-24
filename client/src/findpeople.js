@@ -28,12 +28,13 @@ export default function FindPeople() {
             <div id="find-people">
                 <input
                     defaultValue={searchTerm}
+                    placeholder="looking for someone..."
                     onChange={({ target }) => setSearchTerm(target.value)}
                 />
                 {resultUsers &&
                     resultUsers.map(function (user) {
                         return (
-                            <div key={user.id}>
+                            <div key={user.id} id="found-people">
                                 <Link to={`/user/${user.id}`}>
                                     <img
                                         src={user.imageurl}
@@ -42,7 +43,10 @@ export default function FindPeople() {
                                         height="200"
                                     />
                                 </Link>
-                                {user.first} {user.last}
+                                <div id="findtext">
+                                    {" "}
+                                    {user.first} {user.last}
+                                </div>
                             </div>
                         );
                     })}

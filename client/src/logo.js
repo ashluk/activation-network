@@ -3,10 +3,10 @@ export default function Logo() {
         <div>
             <img
                 className="logo"
-                src="socialnetworklogo.jpg"
+                src="sensenet.jpg"
                 alt="logo"
-                width="250"
-                height="70"
+                width="660"
+                height="100"
             />
         </div>
     );

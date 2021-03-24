@@ -20,8 +20,8 @@ export default function Profilepic({
                 id="profilepic"
                 alt={first}
                 bio={bio}
-                width="150"
-                height="150"
+                width="200"
+                height="200"
             />
         </div>
     );

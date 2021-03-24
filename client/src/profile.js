@@ -6,9 +6,12 @@ export default function Profile(props) {
     return (
         <div id="profile-in-profile">
             <Profilepic
+                className="profile-main"
                 imageUrl={props.imageUrl}
                 first={props.first}
-                toggleUploader={() => props.toggleUploader()}
+                last={props.last}
+                width="300"
+                height="300"
             />
             <Bioeditor
                 bio={props.bio}
@@ -18,3 +21,4 @@ export default function Profile(props) {
     );
 }
 //<Logout />
+//                toggleUploader={() => props.toggleUploader()}

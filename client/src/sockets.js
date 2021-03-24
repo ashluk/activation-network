@@ -8,6 +8,7 @@ export const init = (store) => {
         socket.on("sending back to client", (data) => {
             console.log("sending back to socket.js", data);
         });
+
         socket.on("chatMessages", (msgs) =>
             store.dispatch(mostRecentMessages(msgs))
         );

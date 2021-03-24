@@ -427,26 +427,6 @@ app.get("/getfriends", (req, res) => {
         });
 });
 
-/*app.post("/hot/:id", (req, res) => {
-    const user = users.find((user) => user.id == req.params.id);
-    if (user) {
-        user.hot = true;
-    }
-    res.json({
-        success: !!user,
-    });
-});
-
-app.post("/not/:id", (req, res) => {
-    const user = users.find((user) => user.id == req.params.id);
-    if (user) {
-        user.hot = false;
-    }
-    res.json({
-        success: !!user,
-    });
-});*/
-
 ///////////////////LOGOUT/////////////////////
 app.get("/logout", (req, res) => {
     req.session = undefined;
@@ -473,47 +453,63 @@ server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
 });
 ///////////////////CHAT////////////////////////////
-io.on("connection", (socket) => {
-    console.log("socket with id connected", socket.id);
-    io.on("connection", function (socket) {
-        if (!socket.request.session.userId) {
-            return socket.disconnect(true);
-        }
-        const socketId = socket.id;
-        const userId = socket.request.session.userId;
 
-        console.log("userid in sockets", userId);
+io.on("connection", function (socket) {
+    //console.log("socket with id connected", socket.id);
+    if (!socket.request.session.userId) {
+        return socket.disconnect(true);
+    }
+    const socketId = socket.id;
+    const userId = socket.request.session.userId;
 
-        db.getLastTenMessages()
+    console.log("userid in sockets", userId);
+
+    db.getLastTenMessages()
+        .then((result) => {
+            console.log("result.rows", result.rows);
+            socket.emit("chatMessages", result.rows.reverse());
+        })
+        .catch((err) => {
+            console.log("error in getLastTen", err);
+        });
+
+    socket.on("my amazing chat message", (msg) => {
+        console.log("message inside of amazing chat", msg);
+
+        db.newMessage(msg, userId)
             .then((result) => {
-                console.log("result.rows", result.rows);
-                socket.emit("chatMessages", result.rows.reverse());
+                console.log("results in new message", result.rows[0].id);
+                db.getMessageSender(userId)
+                    .then(({ rows }) => {
+                        console.log("rows in getMessageSender", rows);
+
+                        socket.emit("chatMessage", {
+                            id: result.rows[0].id,
+                            message: msg,
+                            senderId: userId,
+                            created_at: rows[0].created_at,
+                            first: rows[0].first,
+                            last: rows[0].last,
+                            imageurl: rows[0].imageurl,
+                        });
+                    })
+                    .catch((err) => {
+                        console.log("error in getMessageSender", err);
+                    });
             })
             .catch((err) => {
-                console.log("error in getLastTen", err);
+                console.log("error in newMessage", err);
             });
-
-        socket.on("my amazing chat message", (msg) => {
-            console.log("message inside of amazing chat", msg);
-
-            db.newMessage(msg, userId).then((results) => {
-                console.log("results in new message", results);
-                db.getMessageSender(userId).then(({ rows }) => {
-                    console.log("rows in getMessage", rows);
-                    socket.emit("chatMessage", rows[0]);
-                });
-            });
-            //send the message to all the connected clients
-            //need two things before sending message to clients
-            //1 add to the db
-            //2 is find out information (i.e name and image) of user who sent the message
-            //done with another db query
-            io.sockets.emit("sending back to client", msg);
-        });
-        socket.on("disconnect", () => {
-            console.log(`Socket with if ${socket.id} just disconnected`);
-        });
-
-        console.log("socket id", socket.id);
+        //send the message to all the connected clients
+        //need two things before sending message to clients
+        //1 add to the db
+        //2 is find out information (i.e name and image) of user who sent the message
+        //done with another db query
+        io.sockets.emit("sending back to client", msg);
     });
+    socket.on("disconnect", () => {
+        console.log(`Socket with if ${socket.id} just disconnected`);
+    });
+
+    console.log("socket id", socket.id);
 });

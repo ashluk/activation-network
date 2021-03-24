@@ -152,7 +152,7 @@ module.exports.getLastTenMessages = () => {
     return db.query(q);
 };
 
-module.exports.insertMessages = (message, senderId) => {
+module.exports.newMessage = (message, senderId) => {
     const q = `INSERT INTO chat (message, senderId) 
     VALUES ($1, $2)
     RETURNING *`;

@@ -29,23 +29,23 @@ export default function reducer(state = {}, action) {
                 }
             }),
         };
-        /////////////CHAT///////////////////////
-        if (action.type == "ADD_MESSAGES") {
-            state = {
-                ...state,
-                mostRecentMessages: action.mostRecentMessages,
-            };
-            //update state here
-        } else if (action.type == "ADD_MESSAGE") {
-            state = {
-                ...state,
-                mostRecentMessages: [
-                    ...state.mostRecentMessages,
-                    action.newMessage,
-                ],
-                //A conditional for the action with individual new messages. For this action, the reducer should return a new object that has all the same properties as the old state object except the array of chat messages is replaced with a new array that has in it all the same objects as the old chat messages array plus one more at the end
-            };
-        }
+    }
+    /////////////CHAT///////////////////////
+    if (action.type == "ADD_MESSAGES") {
+        state = {
+            ...state,
+            mostRecentMessages: action.mostRecentMessages,
+        };
+        //update state here
+    } else if (action.type == "ADD_MESSAGE") {
+        state = {
+            ...state,
+            mostRecentMessages: [
+                ...state.mostRecentMessages,
+                action.newMessage,
+            ],
+            //A conditional for the action with individual new messages. For this action, the reducer should return a new object that has all the same properties as the old state object except the array of chat messages is replaced with a new array that has in it all the same objects as the old chat messages array plus one more at the end
+        };
     }
     return state;
 }

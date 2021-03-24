@@ -45,8 +45,8 @@ export default class OtherProfile extends Component {
                     src={this.state.otherUser.imageurl}
                     id="profilepic"
                     alt={this.state.otherUser.first}
-                    width="200"
-                    height="200"
+                    width="150"
+                    height="150"
                 />
                 <h2>{this.state.otherUser.bio}</h2>
                 <FriendshipButton otherUserId={this.props.match.params.id} />
