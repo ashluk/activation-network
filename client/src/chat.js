@@ -36,21 +36,19 @@ export default function Chat() {
     return (
         <>
             <div id="chat-room">
-                <h1>Chat Room</h1>
+                <h1>cowboy connect</h1>
                 <div className="chat-container" ref={elemRef}>
                     {chatMessages &&
                         chatMessages.map(function (user) {
                             return (
                                 <div key={user.id}>
                                     <div id="chat-message">
-                                        <div id="created-at">
-                                            {user.created_at}
-                                        </div>
                                         <div id="chat-name">
                                             {user.first} {user.last}
                                         </div>
                                         {user.message}
                                     </div>
+                                    <div id="created-at">{user.created_at}</div>
                                 </div>
                             );
                         })}

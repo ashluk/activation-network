@@ -17,7 +17,7 @@ export default function Profilepic({
                 onClick={toggleUploader}
                 className="profile-pic"
                 src={imageUrl}
-                id="profilepic"
+                // id="profilepic"
                 alt={first}
                 bio={bio}
                 width="200"

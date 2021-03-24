@@ -39,6 +39,7 @@ export default class ResetPassword extends React.Component {
                 } else {
                     this.setState({
                         error: true,
+                        step: 1,
                     });
                 }
             })
@@ -69,7 +70,10 @@ export default class ResetPassword extends React.Component {
                         onChange={(e) => this.handleChange(e)}
                         name="email"
                     />
-                    <button onClick={() => this.handleClick()}>reset</button>
+                    <div id="linktologininreset">
+                        <Link to="/login">back to login?</Link>
+                    </div>
+                    <button onClick={() => this.handleClick()}>RESET</button>
                 </div>
             );
         }
@@ -86,9 +90,7 @@ export default class ResetPassword extends React.Component {
                         name="newpassword"
                         placeholder="new password"
                     />
-                    <button onClick={() => this.updatePass()}>
-                        keep new password
-                    </button>
+                    <button onClick={() => this.updatePass()}>SUBMIT </button>
                 </div>
             );
         }

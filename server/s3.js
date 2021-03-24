@@ -49,3 +49,15 @@ module.exports.upload = (req, res, next) => {
             console.log(err);
         });
 };
+module.exports.delete = (filename) => {
+    s3.deleteObject(
+        {
+            Bucket: "indreamsimages",
+            Key: filename,
+        },
+        function (err, data) {
+            if (err) console.log(err, err.stack);
+            else console.log(data);
+        }
+    );
+};

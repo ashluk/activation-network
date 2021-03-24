@@ -8,13 +8,29 @@ body {
     color: ghostwhite;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
     text-transform: uppercase;
     font-weight: 100;
-    letter-spacing: -1.5px;
+    letter-spacing: -1.8px;
 }
-/*.spiced {
-    color: blueviolet;
-}*/
+@font-face {
+    font-family: "Terminal Grotesque Open";
+    src: url("TerminalGrotesque-Open.woff2") format("woff2"),
+        url("TerminalGrotesque-Open.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+h1 {
+    font-size: 25px;
+}
+#chat-room h1 {
+    font-family: "Terminal Grotesque Open";
+    font-size: 40px;
+    letter-spacing: -1.5px;
+    padding-top: 5px;
+}
 #backgroundimage {
     position: fixed;
     top: 0;
@@ -30,11 +46,71 @@ body {
     top: 2px;
     left: 500px;
 }
+#logoinwelcome {
+    position: fixed;
+    top: 2px;
+    left: 350px;
+}
+
 button {
     width: 150px;
 }
 #bio-button {
     width: 300px;
+}
+a {
+    z-index: 1;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    font-weight: 400;
+    font-size: 20px;
+    top: 10px;
+    left: 0px;
+    width: 350px;
+    color: rgb(247, 214, 211);
+}
+
+#stalkpeople {
+    position: fixed;
+    top: 100px;
+    left: 500px;
+    width: 150px;
+
+    font-size: 20px;
+}
+#friendsandwannabes {
+    position: fixed;
+    top: 100px;
+    left: 826px;
+    font-size: 20px;
+    width: 230px;
+}
+#yourprofile {
+    position: fixed;
+    top: 100px;
+    left: 1040px;
+    width: 150px;
+
+    font-size: 20px;
+}
+#cowboyconnect {
+    position: fixed;
+    top: 100px;
+    left: 640px;
+    width: 200px;
+
+    font-size: 20px;
+}
+
+.add {
+    display: flex;
+    flex-direction: column;
+}
+.edit {
+    display: flex;
+    flex-direction: column;
 }
 
 /*#profilepic {
@@ -70,9 +146,6 @@ button {
     background-color: rgba(0, 0, 0, 0.3);
     /*visibility: invisible;*/
 }
-.profile-name {
-    font-size: 18px;
-}
 
 #other-profile {
     position: absolute;
@@ -81,20 +154,30 @@ button {
     width: 300px;
     height: 300px;
 }
-#profile-in-profile {
-    width: 400px;
-    height: 400px;
-    background-color: green;
+#profile-in-profile .profile-name {
+    font-size: 28px;
 }
-#pic-in-profile {
-    width: 400px;
-    height: 400px;
+
+#profile-in-profile .profile-pic {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+#profile-in-profile {
+    text-align: center;
+    color: blanchedalmond;
+}
+.currentuser .profile-name {
+    font-size: 18px;
 }
 .currentuser {
     position: absolute;
+    object-fit: cover;
+
     top: 0px;
     right: 0px;
     align-content: center;
+    text-align: center;
     width: 200px;
     height: 200px;
 }
@@ -102,23 +185,27 @@ button {
 #find-people {
     position: relative;
     text-align: center;
-
-    top: 50px;
-    left: 560px;
-    width: 160px;
+    top: 120px;
+    left: 660px;
+    width: 260px;
     height: 300px;
+}
+#find-people input {
+    width: 250px;
 }
 #friends-and-wannabes {
     position: relative;
-    top: 100px;
+    top: 120px;
     left: 550px;
     width: 200px;
     text-align: center;
     font-size: 22px;
 }
 #findimage {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+
     padding-top: 5px;
 }
 #found-people {
@@ -145,24 +232,6 @@ button {
     font: 200;
     text-decoration: none;
 }
-a {
-    z-index: 1;
-    text-decoration: none;
-    position: relative;
-    font-weight: 800;
-    top: 10px;
-    right: 20px;
-    font: 200;
-    color: rgb(247, 214, 211);
-}
-.add {
-    display: flex;
-    flex-direction: column;
-}
-.edit {
-    display: flex;
-    flex-direction: column;
-}
 
 #regforms {
     position: fixed;
@@ -182,12 +251,20 @@ a {
 #linkto {
     position: fixed;
     top: 250px;
-    left: 370px;
+    left: 350px;
+    font-size: 15px;
 }
 #linktologin {
     position: fixed;
     top: 250px;
-    left: 470px;
+    left: 450px;
+    font-size: 18px;
+}
+#linktologininreset {
+    position: fixed;
+    top: 250px;
+    left: 500px;
+    font-size: 18px;
 }
 #navlinks {
     position: relative;
@@ -199,26 +276,36 @@ a {
 }
 .chat-container {
     height: 300px;
-    width: 350px;
+    width: 470px;
     overflow-y: auto;
 }
 #chat-room {
     position: relative;
     text-align: center;
-    top: 100px;
+    top: 120px;
     left: 550px;
-    width: 350px;
+    width: 480px;
+
     background-color: ghostwhite;
     color: black;
+}
+#chat-room textarea {
+    width: 480px;
 }
 #chat-message {
     display: flex;
     flex-direction: column;
-    font-size: 20px;
+    font-family: monospace;
+    padding-top: 8px;
+    font-size: 16px;
 }
 #chat-name {
-    text-align: center;
-    font-size: 13px;
+    text-align: left;
+    padding-left: 3px;
+    color: royalblue;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 15px;
     font-weight: 500;
 }
 #created-at {

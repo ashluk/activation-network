@@ -429,6 +429,24 @@ app.get("/getfriends", (req, res) => {
             console.log("err in getFriends", err);
         });
 });
+//////////////DELETEACCOUNT/////////////////
+app.get("/delete", (req, res) => {
+    db.userDelete(req.session.userid)
+        .then(() => {
+            res.json({ success: true });
+        })
+        .catch((err) => console.log("error in userDelete", err));
+    db.chatDelete(req.session.userid)
+        .then(() => {
+            res.json({ success: true });
+        })
+        .catch((err) => console.log("error in chatDelete", err));
+    db.friendshipDelete(req.session.userid)
+        .then(() => {
+            res.json({ success: true });
+        })
+        .catch((err) => console.log("error in friendshipDelete", err));
+});
 
 ///////////////////LOGOUT/////////////////////
 app.get("/logout", (req, res) => {

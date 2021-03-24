@@ -15,6 +15,7 @@ import Friends from "./friends";
 import { Link } from "react-router-dom";
 import Logout from "./logout";
 import Chat from "./chat";
+import Delete from "./delete";
 
 export default class App extends Component {
     constructor() {
@@ -69,13 +70,19 @@ export default class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div id="navlinks">
-                    <Link to="/friends">FRIENDS</Link>
+                <Link to="/friends" id="friendsandwannabes">
+                    FRIENDS AND WANNABES
+                </Link>
 
-                    <Link to="/users/">FIND PEOPLE</Link>
-                    <Link to="/chat">CHAT</Link>
-                    <Link to="/">PROFILE</Link>
-                </div>
+                <Link to="/users/" id="stalkpeople">
+                    STALK PEOPLE
+                </Link>
+                <Link to="/chat" id="cowboyconnect">
+                    COWBOY CONNECT
+                </Link>
+                <Link to="/" id="yourprofile">
+                    YOUR PROFILE
+                </Link>
 
                 <div id="logo">
                     <Logo />
@@ -94,6 +101,7 @@ export default class App extends Component {
                         />
 
                         <Logout />
+                        <Delete />
                     </div>
 
                     <Route

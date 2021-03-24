@@ -26,6 +26,7 @@ export default function FindPeople() {
     return (
         <>
             <div id="find-people">
+                <h1>stalk someone?</h1>
                 <input
                     defaultValue={searchTerm}
                     placeholder="looking for someone..."

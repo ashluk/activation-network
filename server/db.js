@@ -162,3 +162,20 @@ module.exports.newMessage = (message, senderId) => {
     const params = [message, senderId];
     return db.query(q, params);
 };
+///////////////DELETE ACCOUNT//////////////
+module.exports.userDelete = (id) => {
+    const q = `
+    DELETE FROM users  WHERE id = $1`;
+    const params = [id];
+    return db.query(q, params);
+};
+module.exports.chatDelete = (id) => {
+    const q = `DELETE FROM chat WHERE id = $1`;
+    const params = [id];
+    return db.query(q, params);
+};
+module.exports.friendshipDelete = (id) => {
+    const q = `DELETE FROM friendships WHERE id = $1`;
+    const params = [id];
+    return db.query(q, params);
+};

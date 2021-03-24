@@ -6,12 +6,10 @@ export default function Profile(props) {
     return (
         <div id="profile-in-profile">
             <Profilepic
-                className="profile-main"
+                className="profile-pic"
                 imageUrl={props.imageUrl}
                 first={props.first}
                 last={props.last}
-                width="300"
-                height="300"
             />
             <Bioeditor
                 bio={props.bio}

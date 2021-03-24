@@ -1,6 +1,5 @@
 //here we export all our action creator functions...
-import axios from "axios";
-
+import axios from "./axios";
 //action creator is just a function that returns an object.
 
 //the object that gets returned is the action
