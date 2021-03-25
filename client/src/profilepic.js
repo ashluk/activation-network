@@ -6,7 +6,7 @@ export default function Profilepic({
     toggleUploader,
 }) {
     //this is rendering a default image if there is no imageUrl provided
-    imageUrl = imageUrl || "computercat.png"; //we need to add a default.png into the public folder
+    imageUrl = imageUrl || "omni1.jpg"; //we need to add a default.png into the public folder
 
     return (
         <div id="pic-in-profilepic">

@@ -37,7 +37,6 @@ export default class Uploader extends Component {
         return (
             <div>
                 <div className="modal">
-                    <h2 className="uploader-text"></h2>
                     <div
                         className="x"
                         onClick={() => this.props.toggleUploader()}
@@ -46,6 +45,7 @@ export default class Uploader extends Component {
                     </div>
 
                     <input
+                        id="modal-input"
                         onChange={(e) => this.handleChange(e)}
                         type="file"
                         name="file"

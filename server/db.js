@@ -165,17 +165,24 @@ module.exports.newMessage = (message, senderId) => {
 ///////////////DELETE ACCOUNT//////////////
 module.exports.userDelete = (id) => {
     const q = `
-    DELETE FROM users  WHERE id = $1`;
+    DELETE FROM users WHERE id = $1`;
     const params = [id];
     return db.query(q, params);
 };
 module.exports.chatDelete = (id) => {
-    const q = `DELETE FROM chat WHERE id = $1`;
+    console.log("id in db", id);
+    const q = `DELETE FROM chat WHERE senderId = $1`;
     const params = [id];
     return db.query(q, params);
 };
 module.exports.friendshipDelete = (id) => {
-    const q = `DELETE FROM friendships WHERE id = $1`;
+    const q = `DELETE FROM friendships WHERE sender_id = $1`;
+    const params = [id];
+    return db.query(q, params);
+};
+module.exports.resetDelete = (id) => {
+    const q = `
+    DELETE FROM reset_codes WHERE id = $1`;
     const params = [id];
     return db.query(q, params);
 };

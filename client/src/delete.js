@@ -18,7 +18,7 @@ export default class Delete extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.handleClick}>DELETE ACCOUNT</button>
+                <button onClick={this.handleClick}>DELETE CHAT MESSAGES</button>
             </div>
         );
     }

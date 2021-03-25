@@ -37,16 +37,15 @@ export default class OtherProfile extends Component {
         return (
             <div id="other-profile">
                 <h1>
-                    my name is {this.state.otherUser.first}{" "}
-                    {this.state.otherUser.last}
+                    {this.state.otherUser.first} {this.state.otherUser.last}
                 </h1>
                 <img
                     className="profile-pic"
                     src={this.state.otherUser.imageurl}
                     id="profilepic"
                     alt={this.state.otherUser.first}
-                    width="150"
-                    height="150"
+                    width="350"
+                    height="350"
                 />
                 <h2>{this.state.otherUser.bio}</h2>
                 <FriendshipButton otherUserId={this.props.match.params.id} />

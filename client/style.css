@@ -1,10 +1,13 @@
+* {
+    margin: 0;
+}
 body {
     /* align-content: center;
     justify-content: center;
     grid-template-rows: 500px;
     grid-template-columns: 1fr 1fr 1fr;*/
 
-    background-color: rgb(37, 37, 39);
+    background-color: rgb(0, 0, 0);
     color: ghostwhite;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -23,7 +26,7 @@ body {
 }
 
 h1 {
-    font-size: 25px;
+    font-size: 35px;
 }
 #chat-room h1 {
     font-family: "Terminal Grotesque Open";
@@ -33,22 +36,31 @@ h1 {
 }
 #backgroundimage {
     position: fixed;
-    top: 0;
+    top: 3px;
     left: 0;
 }
 #backgroundimage:hover {
     -webkit-filter: invert(100%) !important;
 }
+.background3:hover {
+    -webkit-filter: invert(100%) !important;
+}
+.background3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
 #logo {
     position: fixed;
     text-align-last: center;
     font-family: Arial, Helvetica, sans-serif;
-    top: 2px;
-    left: 500px;
+    top: 8px;
+    left: 510px;
 }
 #logoinwelcome {
     position: fixed;
-    top: 2px;
+    top: 10px;
     left: 350px;
 }
 
@@ -80,6 +92,7 @@ a {
 
     font-size: 20px;
 }
+
 #friendsandwannabes {
     position: fixed;
     top: 100px;
@@ -113,6 +126,10 @@ a {
     flex-direction: column;
 }
 
+.edit textarea {
+    height: 100px;
+}
+
 /*#profilepic {
     position: fixed;
     top: 30px;
@@ -125,13 +142,28 @@ a {
     align-content: center;
     text-align: center;
     top: 150px;
-    left: 500px;
+    left: 630px;
     bottom: 350px;
     width: 400px;
     height: 200px;
     background-color: ghostwhite;
     color: black;
-    font-size: 30px;
+    padding-top: 10px;
+
+    font-size: 40px;
+    font-family: "Terminal Grotesque Open";
+    outline: springgreen solid 2px;
+}
+.modal h2 {
+    padding-top: 30px;
+}
+
+.x {
+    position: fixed;
+    top: 160px;
+    right: 360px;
+    color: springgreen;
+    font-family: "Terminal Grotesque Open";
 }
 .modalpopup {
     align-content: center;
@@ -149,10 +181,13 @@ a {
 
 #other-profile {
     position: absolute;
-    top: 150px;
-    left: 400px;
+    text-align: center;
+    align-content: center;
+    top: 50px;
+    left: 50px;
     width: 300px;
     height: 300px;
+    font-size: 15px;
 }
 #profile-in-profile .profile-name {
     font-size: 28px;
@@ -171,7 +206,7 @@ a {
     font-size: 18px;
 }
 .currentuser {
-    position: absolute;
+    position: fixed;
     object-fit: cover;
 
     top: 0px;
@@ -192,6 +227,9 @@ a {
 }
 #find-people input {
     width: 250px;
+}
+#find-people h1 {
+    font-size: 30px;
 }
 #friends-and-wannabes {
     position: relative;
@@ -282,8 +320,8 @@ a {
 #chat-room {
     position: relative;
     text-align: center;
-    top: 120px;
-    left: 550px;
+    top: 170px;
+    left: 590px;
     width: 480px;
 
     background-color: ghostwhite;

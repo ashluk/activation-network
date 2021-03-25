@@ -247,10 +247,10 @@ app.post("/verify", (req, res) => {
 });
 //////////////////////UPLOADER/////////////////////////////////
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-    console.log("hit this s3 route", req.file);
+    console.log("hit this s3 route", req);
     //const { title, username, description } = req.body;
     const { filename } = req.file;
-
+    //s3.delete(myoldpichere)
     const fullUrl = "https://s3.amazonaws.com/indreamsimages/" + filename;
 
     console.log("req.session", req.session);
@@ -431,21 +431,25 @@ app.get("/getfriends", (req, res) => {
 });
 //////////////DELETEACCOUNT/////////////////
 app.get("/delete", (req, res) => {
-    db.userDelete(req.session.userid)
+    console.log("about to delete", req.session.userId);
+    db.chatDelete(req.session.userId)
         .then(() => {
-            res.json({ success: true });
-        })
-        .catch((err) => console.log("error in userDelete", err));
-    db.chatDelete(req.session.userid)
-        .then(() => {
-            res.json({ success: true });
+            db.friendshipDelete(req.session.userId)
+                .then(() => {
+                    db.userDelete(req.session.userId).then(() => {
+                        db.resetDelete(req.session.userId)
+                            .then(() => {
+                                req.session.userId = undefined;
+                                res.json({ success: true });
+                            })
+                            .catch((err) =>
+                                console.log("error in userDelete", err)
+                            );
+                    });
+                })
+                .catch((err) => console.log("error in friendshipDelete", err));
         })
         .catch((err) => console.log("error in chatDelete", err));
-    db.friendshipDelete(req.session.userid)
-        .then(() => {
-            res.json({ success: true });
-        })
-        .catch((err) => console.log("error in friendshipDelete", err));
 });
 
 ///////////////////LOGOUT/////////////////////
