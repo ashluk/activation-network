@@ -68,6 +68,11 @@ const uploader = multer({
     },
 });
 
+/////////////dealing with EADDRINUSE////////////////
+process.once("SIGUSR2", () =>
+    server.close((err) => process.kill(process.pid, "SIGUSR2"))
+);
+
 ////////////////////WELCOME////////////////////////////////
 app.get("./welcome", (req, res) => {
     //is going to run if the user puts /welcome in the url bar
