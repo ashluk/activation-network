@@ -276,6 +276,11 @@ a {
     top: 150px;
     left: 350px;
 }
+#artistormusicanbuttons {
+    position: fixed;
+    bottom: 50px;
+    left: 350px;
+}
 #loginforms {
     position: fixed;
     top: 150px;
@@ -288,9 +293,9 @@ a {
 }
 #linkto {
     position: fixed;
-    top: 250px;
+    bottom: 10px;
     left: 350px;
-    font-size: 15px;
+    font-size: 10px;
 }
 #linktologin {
     position: fixed;
@@ -349,4 +354,9 @@ a {
 #created-at {
     text-align: center;
     font-size: 9px;
+}
+#artist-images {
+    position: fixed;
+    left: 10px;
+    top: 300px;
 }

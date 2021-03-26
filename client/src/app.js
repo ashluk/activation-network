@@ -55,6 +55,12 @@ export default class App extends Component {
             imageUrl: imageUrl,
         });
     }
+    handleImage(imageUrl) {
+        console.log("handleimageUrl", imageUrl);
+        this.setState({
+            imageUrl: imageUrl,
+        });
+    }
     toggleUploader() {
         console.log("toggleUplaoder is running");
         this.setState({
@@ -70,26 +76,13 @@ export default class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <Link to="/friends" id="friendsandwannabes">
-                    FRIENDS AND WANNABES
+                <Link to="/users/" id="stalkpeople">
+                    SEARCH FOR MUSICIANS
                 </Link>
 
-                <Link to="/users/" id="stalkpeople">
-                    STALK PEOPLE
-                </Link>
-                <Link to="/chat" id="cowboyconnect">
-                    COWBOY CONNECT
-                </Link>
                 <Link to="/" id="yourprofile">
                     YOUR PROFILE
                 </Link>
-
-                <div id="logo">
-                    <Logo />
-                </div>
-                <div id="backgroundimage">
-                    <Backgroundimage />
-                </div>
 
                 <div id="top-left">
                     <div className="currentuser">
@@ -101,7 +94,6 @@ export default class App extends Component {
                         />
 
                         <Logout />
-                        <Delete />
                     </div>
 
                     <Route

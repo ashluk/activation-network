@@ -2,7 +2,7 @@ import React from "react";
 import axios from "./axios";
 import { Link } from "react-router-dom";
 
-export default class Registration extends React.Component {
+export default class Artistregistration extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -12,12 +12,12 @@ export default class Registration extends React.Component {
     handleClick() {
         console.log("user clicked buootn");
         axios
-            .post("/registration", this.state)
+            .post("/artistregistration", this.state)
             .then(({ data }) => {
-                console.log("what is data", data);
+                console.log("what is data in artistreg", data);
                 if (data.success) {
                     //if everything works redirect -- location.replace redirects
-                    console.log("what is data after", data);
+                    console.log("what is data in artistreg after", data);
 
                     console.log(data);
                     location.replace("/");
@@ -49,7 +49,7 @@ export default class Registration extends React.Component {
         return (
             <div>
                 <div id="regforms">
-                    <h1>Registration</h1>
+                    <h1>Artist Registration</h1>
                     {this.state.error && <p>something went wrong</p>}
                     <input
                         name="first"
@@ -72,16 +72,6 @@ export default class Registration extends React.Component {
                         type="password"
                         onChange={(e) => this.handleChange(e)}
                     />
-                    <select
-                        name="artistormusician"
-                        onChange={(e) => this.handleChange(e)}
-                    >
-                        <option value="select">select</option>
-
-                        <option value="artist">artist</option>
-                        <option value="musician">musician</option>
-                    </select>
-
                     <button onClick={() => this.handleClick()}>submit</button>
                 </div>
                 <div id="linkto">

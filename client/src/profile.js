@@ -1,6 +1,6 @@
 import Profilepic from "./profilepic";
 import Bioeditor from "./bioeditor";
-
+import Artistimages from "./artistimages";
 export default function Profile(props) {
     console.log("props in profile", props);
     return (
@@ -15,6 +15,7 @@ export default function Profile(props) {
                 bio={props.bio}
                 bioInApp={(bio) => props.bioInApp(bio)}
             />
+            <Artistimages className="artist-or-image" title={props.title} />
         </div>
     );
 }

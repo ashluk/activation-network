@@ -1,10 +1,12 @@
 import React from "react";
 import axios from "./axios";
+
 import { Link } from "react-router-dom";
 
-export default class Registration extends React.Component {
+export default class Artistimages extends React.Component {
     constructor() {
         super();
+        this.file = undefined;
         this.state = {
             error: false,
         };
@@ -12,12 +14,12 @@ export default class Registration extends React.Component {
     handleClick() {
         console.log("user clicked buootn");
         axios
-            .post("/registration", this.state)
+            .post("/artistimages", this.state)
             .then(({ data }) => {
-                console.log("what is data", data);
+                console.log("what is data in artistimages", data);
                 if (data.success) {
                     //if everything works redirect -- location.replace redirects
-                    console.log("what is data after", data);
+                    console.log("what is data in artistimages after", data);
 
                     console.log(data);
                     location.replace("/");
@@ -45,47 +47,57 @@ export default class Registration extends React.Component {
         );
         //we HAVE to call this.setState to store input into state
     }
+    handleImage() {
+        this.props.imageUploadInApp("this is an arg");
+        var formData = new FormData();
+        formData.append("file", this.state.file);
+        axios
+            .post("/artistimage", formData)
+            .then(({ data }) => {
+                console.log("response from post", data);
+                this.props.imageUploadInApp(data.imageUrl);
+            })
+            .catch(function (err) {
+                console.log("err in axios catch", err);
+            });
+    }
+
     render() {
         return (
             <div>
-                <div id="regforms">
-                    <h1>Registration</h1>
+                <div id="artist-images">
                     {this.state.error && <p>something went wrong</p>}
+                    UPLOAD YOUR WORK
                     <input
-                        name="first"
-                        placeholder="first"
-                        onChange={(e) => this.handleChange(e)}
+                        type="file"
+                        name="file"
+                        accept="image/*"
+                        onChange={(e) => this.handleImage(e)}
                     />
                     <input
-                        name="last"
-                        placeholder="last"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <input
-                        name="email"
-                        placeholder="email"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <input
-                        name="password"
-                        placeholder="password"
-                        type="password"
+                        name="title"
+                        placeholder="title"
                         onChange={(e) => this.handleChange(e)}
                     />
                     <select
-                        name="artistormusician"
+                        name="video-or-image"
                         onChange={(e) => this.handleChange(e)}
                     >
                         <option value="select">select</option>
 
-                        <option value="artist">artist</option>
-                        <option value="musician">musician</option>
+                        <option value="video">video</option>
+                        <option value="image">image</option>
                     </select>
+                    <select name="tags" onChange={(e) => this.handleChange(e)}>
+                        <option value="select">select</option>
 
+                        <option value="3d">3d</option>
+                        <option value="animation">animation</option>
+                        <option value="drawing">drawing</option>
+                        <option value="gan">gan</option>
+                        <option value="responsive">responsive</option>
+                    </select>
                     <button onClick={() => this.handleClick()}>submit</button>
-                </div>
-                <div id="linkto">
-                    <Link to="/login">Click here to log in!</Link>
                 </div>
             </div>
         );

@@ -5,13 +5,13 @@ const db = spicedPg(
         "postgres:postgres:postgres@localhost:5432/finalproject"
 );
 //////////////////REGISTER//////////////////////////
-module.exports.addUser = (first, last, email, password) => {
-    const q = `INSERT INTO users (first, last, email, password)
-            values($1, $2, $3, $4)
+module.exports.addUser = (first, last, email, password, artistormusician) => {
+    const q = `INSERT INTO users (first, last, email, password, artistormusician)
+            values($1, $2, $3, $4, $5)
             RETURNING id
             
     `;
-    const params = [first, last, email, password];
+    const params = [first, last, email, password, artistormusician];
 
     return db.query(q, params);
 };

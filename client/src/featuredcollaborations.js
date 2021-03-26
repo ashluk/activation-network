@@ -1,4 +1,4 @@
-export default function Backgroundimage() {
+export default function Featuredcollaboratoins() {
     return (
         <div>
             <img

@@ -1,5 +1,7 @@
 import { HashRouter, Route } from "react-router-dom";
 import Registration from "./registration";
+import Artistormusician from "./artistormusician";
+import Artistregistration from "./artistregistration";
 import Login from "./login";
 import Reset from "./reset";
 import Logo from "./logo";
@@ -10,7 +12,13 @@ export default function Welcome() {
         <div>
             <HashRouter>
                 <div>
-                    <Route exact path="/" component={Registration} />
+                    <Route exact path="/" component={Artistormusician} />
+                    <Route
+                        path="/artistregistration"
+                        component={Artistregistration}
+                    />
+                    <Route path="/registration" component={Registration} />
+
                     <Route path="/login" component={Login} />
                     <div id="resetforms">
                         <Route path="/reset" component={Reset} />

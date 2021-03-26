@@ -90,12 +90,17 @@ app.get("./welcome", (req, res) => {
 //app.get("/registration", (req, res) => {});
 
 app.post("/registration", (req, res) => {
-    const { first, last, email, password } = req.body;
-    // console.log("requested body", req.body);
-
+    let { first, last, email, password, artistormusician } = req.body;
+    console.log("requested bod in registration", req.body);
+    //req.body.artistormusician = "artist";
+    if (req.body.artistormusician == "artist") {
+        artistormusician = true;
+    } else {
+        artistormusician = false;
+    }
     hash(password)
         .then((hashedPassword) => {
-            db.addUser(first, last, email, hashedPassword)
+            db.addUser(first, last, email, hashedPassword, artistormusician)
                 .then(({ rows }) => {
                     console.log("rows: ", rows);
                     req.session.userId = rows[0].id;
@@ -483,7 +488,7 @@ server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
 });
 ///////////////////CHAT////////////////////////////
-
+/*
 io.on("connection", function (socket) {
     //console.log("socket with id connected", socket.id);
     if (!socket.request.session.userId) {
@@ -543,3 +548,4 @@ io.on("connection", function (socket) {
 
     console.log("socket id", socket.id);
 });
+*/
