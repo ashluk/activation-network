@@ -52,6 +52,7 @@ app.use(express.static(path.join(__dirname, "..", "client", "public")));
 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
+        console.log("file in multer", file);
         callback(null, __dirname + "/uploads");
     },
     filename: function (req, file, callback) {
@@ -64,7 +65,7 @@ const diskStorage = multer.diskStorage({
 const uploader = multer({
     storage: diskStorage,
     limits: {
-        fileSize: 4000000,
+        fileSize: 90000000,
     },
 });
 
@@ -275,6 +276,67 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
             console.log("err in addImages", err);
         });
 });
+/////////////////ARTWORK UPLOADER///////////////////////////////
+app.post("/upload/artwork", uploader.single("file"), s3.upload, (req, res) => {
+    console.log("req.body in artworkujpload", req.body);
+    const { title, type, tags } = req.body;
+
+    const { filename } = req.file;
+
+    const artist_id = req.session.userId;
+    const fullUrl = "https://s3.amazonaws.com/indreamsimages/" + filename;
+    db.uploadArt(artist_id, title, type, tags, fullUrl)
+        .then(({ rows }) => {
+            console.log("rows in uploadart", rows);
+            res.json({
+                url: rows[0].file,
+                success: true,
+            });
+        })
+        .catch((err) => {
+            console.log("err in addImages", err);
+        });
+});
+
+app.get("/artwork", (req, res) => {
+    db.getArt(req.session.userId).then(({ rows }) => {
+        console.log("rows in artwork", rows);
+        res.json({ rows });
+    });
+});
+///////////////////MUSIC UPLOAD//////////////////////////////
+app.post("/upload/music", uploader.single("file"), s3.upload, (req, res) => {
+    console.log("req.body in music", req.body);
+    const { title, type, tags } = req.body;
+
+    const { filename } = req.file;
+
+    const artist_id = req.session.userId;
+    const fullUrl = "https://s3.amazonaws.com/indreamsimages/" + filename;
+    db.uploadArt(artist_id, title, type, tags, fullUrl)
+        .then(({ rows }) => {
+            console.log("rows in uploadart", rows);
+            res.json({
+                url: rows[0].file,
+                success: true,
+            });
+        })
+        .catch((err) => {
+            console.log("err in addImages", err);
+        });
+});
+
+app.get("/music", (req, res) => {
+    // let music = "music";
+    db.getMusic(req.session.userId, "music")
+        .then(({ rows }) => {
+            console.log("rows in music1", rows);
+            res.json({ rows });
+        })
+        .catch((err) => {
+            console.log("err in getmusic", err);
+        });
+});
 ///////////////////////////BIO ROUTE///////////////////////////
 app.post("/updatebio", (req, res) => {
     //console.log("i am in the bio editor", req.session);
@@ -323,8 +385,8 @@ app.get("/user/:id.json", (req, res) => {
             });
     }
 });
-///////////////////FIND PEOPLE////////////////////////
-app.get("/users/most-recent", (req, res) => {
+///////////////////FIND PEOPLE -- INCLUDING BY TAG////////////////////////
+/*app.get("/users/most-recent", (req, res) => {
     db.mostRecentUser()
         .then(({ rows }) => {
             console.log("rows in most recent", rows);
@@ -333,10 +395,21 @@ app.get("/users/most-recent", (req, res) => {
         .catch((err) => {
             console.log("error in mostrecent", err);
         });
-});
-app.get("/users/:val", (req, res) => {
+});*/
+/*app.get("/users/:val", (req, res) => {
     // console.log("req.params.val", req.params.val);
     db.findUser(req.params.val)
+        .then(({ rows }) => {
+            console.log("results in users.val", rows);
+            res.json({ resultUsers: rows });
+        })
+        .catch((err) => {
+            console.log("error in finduser", err);
+        });
+});*/
+app.get("/users/:val", (req, res) => {
+    console.log("req.params.val", req.params.val);
+    db.searchByTag(req.params.val)
         .then(({ rows }) => {
             console.log("results in users.val", rows);
             res.json({ resultUsers: rows });

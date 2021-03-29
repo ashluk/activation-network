@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS tags;
-DROP TABLE IF EXISTS items;
+DROP TABLE IF EXISTS artworks;
 DROP TABLE IF EXISTS reset_codes;
 DROP TABLE IF EXISTS private_message;
 DROP TABLE IF EXISTS friendships;
@@ -18,11 +18,14 @@ CREATE TABLE users (
     artistormusician BOOLEAN DEFAULT false,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-CREATE TABLE items (
-          id SERIAL PRIMARY KEY,
-          itemId INT NOT NULL REFERENCES users(id),
-          title VARCHAR(255) NOT NULL CHECK (title <> ''),
-          content VARCHAR NOT NULL CHECK (title <> '')
+CREATE TABLE artworks (
+    id SERIAL PRIMARY KEY,
+    artist_id INT NOT NULL REFERENCES users(id),
+    title VARCHAR(255) NOT NULL CHECK (title <> ''),
+    type VARCHAR(255),
+    tags VARCHAR(255) NOT NULL CHECK (tags <> ''),
+    file VARCHAR 
+    
 
 );
 

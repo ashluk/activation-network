@@ -24,7 +24,23 @@ body {
     font-style: normal;
     font-display: swap;
 }
-
+@font-face {
+    font-family: "Druk Wide Cy Web";
+    src: url("DrukWideCyWeb-Bold.woff2") format("woff2"),
+        url("DrukWideCyWeb-Bold.woff") format("woff"),
+        url("DrukWideCyWeb-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+    text-transform: uppercase;
+}
+audio {
+    filter: pink(80%) saturate(70%) grayscale(10) contrast(99%) invert(12%);
+    font-family: "Terminal Grotesque Open";
+    border-radius: 0%;
+    width: 400px;
+    height: 35px;
+}
 h1 {
     font-size: 35px;
 }
@@ -86,9 +102,9 @@ a {
 
 #stalkpeople {
     position: fixed;
-    top: 100px;
-    left: 500px;
-    width: 150px;
+    top: 10px;
+    left: 200px;
+    width: 250px;
 
     font-size: 20px;
 }
@@ -357,6 +373,44 @@ a {
 }
 #artist-images {
     position: fixed;
+    display: flex;
+    flex-direction: row;
     left: 10px;
     top: 300px;
+}
+#music-upload {
+    position: fixed;
+    left: 10px;
+    top: 400px;
+}
+#artworkimage {
+    position: relative;
+    left: 30px;
+    top: 0;
+}
+#findmusicians {
+    position: fixed;
+    color: cyan;
+    width: 200px;
+}
+#find-music {
+    width: 400px;
+    height: 100px;
+}
+#find-music a {
+    display: flex;
+    font-family: "Druk Wide Cy Web";
+
+    flex-direction: column;
+    text-align: left;
+    content-align: center;
+    padding-top: 10px;
+    color: cyan;
+    position: relative;
+}
+select {
+    font-family: "Terminal Grotesque Open";
+    font-size: 17px;
+    width: 200px;
+    height: 20px;
 }

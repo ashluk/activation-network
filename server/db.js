@@ -186,3 +186,32 @@ module.exports.resetDelete = (id) => {
     const params = [id];
     return db.query(q, params);
 };
+
+////////ARTWORK//////////////
+module.exports.uploadArt = (artist_id, title, type, tags, file) => {
+    const q = `INSERT INTO artworks(artist_id, title, type, tags, file)
+    VALUES($1,$2,$3,$4,$5)
+    RETURNING *  `;
+    const params = [artist_id, title, type, tags, file];
+    return db.query(q, params);
+};
+
+module.exports.getArt = (id) => {
+    const q = `SELECT * FROM artworks WHERE artist_id = $1`;
+    const params = [id];
+    return db.query(q, params);
+};
+module.exports.getMusic = (id, type) => {
+    const q = `SELECT * FROM artworks WHERE artist_id = $1 AND type = $2`;
+    const params = [id, type];
+    return db.query(q, params);
+};
+
+/////////////FIND BY TAG//////////////
+module.exports.searchByTag = (val) => {
+    const q = `SELECT * FROM artworks
+    WHERE tags = $1
+    LIMIT 6`;
+    const params = [val];
+    return db.query(q, params);
+};

@@ -5,6 +5,7 @@ import Artistregistration from "./artistregistration";
 import Login from "./login";
 import Reset from "./reset";
 import Logo from "./logo";
+import Featuredartwork from "./featuredartwork";
 import Backgroundwelcome from "./backgroundwelcome";
 
 export default function Welcome() {
@@ -13,6 +14,10 @@ export default function Welcome() {
             <HashRouter>
                 <div>
                     <Route exact path="/" component={Artistormusician} />
+                    <Route
+                        path="/featuredartwork"
+                        component={Featuredartwork}
+                    />
                     <Route
                         path="/artistregistration"
                         component={Artistregistration}

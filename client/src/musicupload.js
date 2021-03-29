@@ -3,7 +3,7 @@ import axios from "./axios";
 
 import { Link } from "react-router-dom";
 
-export default class Artistimages extends React.Component {
+export default class Musicupload extends React.Component {
     constructor() {
         super();
         this.file = undefined;
@@ -35,13 +35,13 @@ export default class Artistimages extends React.Component {
         console.log("type", this.state.type);
         console.log("tags", this.state.tags);
         axios
-            .post("/upload/artwork", formData)
+            .post("/upload/music", formData)
             .then(({ data }) => {
-                console.log("what is data in artistimages", data);
+                console.log("what is data in uploadmusic", data);
                 if (data.success) {
                     //i want to call something here passed to it by profile.
-                    console.log("what is data in artistimages after", data);
-                    this.props.handleImageInProfile(data.url);
+                    console.log("what is data in uploadmusic after", data);
+                    this.props.handleMusicInProfile(data.url);
                     console.log(data);
                 } else {
                     this.setState({
@@ -55,7 +55,7 @@ export default class Artistimages extends React.Component {
             });
     }
 
-    handleImage(e) {
+    handleAudio(e) {
         console.log("change e.target.value !", e.target.value);
         //e gives us access to see what the user is typing
         console.log(
@@ -75,14 +75,14 @@ export default class Artistimages extends React.Component {
     render() {
         return (
             <div>
-                <div id="artist-images">
+                <div id="music-upload">
                     {this.state.error && <p>something went wrong</p>}
-                    UPLOAD YOUR ART
+                    UPLOAD YOUR MUSIC
                     <input
                         type="file"
                         name="file"
-                        accept="video/*"
-                        onChange={(e) => this.handleImage(e)}
+                        accept="audio/*"
+                        onChange={(e) => this.handleAudio(e)}
                     />
                     <input
                         name="title"
@@ -98,11 +98,11 @@ export default class Artistimages extends React.Component {
                     <select name="tags" onChange={(e) => this.handleChange(e)}>
                         <option value="select">select</option>
 
-                        <option value="3d">3d</option>
-                        <option value="animation">animation</option>
-                        <option value="drawing">drawing</option>
-                        <option value="gan">gan</option>
-                        <option value="responsive">responsive</option>
+                        <option value="metal">metal</option>
+                        <option value="industrial">industrial</option>
+                        <option value="ambient">ambient</option>
+                        <option value="jungle">jungle</option>
+                        <option value="techno">techno</option>
                     </select>
                     <button onClick={() => this.handleClick()}>submit</button>
                 </div>

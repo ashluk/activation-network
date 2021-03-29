@@ -1,4 +1,4 @@
-export default function Featuredcollaboratoins() {
+export default function Featuredcollaborations() {
     return (
         <div>
             <img

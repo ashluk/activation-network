@@ -49,3 +49,26 @@ export async function newMessage(message) {
         newMessage: message,
     };
 }
+
+///////////UPLOAD ARTWORKS///////////////////
+
+/*export async function addArtImage(file) {
+    return {
+        type: `ADD_ARTWORK_IMAGE`,
+        file,
+    };
+}
+export async function addArtInfo(property, value) {
+    return {
+        type: `ADD_ARTWORK_INFO`,
+        property,
+        value,
+    };
+}
+export async function getArtwork() {
+    const { data } = await axios.get("/artworks");
+    return {
+        type: "GET_ARTWORK",
+        artwork: data.artwork,
+    };
+}*/
