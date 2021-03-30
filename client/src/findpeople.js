@@ -53,12 +53,14 @@ export default function FindPeople() {
                         return (
                             <div key={user.id} id="found-people">
                                 <Link to={`/user/${user.artist_id}`}>
-                                    <img
-                                        src={user.file}
-                                        id="findimage"
-                                        width="200"
-                                        height="200"
-                                    />
+                                    {user.title}
+                                    <video width="500" height="500" controls>
+                                        <source
+                                            src={user.file}
+                                            type="video/mp4"
+                                        ></source>
+                                        ;
+                                    </video>
                                 </Link>
                                 <div id="findtext">
                                     {" "}
@@ -80,3 +82,12 @@ export default function FindPeople() {
                     <option value="music">music</option>
                 </select>
                 */
+
+/*
+                 <img
+                                        src={user.file}
+                                        id="findimage"
+                                        width="200"
+                                        height="200"
+                                    />
+                                    */

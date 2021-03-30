@@ -211,7 +211,7 @@ module.exports.getMusic = (id, type) => {
 module.exports.searchByTag = (val) => {
     const q = `SELECT * FROM artworks
     WHERE tags = $1
-    LIMIT 6`;
+    LIMIT 20`;
     const params = [val];
     return db.query(q, params);
 };

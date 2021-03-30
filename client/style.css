@@ -44,6 +44,12 @@ audio {
 h1 {
     font-size: 35px;
 }
+#line {
+    position: fixed;
+    top: 300px;
+    width: 100%;
+    z-index: 10;
+}
 #chat-room h1 {
     font-family: "Terminal Grotesque Open";
     font-size: 40px;
@@ -262,10 +268,14 @@ a {
 
     padding-top: 5px;
 }
-#found-people {
+#found-people a {
+    font-family: "Druk Wide Cy Web";
+    font-size: 35px;
     padding-top: 10px;
+    text-align: left;
     display: flex;
     flex-direction: column;
+    width: 200px;
 }
 #findtext {
     padding-top: 20px;

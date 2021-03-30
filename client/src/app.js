@@ -108,6 +108,9 @@ export default class App extends Component {
     render() {
         return (
             <BrowserRouter>
+                <div id="line">
+                    <img src="https://static.tumblr.com/rzpvsia/0fan3j19h/site_horizon.png"></img>
+                </div>
                 <Link to="/users/" id="stalkpeople">
                     SEARCH FOR ARTISTS
                 </Link>

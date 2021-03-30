@@ -1,7 +1,7 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 var Carousel = require("react-responsive-carousel").Carousel;
-
+/*
 export default function Featuredartwork() {
     return (
         <Carousel
@@ -41,3 +41,4 @@ ReactDOM.render(
     <Featuredartwork />,
     document.querySelector(".featuredartwork")
 );
+*/

@@ -1,12 +1,16 @@
 import { Component } from "react";
 import axios from "./axios";
 import { FriendshipButton } from "./hooks/friendshipButton";
+import Artistimages from "./artistimages";
+import Musicupload from "./musicupload";
 
 export default class OtherProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
             otherUser: "",
+            artwork: "",
+            music: "",
         };
         console.log("actually what is this state", this.state);
     }
@@ -32,6 +36,40 @@ export default class OtherProfile extends Component {
             .catch((err) => {
                 console.log("error in axios user:id", err);
             });
+        axios
+            .get(`/artwork/${this.props.match.params.id}.json`)
+            .then(({ data }) => {
+                var artwork = [];
+                for (var i = 0; i < data.rows.length; i++) {
+                    //console.log("data.rows[i]OTHER", data.rows[i].file);
+                    artwork.push(data.rows[i].file);
+                }
+
+                console.log("artwork INOTHERPROFILE", artwork);
+                this.setState({
+                    artwork: artwork,
+                });
+            })
+            .catch((err) => {
+                console.log("error in axios upload art", err);
+            });
+        axios
+            .get(`/music/${this.props.match.params.id}.json`)
+            .then(({ data }) => {
+                var music = [];
+                for (var i = 0; i < data.rows.length; i++) {
+                    console.log("data.rows[i]musixOTHER PROFILE", data.rows[i]);
+                    music.push(data.rows[i].file);
+                }
+
+                this.setState({
+                    music: music,
+                });
+            })
+            .catch((err) => {
+                console.log("error in axios upload music", err);
+            });
+        console.log("THIS.STATE.ARTWORK", this.state);
     }
     render() {
         return (
@@ -48,9 +86,45 @@ export default class OtherProfile extends Component {
                     height="350"
                 />
                 <h2>{this.state.otherUser.bio}</h2>
+                <audio controls>
+                    <source
+                        src={this.state.music.file}
+                        type="audio/mpeg"
+                    ></source>
+                    <video width="500" height="500" controls>
+                        <source
+                            src={this.state.artwork.file}
+                            type="video/mp4"
+                        ></source>
+                        ;
+                    </video>
+                </audio>
                 <FriendshipButton otherUserId={this.props.match.params.id} />
             </div>
         );
     }
 }
 //otherUserId - {this.props.match.params.id} creates a property that i am passing down to friendshipbutton
+/*
+  <Artistimages
+                    className="artworkimage"
+                    handleImageInProfile={(url) =>
+                        setNewImages([...newImages, url])
+                    } //this puts the url in state
+                    title={props.title}
+                />
+                {newMusic.map(function (url, id) {
+                    return (
+                        <audio controls key={id}>
+                            <source src={url} type="audio/mpeg"></source>
+                        </audio>
+                    );
+                })}
+                <Musicupload
+                    className="audio"
+                    handleMusicInProfile={(url) =>
+                        setNewMusic([...newMusic, url])
+                    } //this puts the url in state
+                    title={props.title}
+                />
+                */

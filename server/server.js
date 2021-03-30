@@ -385,6 +385,42 @@ app.get("/user/:id.json", (req, res) => {
             });
     }
 });
+app.get("/artwork/:id.json", (req, res) => {
+    //console.log("other profile id", req.params.id);
+    //console.log("current id", req.session.userId);
+    if (req.session.userId == req.params.id) {
+        res.json({
+            success: false,
+        });
+    } else {
+        db.getArt(req.params.id)
+            .then(({ rows }) => {
+                res.json({ rows });
+                console.log("rows in getArt", rows);
+            })
+            .catch((err) => {
+                console.log("error in user", err);
+                res.json({ success: false });
+            });
+    }
+});
+app.get("/music/:id.json", (req, res) => {
+    if (req.session.userId == req.params.id) {
+        res.json({
+            success: false,
+        });
+    } else {
+        db.getMusic(req.params.id, "music")
+            .then(({ rows }) => {
+                console.log("rows in getMusic", rows);
+                res.json({ rows });
+            })
+            .catch((err) => {
+                console.log("error in user", err);
+                res.json({ success: false });
+            });
+    }
+});
 ///////////////////FIND PEOPLE -- INCLUDING BY TAG////////////////////////
 /*app.get("/users/most-recent", (req, res) => {
     db.mostRecentUser()
