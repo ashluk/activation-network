@@ -1,44 +1,59 @@
-var React = require("react");
-var ReactDOM = require("react-dom");
-var Carousel = require("react-responsive-carousel").Carousel;
-/*
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 export default function Featuredartwork() {
+    const [searchTerm, setSearchTerm] = useState();
+    const [resultUsers, setResultUsers] = useState();
+    console.log("searchterm current", searchTerm);
+
+    useEffect(
+        function () {
+            /* if (searchTerm === undefined) {
+                axios.get("/users/most-recent").then(({ data }) => {
+                    setResultUsers(data.mostRecent);
+                    //console.log("setresult", data.mostRecent);
+                });
+            } else {
+            }*/
+            axios.get("/users/" + searchTerm).then(({ data }) => {
+                setResultUsers(data.resultUsers);
+                console.log("setResultUsers", data.resultUsers);
+            });
+        },
+        [searchTerm]
+    );
+    /* <input
+                    defaultValue={searchTerm}
+                    placeholder="looking for someone..."
+                    onChange={({ target }) => setSearchTerm(target.value)}
+                />*/
     return (
-        <Carousel
-            showArrows={true}
-            onChange={onChange}
-            onClickItem={onClickItem}
-            onClickThumb={onClickThumb}
-        >
-            <div>
-                <img src="client/public/omni3.png" />
-                <p className="legend">Legend 1</p>
+        <>
+            <div id="find-people">
+                <h1>looking to collaborate?</h1>
+
+                {resultUsers &&
+                    resultUsers.map(function (user) {
+                        return (
+                            <div key={user.id} id="found-people">
+                                <Link to={`/user/${user.artist_id}`}>
+                                    {user.title}
+                                    <video width="500" height="500" controls>
+                                        <source
+                                            src={user.file}
+                                            type="video/mp4"
+                                        ></source>
+                                    </video>
+                                </Link>
+                                <div id="findtext">
+                                    {" "}
+                                    {user.first} {user.last}
+                                </div>
+                            </div>
+                        );
+                    })}
             </div>
-            <div>
-                <img src="client/public/omni2.png" />
-                <p className="legend">Legend 2</p>
-            </div>
-            <div>
-                <img src="client/public/omni2.png" />
-                <p className="legend">Legend 3</p>
-            </div>
-            <div>
-                <img src="assets/4.jpeg" />
-                <p className="legend">Legend 4</p>
-            </div>
-            <div>
-                <img src="client/public/omni5.png" />
-                <p className="legend">Legend 5</p>
-            </div>
-            <div>
-                <img src="client/public/omni3.png" />
-                <p className="legend">Legend 6</p>
-            </div>
-        </Carousel>
+        </>
     );
 }
-ReactDOM.render(
-    <Featuredartwork />,
-    document.querySelector(".featuredartwork")
-);
-*/

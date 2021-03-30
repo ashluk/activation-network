@@ -5,6 +5,7 @@ import Artistregistration from "./artistregistration";
 import Login from "./login";
 import Reset from "./reset";
 import Logo from "./logo";
+import Featuredartwork from "./featuredartwork";
 //import Featuredartwork from "./featuredartwork";
 import Backgroundwelcome from "./backgroundwelcome";
 
@@ -23,12 +24,12 @@ export default function Welcome() {
                         component={Artistregistration}
                     />
                     <Route path="/registration" component={Registration} />
-
                     <Route path="/login" component={Login} />
                     <div id="resetforms">
                         <Route path="/reset" component={Reset} />
                     </div>
                 </div>
+                <Featuredartwork />
             </HashRouter>
 
             <div id="logoinwelcome">

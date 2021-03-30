@@ -2,13 +2,17 @@ import Profilepic from "./profilepic";
 import Bioeditor from "./bioeditor";
 import Artistimages from "./artistimages";
 import Musicupload from "./musicupload";
+import Collaborations from "./collaborations";
 import { useState, useEffect } from "react";
 
 export default function Profile(props) {
     var [newImages, setNewImages] = useState([]);
     var [newMusic, setNewMusic] = useState([]);
+    var [newCollaborations, setNewCollaborations] = useState([]);
+    var collaborations = props.collaborations;
     var artwork = props.artwork;
     var music = props.music;
+    console.log("collaborations in state", collaborations);
     console.log("artwork in state", artwork);
     console.log("music in state", music);
 
@@ -28,6 +32,14 @@ export default function Profile(props) {
         },
         [music]
     );
+    useEffect(
+        function () {
+            if (collaborations) {
+                setNewCollaborations(collaborations);
+            }
+        },
+        [collaborations]
+    );
 
     console.log("props in profile", props);
     return (
@@ -42,9 +54,7 @@ export default function Profile(props) {
                 bio={props.bio}
                 bioInApp={(bio) => props.bioInApp(bio)}
             />
-            {newImages.map(function (url, id) {
-                return <img src={url} key={id}></img>;
-            })}
+
             {newImages.map(function (url, id) {
                 return (
                     <video width="500" height="500" key={id} controls>
@@ -72,6 +82,21 @@ export default function Profile(props) {
                 handleMusicInProfile={(url) => setNewMusic([...newMusic, url])} //this puts the url in state
                 title={props.title}
             />
+            {newCollaborations.map(function (url, id) {
+                return (
+                    <video width="500" height="500" key={id} controls>
+                        <source src={url} type="video/mp4"></source>;
+                    </video>
+                );
+            })}
+
+            <Collaborations
+                className="collaborations"
+                handleCollaborationsInProfile={(url) =>
+                    setNewCollaborations([...newCollaborations, url])
+                } //this puts the url in state
+                title={props.title}
+            />
         </div>
     );
 }
@@ -87,4 +112,9 @@ export default function Profile(props) {
 
 /*
 
+            */
+/*
+ {newImages.map(function (url, id) {
+                return <img src={url} key={id}></img>;
+            })}
             */

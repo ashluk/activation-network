@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS tags;
 DROP TABLE IF EXISTS artworks;
 DROP TABLE IF EXISTS reset_codes;
 DROP TABLE IF EXISTS private_message;
+DROP TABLE IF EXISTS collaborations;
 DROP TABLE IF EXISTS friendships;
 
 DROP TABLE IF EXISTS users;
@@ -53,3 +54,14 @@ CREATE TABLE friendships(
     sender_id INT REFERENCES users(id) NOT NULL, 
     recipient_id INT REFERENCES users(id) NOT NULL, 
     accepted BOOLEAN DEFAULT false );
+
+
+    CREATE TABLE collaborations( 
+    id SERIAL PRIMARY KEY, 
+    userId INT REFERENCES users(id) NOT NULL, 
+    collaborator_id INT REFERENCES users(id), 
+    title VARCHAR(255),
+    description VARCHAR,
+    file VARCHAR
+
+     );

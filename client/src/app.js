@@ -7,6 +7,8 @@ import Uploader from "./uploader";
 import Logo from "./logo";
 import Backgroundimage from "./backgroundimage";
 import Artistimages from "./artistimages";
+import Collaborations from "./collaborations";
+
 import { BrowserRouter, Route } from "react-router-dom";
 import OtherProfile from "./otherprofile";
 import Profile from "./profile";
@@ -84,6 +86,23 @@ export default class App extends Component {
             .catch((err) => {
                 console.log("error in axios upload music", err);
             });
+        axios
+            .get("/collaborations")
+            .then(({ data }) => {
+                var collaborations = [];
+                for (var i = 0; i < data.rows.length; i++) {
+                    console.log("data.rows[i]collaborations", data.rows[i]);
+                    collaborations.push(data.rows[i].file);
+                }
+
+                console.log("data.rows in musixc", data.rows);
+                this.setState({
+                    collaborations: collaborations,
+                });
+            })
+            .catch((err) => {
+                console.log("error in axios get collab", err);
+            });
     }
 
     imageUploadInApp(imageUrl) {
@@ -108,14 +127,14 @@ export default class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div id="line">
-                    <img src="https://static.tumblr.com/rzpvsia/0fan3j19h/site_horizon.png"></img>
-                </div>
                 <Link to="/users/" id="stalkpeople">
                     SEARCH FOR ARTISTS
                 </Link>
                 <Link to="/findmusic" id="findmusicians">
                     SEARCH FOR MUSICIANS
+                </Link>
+                <Link to="/friends" id="friendsandwannabes">
+                    COLLABORATORS
                 </Link>
 
                 <Link to="/" id="yourprofile">
@@ -214,3 +233,9 @@ export default class App extends Component {
                             <Artistimages artwork={this.state.artwork} />
                         )}
                     />*/
+
+/*
+                    <div id="line">
+                    <img src="https://static.tumblr.com/rzpvsia/0fan3j19h/site_horizon.png"></img>
+                </div>
+                */

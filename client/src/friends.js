@@ -1,9 +1,12 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getFriends, unFriend, acceptFriend } from "./actions";
+import Collaborations from "./collaborations";
 
-export default function Friends() {
+export default function Friends(props) {
+    var [newCollaborations, setNewCollaborations] = useState([]);
+    var collaborations = props.collaborations;
     const dispatch = useDispatch();
     const friend = useSelector(
         (state) =>
@@ -20,6 +23,14 @@ export default function Friends() {
     useEffect(() => {
         !friend && dispatch(getFriends());
     }, []);
+    useEffect(
+        function () {
+            if (collaborations) {
+                setNewCollaborations(collaborations);
+            }
+        },
+        [collaborations]
+    );
 
     if (!friend && !wannabe) {
         return null;
@@ -42,6 +53,16 @@ export default function Friends() {
                             <button onClick={() => dispatch(unFriend(user.id))}>
                                 UNFRIEND
                             </button>
+                            <Collaborations
+                                className="collaborations"
+                                handleCollaborationsInProfile={(url) =>
+                                    setNewCollaborations([
+                                        ...newCollaborations,
+                                        url,
+                                    ])
+                                } //this puts the url in state
+                                title={props.title}
+                            />
                         </div>
                     );
                 })}
@@ -69,3 +90,22 @@ export default function Friends() {
 }
 // <Link to="/hot">See who&apos;s hot</Link>
 //    <Link to="/not">See who&apos;s not</Link>
+
+/*
+{newCollaborations.map(function (url, id) {
+                                return (
+                                    <video
+                                        width="500"
+                                        height="500"
+                                        key={id}
+                                        controls
+                                    >
+                                        <source
+                                            src={url}
+                                            type="video/mp4"
+                                        ></source>
+                                        ;
+                                    </video>
+                                );
+                            })}
+                            */

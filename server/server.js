@@ -337,6 +337,50 @@ app.get("/music", (req, res) => {
             console.log("err in getmusic", err);
         });
 });
+
+///////////////COLLABORATIONS UPLOAD//////////////////
+app.post(
+    "/upload/collaborations",
+    uploader.single("file"),
+    s3.upload,
+    (req, res) => {
+        console.log("req.body in collaboration", req.body);
+        const { collaborator_id, title, description } = req.body;
+
+        const { filename } = req.file;
+
+        const userId = req.session.userId;
+        const fullUrl = "https://s3.amazonaws.com/indreamsimages/" + filename;
+        db.uploadCollaborations(
+            userId,
+            collaborator_id,
+            title,
+            description,
+            fullUrl
+        )
+            .then(({ rows }) => {
+                console.log("rows in uploadcollaborations", rows);
+                res.json({
+                    url: rows[0].file,
+                    success: true,
+                });
+            })
+            .catch((err) => {
+                console.log("err in addcollaborations", err);
+            });
+    }
+);
+app.get("/collaborations", (req, res) => {
+    // let music = "music";
+    db.getCollaborations(req.session.userId)
+        .then(({ rows }) => {
+            console.log("rows in collaborations", rows);
+            res.json({ rows });
+        })
+        .catch((err) => {
+            console.log("err in getmusic", err);
+        });
+});
 ///////////////////////////BIO ROUTE///////////////////////////
 app.post("/updatebio", (req, res) => {
     //console.log("i am in the bio editor", req.session);
@@ -393,7 +437,7 @@ app.get("/artwork/:id.json", (req, res) => {
             success: false,
         });
     } else {
-        db.getArt(req.params.id)
+        db.getArt(req.params.id, "art")
             .then(({ rows }) => {
                 res.json({ rows });
                 console.log("rows in getArt", rows);

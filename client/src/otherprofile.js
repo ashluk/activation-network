@@ -3,14 +3,15 @@ import axios from "./axios";
 import { FriendshipButton } from "./hooks/friendshipButton";
 import Artistimages from "./artistimages";
 import Musicupload from "./musicupload";
+import Collaborations from "./collaborations";
 
 export default class OtherProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
             otherUser: "",
-            artwork: "",
-            music: "",
+            artwork: [],
+            music: [],
         };
         console.log("actually what is this state", this.state);
     }
@@ -45,10 +46,10 @@ export default class OtherProfile extends Component {
                     artwork.push(data.rows[i].file);
                 }
 
-                console.log("artwork INOTHERPROFILE", artwork);
                 this.setState({
                     artwork: artwork,
                 });
+                console.log("artwork INOTHERPROFILE", artwork);
             })
             .catch((err) => {
                 console.log("error in axios upload art", err);
@@ -69,7 +70,6 @@ export default class OtherProfile extends Component {
             .catch((err) => {
                 console.log("error in axios upload music", err);
             });
-        console.log("THIS.STATE.ARTWORK", this.state);
     }
     render() {
         return (
@@ -86,19 +86,26 @@ export default class OtherProfile extends Component {
                     height="350"
                 />
                 <h2>{this.state.otherUser.bio}</h2>
-                <audio controls>
-                    <source
-                        src={this.state.music.file}
-                        type="audio/mpeg"
-                    ></source>
-                    <video width="500" height="500" controls>
-                        <source
-                            src={this.state.artwork.file}
-                            type="video/mp4"
-                        ></source>
-                        ;
-                    </video>
-                </audio>
+
+                {this.state.artwork &&
+                    this.state.artwork.map(function (artwork) {
+                        return (
+                            // eslint-disable-next-line react/jsx-key
+                            <video width="500" height="500" controls>
+                                <source src={artwork} type="video/mp4"></source>
+                            </video>
+                        );
+                    })}
+                {this.state.music &&
+                    this.state.music.map(function (music) {
+                        return (
+                            // eslint-disable-next-line react/jsx-key
+                            <audio controls>
+                                <source src={music} type="audio/mpeg"></source>
+                            </audio>
+                        );
+                    })}
+                <Collaborations otherUserId={this.props.match.params.id} />
                 <FriendshipButton otherUserId={this.props.match.params.id} />
             </div>
         );
@@ -127,4 +134,18 @@ export default class OtherProfile extends Component {
                     } //this puts the url in state
                     title={props.title}
                 />
+                */
+/*
+<video width="500" height="500" controls>
+                    <source src={this.state.artwork} type="video/mp4"></source>
+                </video>
+                */
+/*
+{this.state.artwork.map(function (artwork, id) {
+                    return (
+                        <video width="500" height="500" key={id} controls>
+                            <source src={artwork} type="video/mp4"></source>;
+                        </video>
+                    );
+                })}
                 */

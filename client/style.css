@@ -117,8 +117,9 @@ a {
 
 #friendsandwannabes {
     position: fixed;
-    top: 100px;
-    left: 826px;
+    color: ghostwhite;
+    top: 10px;
+    left: 380px;
     font-size: 20px;
     width: 230px;
 }
@@ -235,8 +236,8 @@ a {
     right: 0px;
     align-content: center;
     text-align: center;
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
 }
 
 #find-people {
@@ -298,6 +299,7 @@ a {
 }
 
 #regforms {
+    z-index: 100;
     position: fixed;
     top: 150px;
     left: 350px;
@@ -308,11 +310,15 @@ a {
     left: 350px;
 }
 #loginforms {
+    z-index: 100;
+
     position: fixed;
     top: 150px;
     left: 450px;
 }
 #resetforms {
+    z-index: 100;
+
     position: fixed;
     top: 150px;
     left: 500px;
@@ -392,6 +398,11 @@ a {
     position: fixed;
     left: 10px;
     top: 400px;
+}
+#collaborations-upload {
+    position: relative;
+    left: 10px;
+    top: 0px;
 }
 #artworkimage {
     position: relative;

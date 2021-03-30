@@ -196,9 +196,9 @@ module.exports.uploadArt = (artist_id, title, type, tags, file) => {
     return db.query(q, params);
 };
 
-module.exports.getArt = (id) => {
-    const q = `SELECT * FROM artworks WHERE artist_id = $1`;
-    const params = [id];
+module.exports.getArt = (id, type) => {
+    const q = `SELECT * FROM artworks WHERE artist_id = $1 and type = $2`;
+    const params = [id, type];
     return db.query(q, params);
 };
 module.exports.getMusic = (id, type) => {
@@ -214,4 +214,27 @@ module.exports.searchByTag = (val) => {
     LIMIT 20`;
     const params = [val];
     return db.query(q, params);
+};
+/////////COLLABORATIONS////////////
+module.exports.uploadCollaborations = (
+    userId,
+    collaborator_id,
+    title,
+    description,
+    file
+) => {
+    const q = `INSERT INTO collaborations(userId, collaborator_id, title, description, file)
+    VALUES($1,$2,$3,$4,$5)
+    RETURNING *`;
+    const params = [userId, collaborator_id, title, description, file];
+    return db.query(q, params);
+};
+module.exports.getCollaborations = (id) => {
+    const q = `SELECT * FROM collaborations WHERE userId = $1`;
+    const params = [id];
+    return db.query(q, params);
+};
+module.exports.featuredCollaborations = () => {
+    const q = `SELECT * FROM collaborations`;
+    return db.query(q);
 };
