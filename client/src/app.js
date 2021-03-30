@@ -129,17 +129,49 @@ export default class App extends Component {
         return (
             <BrowserRouter>
                 <Link to="/users/" id="stalkpeople">
-                    SEARCH FOR ARTISTS
+                    <div id="newlinkto">
+                        <img
+                            src="object3.png"
+                            width="100px"
+                            height="100px"
+                            className="object"
+                        />
+                        <div className="linktext"> ART</div>{" "}
+                    </div>
                 </Link>
                 <Link to="/findmusic" id="findmusicians">
-                    SEARCH FOR MUSICIANS
+                    <div id="newlinkto">
+                        <img
+                            src="object6.png"
+                            width="100px"
+                            height="100px"
+                            className="object"
+                        />
+                        <div className="linktext"> MUSIC</div>{" "}
+                    </div>
                 </Link>
                 <Link to="/friends" id="friendsandwannabes">
-                    COLLABORATORS
+                    <div id="newlinkto">
+                        <img
+                            src="object2.png"
+                            width="100px"
+                            height="100px"
+                            className="object"
+                        />
+                        <div className="linktext"> COLLABORATORS</div>{" "}
+                    </div>
                 </Link>
 
                 <Link to="/" id="yourprofile">
-                    YOUR PROFILE
+                    <div id="newlinkto">
+                        <img
+                            src="object1.png"
+                            width="100px"
+                            height="100px"
+                            className="object"
+                        />
+                        <div className="linktext"> PROFILE</div>{" "}
+                    </div>
                 </Link>
 
                 <div id="top-left">
@@ -220,6 +252,11 @@ export default class App extends Component {
                         />
                     )}
                 />
+                <div id="line">
+                    <img src="new_horizon.png"></img>
+                </div>
+                <Logo />
+
                 <Route path="/chat" component={Chat} />
             </BrowserRouter>
         );
@@ -236,7 +273,5 @@ export default class App extends Component {
                     />*/
 
 /*
-                    <div id="line">
-                    <img src="https://static.tumblr.com/rzpvsia/0fan3j19h/site_horizon.png"></img>
-                </div>
+                   
                 */

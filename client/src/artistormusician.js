@@ -37,14 +37,28 @@ export default class Artistormusician extends React.Component {
         return (
             <div>
                 <div id="featuredcollaborations"></div>
-                <div id="artistormusicanbuttons">
-                    <h1>Are you an artist or a musician?</h1>
+                <div id="registrationlinkto">
                     {this.state.error && <p>something went wrong</p>}
-                    <Link to="/artistregistration">ARTIST REGISTRATION</Link>
-                    <Link to="/registration">MUSICIAN REGISTRATION</Link>
+                    <Link to="/registration">
+                        <img
+                            src="object4.png"
+                            width="100px"
+                            height="100px"
+                            className="object"
+                        />
+                        <div className="linktext">REGISTRATION</div>
+                    </Link>
                 </div>
                 <div id="linkto">
-                    <Link to="/login">already signed up? log in here!</Link>
+                    <Link to="/login">
+                        <img
+                            src="object5.png"
+                            width="100px"
+                            height="100px"
+                            className="object"
+                        />
+                        <div class="linktext">LOGIN</div>
+                    </Link>
                 </div>
             </div>
         );

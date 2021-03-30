@@ -6,14 +6,13 @@ import Login from "./login";
 import Reset from "./reset";
 import Logo from "./logo";
 import Featuredartwork from "./featuredartwork";
-//import Featuredartwork from "./featuredartwork";
 import Backgroundwelcome from "./backgroundwelcome";
 
 export default function Welcome() {
     return (
         <div>
             <div id="line">
-                <img src="https://static.tumblr.com/rzpvsia/0fan3j19h/site_horizon.png"></img>
+                <img src="new_horizon.png"></img>
             </div>
             <HashRouter>
                 <div>

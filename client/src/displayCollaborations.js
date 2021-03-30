@@ -19,15 +19,12 @@ export default function Displaycollaborations(props) {
         },
         [collaborations]
     );
-    useEffect(
-        function () {
-            axios.get("/collaborations/" + currentUser).then(({ data }) => {
-                setCurrentUser(data.currentUser);
-                console.log("setResultUsers", data.currentUser);
-            });
-        },
-        [currentUser]
-    );
+    useEffect(function () {
+        axios.get("/collaborations/" + currentUser).then(({ data }) => {
+            setCurrentUser(data.rows);
+            console.log("CurrentUser in displaycollab", data.rows);
+        });
+    }, []);
 
     return (
         <div id="display-collaborations">

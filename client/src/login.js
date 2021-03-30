@@ -59,6 +59,29 @@ export default class Registration extends React.Component {
                     />
                     <button onClick={() => this.handleClick()}>submit</button>
                 </div>
+                <div id="registrationlinkto">
+                    {this.state.error && <p>something went wrong</p>}
+                    <Link to="/registration">
+                        <img
+                            src="object4.png"
+                            width="100px"
+                            height="100px"
+                            className="object"
+                        />
+                        <div className="linktext">REGISTRATION</div>
+                    </Link>
+                </div>
+                <div id="linkto">
+                    <Link to="/login">
+                        <img
+                            src="object5.png"
+                            width="100px"
+                            height="100px"
+                            className="object"
+                        />
+                        <div class="linktext">LOGIN</div>
+                    </Link>
+                </div>
                 <div id="linktologin">
                     <Link to="/reset">Click here to reset password!</Link>
                 </div>

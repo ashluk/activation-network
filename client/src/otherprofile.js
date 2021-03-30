@@ -105,7 +105,6 @@ export default class OtherProfile extends Component {
                             </audio>
                         );
                     })}
-                <Collaborations otherUserId={this.props.match.params.id} />
                 <FriendshipButton otherUserId={this.props.match.params.id} />
             </div>
         );

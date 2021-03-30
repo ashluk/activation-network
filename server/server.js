@@ -381,7 +381,17 @@ app.get("/collaborations/:id", (req, res) => {
             res.json({ rows });
         })
         .catch((err) => {
-            console.log("err in getmusic", err);
+            console.log("err in getcollab", err);
+        });
+});
+app.get("/featuredartwork", (req, res) => {
+    db.featuredCollaborations()
+        .then(({ rows }) => {
+            console.log("rows in featuredcollaborations", rows);
+            res.json({ rows });
+        })
+        .catch((err) => {
+            console.log("err in featuredcollab", err);
         });
 });
 ///////////////////////////BIO ROUTE///////////////////////////

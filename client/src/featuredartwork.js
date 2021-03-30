@@ -4,52 +4,46 @@ import { Link } from "react-router-dom";
 
 export default function Featuredartwork() {
     const [searchTerm, setSearchTerm] = useState();
+    const [featuredCollab, setFeaturedCollab] = useState();
     const [resultUsers, setResultUsers] = useState();
     console.log("searchterm current", searchTerm);
 
-    useEffect(
-        function () {
-            /* if (searchTerm === undefined) {
+    useEffect(function () {
+        /* if (searchTerm === undefined) {
                 axios.get("/users/most-recent").then(({ data }) => {
                     setResultUsers(data.mostRecent);
                     //console.log("setresult", data.mostRecent);
                 });
             } else {
             }*/
-            axios.get("/users/" + searchTerm).then(({ data }) => {
-                setResultUsers(data.resultUsers);
-                console.log("setResultUsers", data.resultUsers);
-            });
-        },
-        [searchTerm]
-    );
-    /* <input
-                    defaultValue={searchTerm}
-                    placeholder="looking for someone..."
-                    onChange={({ target }) => setSearchTerm(target.value)}
-                />*/
+        axios.get("/featuredartwork").then(({ data }) => {
+            setResultUsers(data.rows);
+            console.log("setResultUsers", data.rows);
+        });
+    }, []);
     return (
         <>
-            <div id="find-people">
-                <h1>looking to collaborate?</h1>
-
+            <div id="featured-collaborations">
                 {resultUsers &&
                     resultUsers.map(function (user) {
                         return (
-                            <div key={user.id} id="found-people">
-                                <Link to={`/user/${user.artist_id}`}>
-                                    {user.title}
-                                    <video width="500" height="500" controls>
+                            <div key={user.id} id="featured-video">
+                                <Link
+                                    to={`/collaborations/${user.collaborator_id}`}
+                                >
+                                    <video
+                                        width="1000"
+                                        height="1000"
+                                        loop
+                                        autoPlay="autoplay"
+                                        muted
+                                    >
                                         <source
                                             src={user.file}
                                             type="video/mp4"
                                         ></source>
                                     </video>
                                 </Link>
-                                <div id="findtext">
-                                    {" "}
-                                    {user.first} {user.last}
-                                </div>
                             </div>
                         );
                     })}
