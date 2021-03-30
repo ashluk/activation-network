@@ -370,9 +370,12 @@ app.post(
             });
     }
 );
-app.get("/collaborations", (req, res) => {
-    // let music = "music";
-    db.getCollaborations(req.session.userId)
+app.get("/collaborations/:id", (req, res) => {
+    const userId = req.session.userId;
+    const otherUser = req.params.id;
+
+    console.log("req.params in collaborations", req.params);
+    db.getCollaborations(userId, otherUser)
         .then(({ rows }) => {
             console.log("rows in collaborations", rows);
             res.json({ rows });

@@ -3,8 +3,8 @@ import axios from "./axios";
 
 import { Link } from "react-router-dom";
 export default class Collaborations extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.file = undefined;
 
         this.state = {
@@ -22,6 +22,7 @@ export default class Collaborations extends React.Component {
         );
     }
     handleClick() {
+        console.log("this.props in handleclick", this.props);
         var formData = new FormData();
         formData.append("title", this.state.title);
         formData.append("description", this.state.description);

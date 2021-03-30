@@ -55,6 +55,7 @@ export default function Friends(props) {
                             </button>
                             <Collaborations
                                 className="collaborations"
+                                otherUserId={user.id}
                                 handleCollaborationsInProfile={(url) =>
                                     setNewCollaborations([
                                         ...newCollaborations,

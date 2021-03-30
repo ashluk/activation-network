@@ -8,6 +8,7 @@ import Logo from "./logo";
 import Backgroundimage from "./backgroundimage";
 import Artistimages from "./artistimages";
 import Collaborations from "./collaborations";
+import Displaycollaborations from "./displaycollaborations";
 
 import { BrowserRouter, Route } from "react-router-dom";
 import OtherProfile from "./otherprofile";
