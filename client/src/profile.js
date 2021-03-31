@@ -12,6 +12,7 @@ export default function Profile(props) {
     var collaborations = props.collaborations;
     var artwork = props.artwork;
     var music = props.music;
+    console.log("what is in STATE", props);
     console.log("collaborations in state", collaborations);
     console.log("artwork in state", artwork);
     console.log("music in state", music);
@@ -82,21 +83,6 @@ export default function Profile(props) {
                 handleMusicInProfile={(url) => setNewMusic([...newMusic, url])} //this puts the url in state
                 title={props.title}
             />
-            {newCollaborations.map(function (url, id) {
-                return (
-                    <video width="500" height="500" key={id} controls>
-                        <source src={url} type="video/mp4"></source>;
-                    </video>
-                );
-            })}
-
-            <Collaborations
-                className="collaborations"
-                handleCollaborationsInProfile={(url) =>
-                    setNewCollaborations([...newCollaborations, url])
-                } //this puts the url in state
-                title={props.title}
-            />
         </div>
     );
 }
@@ -117,4 +103,21 @@ export default function Profile(props) {
  {newImages.map(function (url, id) {
                 return <img src={url} key={id}></img>;
             })}
+            */
+/*
+{newCollaborations.map(function (url, id) {
+                return (
+                    <video width="500" height="500" key={id} controls>
+                        <source src={url} type="video/mp4"></source>;
+                    </video>
+                );
+            })}
+
+            <Collaborations
+                className="collaborations"
+                handleCollaborationsInProfile={(url) =>
+                    setNewCollaborations([...newCollaborations, url])
+                } //this puts the url in state
+                title={props.title}
+            />
             */

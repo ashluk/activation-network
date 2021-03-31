@@ -42,7 +42,7 @@ export default function Friends(props) {
             {friend &&
                 friend.map(function (user) {
                     return (
-                        <div key={user.id}>
+                        <div id="friends-inside" key={user.id}>
                             <img
                                 src={user.imageurl}
                                 id="findimage"
@@ -64,6 +64,22 @@ export default function Friends(props) {
                                 } //this puts the url in state
                                 title={props.title}
                             />
+                            {newCollaborations.map(function (url, id) {
+                                return (
+                                    <video
+                                        width="500"
+                                        height="500"
+                                        key={id}
+                                        controls
+                                    >
+                                        <source
+                                            src={url}
+                                            type="video/mp4"
+                                        ></source>
+                                        ;
+                                    </video>
+                                );
+                            })}
                         </div>
                     );
                 })}
@@ -93,20 +109,5 @@ export default function Friends(props) {
 //    <Link to="/not">See who&apos;s not</Link>
 
 /*
-{newCollaborations.map(function (url, id) {
-                                return (
-                                    <video
-                                        width="500"
-                                        height="500"
-                                        key={id}
-                                        controls
-                                    >
-                                        <source
-                                            src={url}
-                                            type="video/mp4"
-                                        ></source>
-                                        ;
-                                    </video>
-                                );
-                            })}
+
                             */

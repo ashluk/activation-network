@@ -52,7 +52,7 @@ export default class Uploader extends Component {
                         accept="image/*"
                     ></input>
                     <h2 onClick={(e) => this.imageUploadMethod(e)}>
-                        Upload a photo?{" "}
+                        Upload a photo?
                     </h2>
                 </div>
             </div>

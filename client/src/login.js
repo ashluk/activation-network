@@ -79,7 +79,7 @@ export default class Registration extends React.Component {
                             height="100px"
                             className="object"
                         />
-                        <div class="linktext">LOGIN</div>
+                        <div className="linktext">LOGIN</div>
                     </Link>
                 </div>
                 <div id="linktologin">

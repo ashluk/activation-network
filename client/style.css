@@ -36,7 +36,6 @@ body {
 }
 audio {
     filter: pink(80%) saturate(70%) grayscale(10) contrast(99%) invert(12%);
-    font-family: "Terminal Grotesque Open";
     border-radius: 0%;
     width: 400px;
     height: 35px;
@@ -47,11 +46,16 @@ video {
     outline: 0px;
 }
 select {
-    font-family: "Terminal Grotesque Open";
-    font-size: 17px;
-    width: 200px;
+    font-size: 15px;
+
+    width: 400px;
     height: 20px;
 }
+input {
+    width: 350px;
+    height: 20px;
+}
+
 #divider {
     length: 100vh;
     width: 10px;
@@ -91,7 +95,7 @@ h1 {
 }
 
 .logo {
-    z-index: 100;
+    z-index: 40;
 
     position: fixed;
     font-family: Arial, Helvetica, sans-serif;
@@ -197,7 +201,7 @@ a {
 }*/
 
 .modal {
-    z-index: 1;
+    z-index: 50;
     position: fixed;
     align-content: center;
     text-align: center;
@@ -212,7 +216,7 @@ a {
 
     font-size: 40px;
     font-family: "Terminal Grotesque Open";
-    outline: springgreen solid 2px;
+    /*outline: springgreen solid 2px;*/
 }
 .modal h2 {
     padding-top: 30px;
@@ -294,14 +298,26 @@ a {
 #friends-and-wannabes {
     position: relative;
     top: 120px;
-    left: 550px;
-    width: 200px;
+    left: 100px;
+    width: 400px;
     text-align: center;
     font-size: 22px;
 }
-#findimage {
+#friends-inside {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+#friends-and-wannabes button {
+    position: relative;
     width: 250px;
-    height: 250px;
+    left: 78px;
+    margin-bottom: 5px;
+}
+
+#findimage {
+    width: 400px;
+    height: 400px;
     object-fit: cover;
 
     padding-top: 5px;
@@ -421,20 +437,49 @@ a {
 }
 #artist-images {
     position: fixed;
-    display: flex;
-    flex-direction: row;
+    width: 410px;
+    height: 150px;
+    font-size: 19px;
+    border-radius: 5px;
+    align-items: center;
+    background-color: ghostwhite;
+    color: black;
     left: 10px;
-    top: 300px;
+    top: 150px;
 }
 #music-upload {
     position: fixed;
+    width: 410px;
+    height: 150px;
+    font-size: 19px;
+    border-radius: 5px;
+    align-items: center;
+    background-color: ghostwhite;
+    color: black;
     left: 10px;
     top: 400px;
 }
+
 #collaborations-upload {
     position: relative;
-    left: 10px;
+    align-content: center;
+    align-items: center;
+    left: 0px;
     top: 0px;
+    width: 400px;
+    height: 175px;
+    font-size: 20px;
+    border-radius: 5px;
+    align-items: center;
+    background-color: rgb(200, 200, 245);
+    color: black;
+}
+#collaborations-upload input {
+    width: 350px;
+}
+#collaborations-upload textarea {
+    width: 350px;
+    height: 60px;
 }
 #artworkimage {
     position: relative;
@@ -456,12 +501,6 @@ a {
     padding-top: 10px;
     color: cyan;
     position: relative;
-}
-select {
-    font-family: "Terminal Grotesque Open";
-    font-size: 17px;
-    width: 200px;
-    height: 20px;
 }
 
 /*////////ICONS//////////*/

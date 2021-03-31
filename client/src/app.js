@@ -68,7 +68,7 @@ export default class App extends Component {
                 });
             })
             .catch((err) => {
-                console.log("error in axios upload art", err);
+                console.log("error in axios upload APP", err);
             });
         axios
             .get("/music")
@@ -79,7 +79,7 @@ export default class App extends Component {
                     music.push(data.rows[i].file);
                 }
 
-                console.log("data.rows in musixc", data.rows);
+                console.log("data.rows in music in APP", data.rows);
                 this.setState({
                     music: music,
                 });
@@ -88,7 +88,7 @@ export default class App extends Component {
                 console.log("error in axios upload music", err);
             });
         axios
-            .get("/collaborations")
+            .get("/collaborations/:id")
             .then(({ data }) => {
                 var collaborations = [];
                 for (var i = 0; i < data.rows.length; i++) {
@@ -96,7 +96,7 @@ export default class App extends Component {
                     collaborations.push(data.rows[i].file);
                 }
 
-                console.log("data.rows in musixc", data.rows);
+                console.log("data.rows in collaboration", data.rows);
                 this.setState({
                     collaborations: collaborations,
                 });

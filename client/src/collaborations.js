@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "./axios";
+import OtherProfile from "./otherprofile";
+import { BrowserRouter, Route } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 export default class Collaborations extends React.Component {
@@ -71,7 +73,7 @@ export default class Collaborations extends React.Component {
 
     render() {
         return (
-            <div>
+            <BrowserRouter>
                 <div id="collaborations-upload">
                     {this.state.error && <p>something went wrong</p>}
                     READY TO SHARE YOUR PROJECT?
@@ -86,14 +88,26 @@ export default class Collaborations extends React.Component {
                         placeholder="title"
                         onChange={(e) => this.handleChange(e)}
                     />
-                    <input
+                    <textarea
                         name="description"
                         placeholder="description"
                         onChange={(e) => this.handleChange(e)}
                     />
-                    <button onClick={() => this.handleClick()}>submit</button>
+                    <button id="submit-me" onClick={() => this.handleClick()}>
+                        submit
+                    </button>
+                    <Route
+                        path="/user/:id"
+                        render={(props) => (
+                            <OtherProfile
+                                key={props.match.url}
+                                match={props.match}
+                                history={props.history}
+                            />
+                        )}
+                    />
                 </div>
-            </div>
+            </BrowserRouter>
         );
     }
 }

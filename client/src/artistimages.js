@@ -42,7 +42,7 @@ export default class Artistimages extends React.Component {
                     //i want to call something here passed to it by profile.
                     console.log("what is data in artistimages after", data);
                     this.props.handleImageInProfile(data.url);
-                    console.log(data);
+                    console.log("data in profile", data);
                 } else {
                     this.setState({
                         error: true,
