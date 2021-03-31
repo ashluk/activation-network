@@ -18,8 +18,15 @@ export default class Logout extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.handleClick}>LOGOUT</button>
+                <img
+                    src="object7.png"
+                    width="100px"
+                    height="100px"
+                    className="logout"
+                    onClick={this.handleClick}
+                />
             </div>
         );
     }
 }
+//                <button onClick={this.handleClick}>LOGOUT</button>

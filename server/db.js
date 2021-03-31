@@ -230,8 +230,13 @@ module.exports.uploadCollaborations = (
     return db.query(q, params);
 };
 module.exports.getCollaborations = (id) => {
-    const q = `SELECT * FROM collaborations WHERE collaborator_id = $1`;
+    const q = `SELECT * FROM collaborations WHERE id = $1`;
     const params = [id];
+    return db.query(q, params);
+};
+module.exports.getUserCollaborations = (userId, collaborator_id) => {
+    const q = `SELECT * FROM collaborations WHERE userId = $1  OR  collaborator_id = $2 `;
+    const params = [userId, collaborator_id];
     return db.query(q, params);
 };
 module.exports.featuredCollaborations = () => {

@@ -4,6 +4,8 @@ import { FriendshipButton } from "./hooks/friendshipButton";
 import Artistimages from "./artistimages";
 import Musicupload from "./musicupload";
 import Collaborations from "./collaborations";
+import Displaycollaborations from "./displaycollaborations";
+import { Link } from "react-router-dom";
 
 export default class OtherProfile extends Component {
     constructor(props) {
@@ -54,6 +56,25 @@ export default class OtherProfile extends Component {
             .catch((err) => {
                 console.log("error in axios upload art", err);
             });
+        /*  axios
+            .get(`/collaborations/${this.props.match.params.id}.json`)
+            .then(({ data }) => {
+                var collaborations = [];
+                for (var i = 0; i < data.rows.length; i++) {
+                    console.log(
+                        "data.rows[i]collaborationsOTHER PROFILE",
+                        data.rows[i]
+                    );
+                    collaborations.push(data.rows[i].file);
+                }
+
+                this.setState({
+                    collaborations: collaborations,
+                });
+            })
+            .catch((err) => {
+                console.log("error in axios upload music", err);
+            });*/
         axios
             .get(`/music/${this.props.match.params.id}.json`)
             .then(({ data }) => {
@@ -69,6 +90,25 @@ export default class OtherProfile extends Component {
             })
             .catch((err) => {
                 console.log("error in axios upload music", err);
+            });
+        axios
+            .get(`/usercollaborations/${this.props.match.params.id}.json`)
+            .then(({ data }) => {
+                var collaborations = [];
+                for (var i = 0; i < data.rows.length; i++) {
+                    console.log(
+                        "data.rows[i]collabOTHER PROFILE",
+                        data.rows[i]
+                    );
+                    collaborations.push(data.rows[i].file);
+                }
+
+                this.setState({
+                    collaborations: collaborations,
+                });
+            })
+            .catch((err) => {
+                console.log("error in axios upload collaborations", err);
             });
     }
     render() {
@@ -86,16 +126,42 @@ export default class OtherProfile extends Component {
                     height="350"
                 />
                 <h2>{this.state.otherUser.bio}</h2>
-
-                {this.state.artwork &&
-                    this.state.artwork.map(function (artwork) {
-                        return (
-                            // eslint-disable-next-line react/jsx-key
-                            <video width="500" height="500" controls>
-                                <source src={artwork} type="video/mp4"></source>
-                            </video>
-                        );
-                    })}
+                <div id="artwork-table">
+                    {this.state.artwork &&
+                        this.state.artwork.map(function (artwork) {
+                            return (
+                                // eslint-disable-next-line react/jsx-key
+                                <video width="500" height="500" controls>
+                                    <source
+                                        src={artwork}
+                                        type="video/mp4"
+                                    ></source>
+                                </video>
+                            );
+                        })}
+                </div>
+                <div id="collaborations-table">
+                    <div id="collaborations-text">COLLABORATIONS</div>
+                    {this.state.collaborations &&
+                        this.state.collaborations.map(function (
+                            collaborations
+                        ) {
+                            return (
+                                // eslint-disable-next-line react/jsx-key
+                                <video
+                                    width="300"
+                                    height="300"
+                                    id="collaborations"
+                                    controls
+                                >
+                                    <source
+                                        src={collaborations}
+                                        type="video/mp4"
+                                    ></source>
+                                </video>
+                            );
+                        })}
+                </div>
                 {this.state.music &&
                     this.state.music.map(function (music) {
                         return (
@@ -105,7 +171,6 @@ export default class OtherProfile extends Component {
                             </audio>
                         );
                     })}
-
                 <FriendshipButton otherUserId={this.props.match.params.id} />
             </div>
         );

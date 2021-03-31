@@ -187,6 +187,8 @@ a {
 }
 .edit {
     display: flex;
+    background-color: black;
+    color: white;
     flex-direction: column;
 }
 
@@ -194,38 +196,34 @@ a {
     height: 100px;
 }
 
-/*#profilepic {
-    position: fixed;
-    top: 30px;
-    right: 30px;
-}*/
-
 .modal {
     z-index: 50;
     position: fixed;
     align-content: center;
     text-align: center;
-    top: 150px;
-    left: 630px;
+    top: 250px;
+    right: 30px;
     bottom: 350px;
-    width: 400px;
-    height: 200px;
+    width: 310px;
+    height: 90px;
+    font-size: 19px;
+    border-radius: 5px;
+    align-items: center;
     background-color: ghostwhite;
     color: black;
     padding-top: 10px;
 
-    font-size: 40px;
-    font-family: "Terminal Grotesque Open";
     /*outline: springgreen solid 2px;*/
 }
-.modal h2 {
-    padding-top: 30px;
+.modal input {
+    position: relative;
+    left: 40px;
 }
 
 .x {
-    position: fixed;
-    top: 160px;
-    right: 360px;
+    position: relative;
+    top: 0px;
+    right: 0px;
     color: springgreen;
     font-family: "Terminal Grotesque Open";
 }
@@ -243,7 +241,7 @@ a {
     /*visibility: invisible;*/
 }
 
-#other-profile {
+/*#other-profile {
     position: absolute;
     text-align: center;
     align-content: center;
@@ -252,6 +250,46 @@ a {
     width: 300px;
     height: 300px;
     font-size: 15px;
+}*/
+#other-profile #profilepic {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 30px;
+    left: 0px;
+}
+#other-profile video {
+    position: relative;
+    left: 0;
+    top: 350px;
+}
+#other-profile audio {
+    position: relative;
+    left: 0;
+    top: 350px;
+}
+#collaborations-table {
+    position: absolute;
+    top: 250px;
+    right: 10px;
+    width: 400px;
+    height: 800px;
+    outline: greenyellow solid 2px;
+}
+#collaborations-table #collaborations-text {
+    position: relative;
+    font-size: 40px;
+    text-align: center;
+}
+#artwork-table {
+    display: inline;
+    width: 800px;
+    left: 0;
+}
+#other-profile #collaborations {
+    position: relative;
+    left: 40px;
+    top: 20px;
 }
 #profile-in-profile .profile-name {
     font-size: 28px;
@@ -262,9 +300,28 @@ a {
     height: 300px;
     object-fit: cover;
 }
+img.profile-pic {
+    border-radius: 50%;
+}
 #profile-in-profile {
     text-align: center;
     color: blanchedalmond;
+}
+#profile-in-profile video {
+    position: relative;
+    left: -100px;
+}
+#profile-in-profile {
+    position: absolute;
+    top: 150px;
+    left: 700px;
+    width: 300px;
+    height: 300px;
+}
+.logout {
+    position: fixed;
+    top: 150px;
+    right: 0;
 }
 .currentuser .profile-name {
     font-size: 18px;
@@ -336,13 +393,6 @@ a {
     font-size: 22px;
 }
 
-#profile-in-profile {
-    position: absolute;
-    top: 150px;
-    right: 400px;
-    width: 300px;
-    height: 300px;
-}
 #top-right {
     position: absolute;
     top: 0px;
@@ -480,6 +530,14 @@ a {
 #collaborations-upload textarea {
     width: 350px;
     height: 60px;
+}
+#display-video {
+    position: relative;
+    left: 200px;
+}
+#display-video video {
+    position: absolute;
+    left: 500px;
 }
 #artworkimage {
     position: relative;

@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "./axios";
 import { Link } from "react-router-dom";
+import Featuredartwork from "./featuredartwork";
 
 export default class Artistormusician extends React.Component {
     constructor() {
@@ -60,6 +61,7 @@ export default class Artistormusician extends React.Component {
                         <div className="linktext">LOGIN</div>
                     </Link>
                 </div>
+                <Featuredartwork />
             </div>
         );
     }

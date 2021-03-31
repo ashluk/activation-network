@@ -24,7 +24,7 @@ export function FriendshipButton(props) {
         e.preventDefault();
         console.log("i was clicked@@@@@@!!!!!", buttonText);
         //this is preventing the auto reload
-        if (buttonText === "REQUEST FRIENDSHIP") {
+        if (buttonText === "REQUEST COLLABORATION") {
             axios
                 .post(`/requestfriendship/${props.otherUserId}`)
                 .then(({ data }) => {
@@ -35,11 +35,11 @@ export function FriendshipButton(props) {
                 .catch((err) => {
                     console.log("error in requestfriendship post", err);
                 });
-        } else if (buttonText === "END FRIENDSHIP") {
+        } else if (buttonText === "END COLLABORATION") {
             axios
                 .post(`/endfriendship/${props.otherUserId}`)
                 .then(({ data }) => {
-                    setButtonText("REQUEST FRIENDSHIP");
+                    setButtonText("REQUEST COLLABORATION");
                 })
                 .catch((err) => {
                     console.log("error in endfriendship post", err);
@@ -48,7 +48,7 @@ export function FriendshipButton(props) {
             axios
                 .post(`/cancelrequest/${props.otherUserId}`)
                 .then(({ data }) => {
-                    setButtonText("REQUEST FRIENDSHIP");
+                    setButtonText("REQUEST COLLABORATION");
                 })
                 .catch((err) => {
                     console.log("error in cancelrequest post", err);
@@ -57,7 +57,7 @@ export function FriendshipButton(props) {
             axios
                 .post(`/acceptrequest/${props.otherUserId}`)
                 .then(({ data }) => {
-                    setButtonText("END FRIENDSHIP");
+                    setButtonText("END COLLABORATION");
                 })
                 .catch((err) => {
                     console.log("error in acceptrequest post", err);

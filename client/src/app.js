@@ -185,7 +185,6 @@ export default class App extends Component {
                             imageUrl={this.state.imageUrl}
                             toggleUploader={() => this.toggleUploader()} //whatever we call these on the left hand side will become the name of the property
                         />
-
                         <Logout />
                     </div>
 
@@ -268,7 +267,7 @@ export default class App extends Component {
                             history={props.history}
                         />
                     )}
-                />{" "}
+                />
                 <Route path="/chat" component={Chat} />
             </BrowserRouter>
         );

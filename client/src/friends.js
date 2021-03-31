@@ -7,6 +7,7 @@ import Collaborations from "./collaborations";
 export default function Friends(props) {
     var [newCollaborations, setNewCollaborations] = useState([]);
     var collaborations = props.collaborations;
+    console.log("Collaborations!!", props);
     const dispatch = useDispatch();
     const friend = useSelector(
         (state) =>

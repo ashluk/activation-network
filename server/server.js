@@ -83,8 +83,8 @@ app.get("./welcome", (req, res) => {
         res.redirect("/");
     } else {
         //send back HTML, which will trigger start.js to render welcome in DOM
-        res.sendFile(path.join(__dirname, "..", "client", "index.html"));
     }
+    res.sendFile(path.join(__dirname, "..", "client", "index.html"));
 });
 
 /////////////////REGISTER ROUTE///////////////////////
@@ -374,12 +374,31 @@ app.get("/collaborations/:id.json", (req, res) => {
     const userId = req.session.userId;
 
     const otherUser = req.params.id;
-    console.log("req.body in COLLAB", req);
+    console.log("req.body in COLLAB", req.params);
     console.log("req.params in collaborations", req.params);
     db.getCollaborations(otherUser)
         .then(({ rows }) => {
-            console.log("rows in collaborations", rows);
-            res.json({ rows });
+            console.log("rows in collaborations", rows[0].file);
+            res.json({
+                rows,
+            });
+        })
+        .catch((err) => {
+            console.log("err in getcollab", err);
+        });
+});
+app.get("/usercollaborations/:id.json", (req, res) => {
+    const userId = req.session.userId;
+
+    const otherUser = req.params.id;
+    console.log("req.body in USERCOLLAB", req.params);
+    console.log("req.params in collaborations", req.params);
+    db.getCollaborations(userId, otherUser)
+        .then(({ rows }) => {
+            console.log("rows in collaborations", rows[0].file);
+            res.json({
+                rows,
+            });
         })
         .catch((err) => {
             console.log("err in getcollab", err);
@@ -522,9 +541,9 @@ app.get("/friendshipstatus/:id", (req, res) => {
     db.checkFriendship(loggedInUser, otherUser)
         .then(({ rows }) => {
             if (rows[0] == undefined) {
-                res.json({ buttonText: "REQUEST FRIENDSHIP" });
+                res.json({ buttonText: "REQUEST COLLABORATION" });
             } else if (rows[0].accepted) {
-                res.json({ buttonText: "END FRIENDSHIP" });
+                res.json({ buttonText: "END COLLABORATION" });
             } else if (
                 rows[0].accepted == false &&
                 rows[0].sender_id == loggedInUser
