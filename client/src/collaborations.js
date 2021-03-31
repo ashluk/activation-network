@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "./axios";
-import OtherProfile from "./otherprofile";
 import { BrowserRouter, Route } from "react-router-dom";
 
 import { Link } from "react-router-dom";
@@ -73,44 +72,33 @@ export default class Collaborations extends React.Component {
 
     render() {
         return (
-            <BrowserRouter>
-                <div id="collaborations-upload">
-                    {this.state.error && <p>something went wrong</p>}
-                    READY TO SHARE YOUR PROJECT?
-                    <input
-                        type="file"
-                        name="file"
-                        accept="video/*"
-                        onChange={(e) => this.uploadCollaborations(e)}
-                    />
-                    <input
-                        name="title"
-                        placeholder="title"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <textarea
-                        name="description"
-                        placeholder="description"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <button id="submit-me" onClick={() => this.handleClick()}>
-                        submit
-                    </button>
-                    <Route
-                        path="/user/:id"
-                        render={(props) => (
-                            <OtherProfile
-                                key={props.match.url}
-                                match={props.match}
-                                history={props.history}
-                            />
-                        )}
-                    />
-                </div>
-            </BrowserRouter>
+            <div id="collaborations-upload">
+                {this.state.error && <p>something went wrong</p>}
+                READY TO SHARE YOUR PROJECT?
+                <input
+                    type="file"
+                    name="file"
+                    accept="video/*"
+                    onChange={(e) => this.uploadCollaborations(e)}
+                />
+                <input
+                    name="title"
+                    placeholder="title"
+                    onChange={(e) => this.handleChange(e)}
+                />
+                <textarea
+                    name="description"
+                    placeholder="description"
+                    onChange={(e) => this.handleChange(e)}
+                />
+                <button id="submit-me" onClick={() => this.handleClick()}>
+                    submit
+                </button>
+            </div>
         );
     }
 }
+
 /*
  <input
                         name="collaborator_id"

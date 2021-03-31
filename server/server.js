@@ -299,7 +299,7 @@ app.post("/upload/artwork", uploader.single("file"), s3.upload, (req, res) => {
 });
 
 app.get("/artwork", (req, res) => {
-    db.getArt(req.session.userId).then(({ rows }) => {
+    db.getArt(req.session.userId, "art").then(({ rows }) => {
         console.log("rows in artwork", rows);
         res.json({ rows });
     });
@@ -370,12 +370,13 @@ app.post(
             });
     }
 );
-app.get("/collaborations/:id", (req, res) => {
+app.get("/collaborations/:id.json", (req, res) => {
     const userId = req.session.userId;
-    const otherUser = req.params.id;
 
+    const otherUser = req.params.id;
+    console.log("req.body in COLLAB", req);
     console.log("req.params in collaborations", req.params);
-    db.getCollaborations(userId, otherUser)
+    db.getCollaborations(otherUser)
         .then(({ rows }) => {
             console.log("rows in collaborations", rows);
             res.json({ rows });

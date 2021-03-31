@@ -28,9 +28,7 @@ export default function Featuredartwork() {
                     resultUsers.map(function (user) {
                         return (
                             <div key={user.id} id="featured-video">
-                                <Link
-                                    to={`/collaborations/${user.collaborator_id}`}
-                                >
+                                <Link to={`/collaborations/${user.id}`}>
                                     <video
                                         width="1000"
                                         height="1000"

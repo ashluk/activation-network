@@ -28,12 +28,15 @@ export default class App extends Component {
         this.state = {
             first: " ",
             last: " ",
+            music: [],
+            artwork: [],
             imageUrl: undefined,
             error: false,
             uploaderIsVisible: false,
             bio: "",
         };
         this.imageUploadInApp = this.imageUploadInApp.bind(this);
+
         /*this.componentDidMount = this.componentDidMount.bind(this);
         this.toggleUploader = this.toggleUploader.bind(this);*/
     }
@@ -63,6 +66,7 @@ export default class App extends Component {
                 }
 
                 console.log("data.rows in artwork", data.rows);
+                console.log("ARTWORK in APP", artwork);
                 this.setState({
                     artwork: artwork,
                 });
@@ -75,17 +79,18 @@ export default class App extends Component {
             .then(({ data }) => {
                 var music = [];
                 for (var i = 0; i < data.rows.length; i++) {
-                    console.log("data.rows[i]musix", data.rows[i]);
+                    console.log("data.rows[i", data.rows[i]);
                     music.push(data.rows[i].file);
                 }
 
-                console.log("data.rows in music in APP", data.rows);
+                console.log("data.rows in artwork", data.rows);
+                console.log("MUSIC in APP", music);
                 this.setState({
                     music: music,
                 });
             })
             .catch((err) => {
-                console.log("error in axios upload music", err);
+                console.log("error in axios upload APP", err);
             });
         axios
             .get("/collaborations/:id")
@@ -161,7 +166,6 @@ export default class App extends Component {
                         <div className="linktext"> COLLABORATORS</div>{" "}
                     </div>
                 </Link>
-
                 <Link to="/" id="yourprofile">
                     <div id="newlinkto">
                         <img
@@ -173,7 +177,6 @@ export default class App extends Component {
                         <div className="linktext"> PROFILE</div>{" "}
                     </div>
                 </Link>
-
                 <div id="top-left">
                     <div className="currentuser">
                         <Profilepic
@@ -256,7 +259,16 @@ export default class App extends Component {
                     <img src="new_horizon.png"></img>
                 </div>
                 <Logo />
-
+                <Route
+                    path="/collaborations/:id"
+                    render={(props) => (
+                        <Displaycollaborations
+                            key={props.match.url}
+                            match={props.match}
+                            history={props.history}
+                        />
+                    )}
+                />{" "}
                 <Route path="/chat" component={Chat} />
             </BrowserRouter>
         );

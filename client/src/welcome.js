@@ -7,6 +7,7 @@ import Reset from "./reset";
 import Logo from "./logo";
 import Featuredartwork from "./featuredartwork";
 import Backgroundwelcome from "./backgroundwelcome";
+import Displaycollaborations from "./displaycollaborations";
 
 export default function Welcome() {
     return (
@@ -24,11 +25,23 @@ export default function Welcome() {
                     />
                     <Route path="/registration" component={Registration} />
                     <Route path="/login" component={Login} />
+
+                    <Featuredartwork />
+
+                    <Route
+                        path="/collaborations/:id"
+                        render={(props) => (
+                            <Displaycollaborations
+                                key={props.match.url}
+                                match={props.match}
+                                history={props.history}
+                            />
+                        )}
+                    />
                     <div id="resetforms">
                         <Route path="/reset" component={Reset} />
                     </div>
                 </div>
-                <Featuredartwork />
             </HashRouter>
 
             <div id="logoinwelcome">

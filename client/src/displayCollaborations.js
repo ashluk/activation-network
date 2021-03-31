@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "./axios";
+import OtherProfile from "./otherprofile";
 
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +11,8 @@ export default function Displaycollaborations(props) {
     var [currentUser, setCurrentUser] = useState([]);
     var [otherUser, setOtherUser] = useState([]);
     var collaborations = props.collaborations;
-    console.log("props in displaycollaborations", this.props);
+    console.log("props in displaycollaborations", props);
+
     useEffect(
         function () {
             if (collaborations) {
@@ -19,11 +21,14 @@ export default function Displaycollaborations(props) {
         },
         [collaborations]
     );
+
     useEffect(function () {
-        axios.get("/collaborations/" + currentUser).then(({ data }) => {
-            setCurrentUser(data.rows);
-            console.log("CurrentUser in displaycollab", data.rows);
-        });
+        axios
+            .get(`/collaborations/${props.match.params.id}.json`)
+            .then(({ data }) => {
+                setCurrentUser(data.rows);
+                console.log("CurrentUser in displaycollab", data.rows);
+            });
     }, []);
 
     return (
@@ -37,7 +42,7 @@ export default function Displaycollaborations(props) {
             })}
             <Collaborations
                 className="collaborations"
-                otherUserId={user.id}
+                otherUserId={props.match.params.id}
                 handleCollaborationsInProfile={(url) =>
                     setNewCollaborations([...newCollaborations, url])
                 } //this puts the url in state
