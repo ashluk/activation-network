@@ -38,12 +38,10 @@ export default function Displaycollaborations(props) {
                 newCollaborations.map(function (user) {
                     return (
                         <div key={user.id} id="display-video">
-                            <h1>{user.title}</h1>
-                            <p>{user.description}</p>
                             <Link to={`/user/${user.userId}`}>
                                 <video
-                                    width="400"
-                                    height="400"
+                                    width="500"
+                                    height="500"
                                     loop
                                     autoPlay="autoplay"
                                 >
@@ -53,6 +51,10 @@ export default function Displaycollaborations(props) {
                                     ></source>
                                 </video>
                             </Link>
+                            <a id="hidebutton" href="/login"></a>
+
+                            <h3>{user.title}</h3>
+                            <p>{user.description}</p>
                             <OtherProfile
                                 match={{
                                     params: { id: user.collaborator_id },

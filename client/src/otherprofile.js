@@ -92,7 +92,7 @@ export default class OtherProfile extends Component {
                 console.log("error in axios upload music", err);
             });
         axios
-            .get(`/usercollaborations/${this.props.match.params.id}.json`)
+            .get(`/collaborations/${this.props.match.params.id}.json`)
             .then(({ data }) => {
                 var collaborations = [];
                 for (var i = 0; i < data.rows.length; i++) {

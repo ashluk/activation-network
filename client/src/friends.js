@@ -65,22 +65,6 @@ export default function Friends(props) {
                                 } //this puts the url in state
                                 title={props.title}
                             />
-                            {newCollaborations.map(function (url, id) {
-                                return (
-                                    <video
-                                        width="500"
-                                        height="500"
-                                        key={id}
-                                        controls
-                                    >
-                                        <source
-                                            src={url}
-                                            type="video/mp4"
-                                        ></source>
-                                        ;
-                                    </video>
-                                );
-                            })}
                         </div>
                     );
                 })}
@@ -111,4 +95,22 @@ export default function Friends(props) {
 
 /*
 
+                            */
+/*
+  {newCollaborations.map(function (url, id) {
+                                return (
+                                    <video
+                                        width="500"
+                                        height="500"
+                                        key={id}
+                                        controls
+                                    >
+                                        <source
+                                            src={url}
+                                            type="video/mp4"
+                                        ></source>
+                                        ;
+                                    </video>
+                                );
+                            })}
                             */

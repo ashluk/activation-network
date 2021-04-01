@@ -55,7 +55,9 @@ export default function Welcome() {
                 </div>
             </HashRouter>
             <div id="logoinwelcome">
-                <Logo />
+                <a href="/">
+                    <Logo />
+                </a>
             </div>
         </div>
     );

@@ -100,7 +100,7 @@ h1 {
     position: fixed;
     font-family: Arial, Helvetica, sans-serif;
     top: 0px;
-    left: 600px;
+    left: 550px;
 }
 #logoinwelcome {
     z-index: 100;
@@ -274,7 +274,6 @@ a {
     right: 10px;
     width: 400px;
     height: 800px;
-    outline: greenyellow solid 2px;
 }
 #collaborations-table #collaborations-text {
     position: relative;
@@ -379,14 +378,20 @@ img.profile-pic {
 
     padding-top: 5px;
 }
+#found-people video {
+    position: relative;
+    left: -4px;
+}
 #found-people a {
     font-family: "Druk Wide Cy Web";
-    font-size: 35px;
-    padding-top: 10px;
+    font-size: 30px;
+    padding-top: 150px;
+
     text-align: left;
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 300px;
+    height: 300px;
 }
 #findtext {
     padding-top: 20px;
@@ -404,7 +409,7 @@ img.profile-pic {
 #regforms {
     z-index: 100;
     position: fixed;
-    top: 150px;
+    top: 180px;
     left: 350px;
 }
 #artistormusicanbuttons {
@@ -416,14 +421,14 @@ img.profile-pic {
     z-index: 100;
 
     position: fixed;
-    top: 150px;
+    top: 180px;
     left: 450px;
 }
 #resetforms {
     z-index: 100;
 
     position: fixed;
-    top: 150px;
+    top: 180px;
     left: 500px;
 }
 
@@ -538,6 +543,59 @@ img.profile-pic {
 #display-video video {
     position: absolute;
     left: 500px;
+    top: 150px;
+}
+#display-video h3 {
+    position: relative;
+    top: 450px;
+    left: 550px;
+}
+#display-video p {
+    position: relative;
+    left: 200px;
+}
+#display-collaborations p {
+    position: relative;
+    top: 580px;
+    left: 550px;
+}
+#display-collaborations #other-profile {
+    position: relative;
+    left: 0;
+}
+#display-collaborations #other-profile video {
+    position: fixed;
+    left: 0;
+    top: 500px;
+}
+#display-collaborations #other-profile button {
+}
+#other-profile button {
+    position: absolute;
+    top: 350px;
+    left: 76px;
+    z-index: 70;
+}
+#hidebutton {
+    background: black;
+
+    width: 175px;
+    height: 50px;
+    position: absolute;
+    top: 380px;
+    left: 76px;
+    z-index: 100;
+}
+
+#display-collaborations #other-profile #collaborations-text {
+    display: none;
+}
+#display-collaborations #other-profile .profile-pic {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    left: 10px;
+    top: 140px;
 }
 #artworkimage {
     position: relative;

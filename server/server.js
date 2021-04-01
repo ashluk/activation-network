@@ -387,7 +387,7 @@ app.get("/collaborations/:id.json", (req, res) => {
             console.log("err in getcollab", err);
         });
 });
-app.get("/usercollaborations/:id.json", (req, res) => {
+/*app.get("/usercollaborations/:id.json", (req, res) => {
     const userId = req.session.userId;
 
     const otherUser = req.params.id;
@@ -403,7 +403,7 @@ app.get("/usercollaborations/:id.json", (req, res) => {
         .catch((err) => {
             console.log("err in getcollab", err);
         });
-});
+});*/
 app.get("/featuredartwork", (req, res) => {
     db.featuredCollaborations()
         .then(({ rows }) => {
@@ -674,7 +674,7 @@ server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
 });
 ///////////////////CHAT////////////////////////////
-/*
+
 io.on("connection", function (socket) {
     //console.log("socket with id connected", socket.id);
     if (!socket.request.session.userId) {
@@ -734,4 +734,3 @@ io.on("connection", function (socket) {
 
     console.log("socket id", socket.id);
 });
-*/
