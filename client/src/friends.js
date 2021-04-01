@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getFriends, unFriend, acceptFriend } from "./actions";
 import Collaborations from "./collaborations";
+import Private from "./privatemessage";
 
 export default function Friends(props) {
     var [newCollaborations, setNewCollaborations] = useState([]);
     var collaborations = props.collaborations;
+    var [newPrivateMessages, setNewPrivateMessages] = useState([]);
+    var privatemessages = props.privatemessages;
     console.log("Collaborations!!", props);
     const dispatch = useDispatch();
     const friend = useSelector(
@@ -31,6 +34,14 @@ export default function Friends(props) {
             }
         },
         [collaborations]
+    );
+    useEffect(
+        function () {
+            if (privatemessages) {
+                setNewPrivateMessages(privatemessages);
+            }
+        },
+        [privatemessages]
     );
 
     if (!friend && !wannabe) {
@@ -65,6 +76,7 @@ export default function Friends(props) {
                                 } //this puts the url in state
                                 title={props.title}
                             />
+                            <Private />
                         </div>
                     );
                 })}

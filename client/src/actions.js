@@ -27,6 +27,8 @@ export async function unFriend(userId) {
     };
 }
 export async function acceptFriend(userId) {
+    console.log("userid in accept friendship", userId);
+
     await axios.post(`/acceptrequest/${userId}`);
     return {
         type: "ACCEPT_FRIEND",
@@ -49,26 +51,23 @@ export async function newMessage(message) {
         newMessage: message,
     };
 }
+//////////////PRIVATE MESSAGES////////////////
 
-///////////UPLOAD ARTWORKS///////////////////
-
-/*export async function addArtImage(file) {
+export async function mostRecentPrivateMessages(messages) {
     return {
-        type: `ADD_ARTWORK_IMAGE`,
-        file,
+        type: `ADD_PRIVATEMESSAGES`,
+        mostRecentPrivateMessages: messages,
     };
 }
-export async function addArtInfo(property, value) {
+export async function newPrivateMessage(message) {
     return {
-        type: `ADD_ARTWORK_INFO`,
-        property,
-        value,
+        type: `ADD_PRIVATEMESSAGE`,
+        newPrivateMessage: message,
     };
 }
-export async function getArtwork() {
-    const { data } = await axios.get("/artworks");
+export async function alertPrivateMessage(userId) {
     return {
-        type: "GET_ARTWORK",
-        artwork: data.artwork,
+        type: `ALERT_PRIVATEMESSAGE`,
+        user: userId,
     };
-}*/
+}

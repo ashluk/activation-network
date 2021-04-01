@@ -10,9 +10,7 @@ export default function Profilepic({
 
     return (
         <div id="pic-in-profilepic">
-            <h1 className="profile-name">
-                {first} {last}
-            </h1>
+            <h1 className="profile-name">{first}</h1>
             <img
                 onClick={toggleUploader}
                 className="profile-pic"

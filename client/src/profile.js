@@ -4,6 +4,7 @@ import Artistimages from "./artistimages";
 import Musicupload from "./musicupload";
 import Collaborations from "./collaborations";
 import { useState, useEffect } from "react";
+import axios from "./axios";
 
 export default function Profile(props) {
     var [newImages, setNewImages] = useState([]);
@@ -41,7 +42,12 @@ export default function Profile(props) {
         },
         [collaborations]
     );
-
+    useEffect(function () {
+        axios.get(`/collaborations/${props.id}.json`).then(({ data }) => {
+            setNewCollaborations(data.rows);
+            console.log("CurrentUser in displaycollab", data.rows);
+        });
+    }, []);
     console.log("props in profile", props);
     return (
         <div id="profile-in-profile">
@@ -63,6 +69,30 @@ export default function Profile(props) {
                     </video>
                 );
             })}
+            {newCollaborations &&
+                newCollaborations.map(function (user) {
+                    return (
+                        <div key={user.id} id="display-video">
+                            <Link to={`/user/${user.userId}`}>
+                                <video
+                                    width="500"
+                                    height="500"
+                                    loop
+                                    autoPlay="autoplay"
+                                >
+                                    <source
+                                        src={user.file}
+                                        type="video/mp4"
+                                    ></source>
+                                </video>
+                            </Link>
+                            <a id="hidebutton" href="/login"></a>
+
+                            <h3>{user.title}</h3>
+                            <h6>{user.description}</h6>
+                        </div>
+                    );
+                })}
 
             <Artistimages
                 className="artworkimage"
@@ -105,19 +135,13 @@ export default function Profile(props) {
             })}
             */
 /*
-{newCollaborations.map(function (url, id) {
-                return (
-                    <video width="500" height="500" key={id} controls>
-                        <source src={url} type="video/mp4"></source>;
-                    </video>
-                );
-            })}
 
-            <Collaborations
+ <Collaborations
                 className="collaborations"
                 handleCollaborationsInProfile={(url) =>
                     setNewCollaborations([...newCollaborations, url])
                 } //this puts the url in state
                 title={props.title}
             />
+           
             */

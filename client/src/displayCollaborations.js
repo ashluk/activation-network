@@ -54,7 +54,7 @@ export default function Displaycollaborations(props) {
                             <a id="hidebutton" href="/login"></a>
 
                             <h3>{user.title}</h3>
-                            <p>{user.description}</p>
+                            <h6>{user.description}</h6>
                             <OtherProfile
                                 match={{
                                     params: { id: user.collaborator_id },

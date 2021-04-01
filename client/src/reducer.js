@@ -47,27 +47,24 @@ export default function reducer(state = {}, action) {
             //A conditional for the action with individual new messages. For this action, the reducer should return a new object that has all the same properties as the old state object except the array of chat messages is replaced with a new array that has in it all the same objects as the old chat messages array plus one more at the end
         };
     }
-    /////////////UPLOAD ARTWORK//////////////////////////////
-
-    /*  if (action.type == "ADD_ARTWORK_IMAGE") {
+    ///////////////////////PRIVATE MESSAGES////////////////////
+    if (action.type == "ADD_PRIVATEMESSAGES") {
         state = {
             ...state,
-            artwork_file: action.file,
+            mostRecentPrivateMessages: action.mostRecentPrivateMessages,
+        };
+    }
+    if (action.type == "ADD_PRIVATEMESSAGE") {
+        state = {
+            ...state,
+            mostRecentPrivateMessages: [
+                ...state.mostRecentPrivateMessages,
+                action.newPrivateMessage,
+            ],
+            //A conditional for the action with individual new messages. For this action, the reducer should return a new object that has all the same properties as the old state object except the array of chat messages is replaced with a new array that has in it all the same objects as the old chat messages array plus one more at the end
         };
         //update state here
     }
-    if (action.type == "ADD_ARTWORK_INFO") {
-        state = {
-            ...state,
-            [action.property]: action.value,
-        };
-    }
-    if (action.type == "GET_ARTWORK_IMAGE") {
-        state = {
-            ...state,
-            [action.property]: action.value,
-        };
-    }*/
     return state;
 }
 

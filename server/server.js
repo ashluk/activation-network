@@ -619,6 +619,8 @@ app.get("/getfriends", (req, res) => {
     db.getFriends(loggedInUser)
         .then((data) => {
             console.log("get friends rows", data.rows);
+            console.log("loggedinuser", loggedInUser);
+
             res.json(data.rows);
         })
         .catch((err) => {
@@ -685,26 +687,26 @@ io.on("connection", function (socket) {
 
     console.log("userid in sockets", userId);
 
-    db.getLastTenMessages()
+    db.getLastTenPrivateMessages()
         .then((result) => {
             console.log("result.rows", result.rows);
-            socket.emit("chatMessages", result.rows.reverse());
+            socket.emit("privateMessages", result.rows.reverse());
         })
         .catch((err) => {
             console.log("error in getLastTen", err);
         });
 
-    socket.on("my amazing chat message", (msg) => {
-        console.log("message inside of amazing chat", msg);
+    socket.on("my amazing private message", (msg) => {
+        console.log("message inside of amazing private", msg);
 
-        db.newMessage(msg, userId)
+        db.newPrivateMessage(msg, userId)
             .then((result) => {
-                console.log("results in new message", result.rows[0].id);
+                console.log("results in new privatemessage", result.rows[0].id);
                 db.getMessageSender(userId)
                     .then(({ rows }) => {
                         console.log("rows in getMessageSender", rows);
 
-                        io.emit("chatMessage", {
+                        io.emit("privateMessage", {
                             id: result.rows[0].id,
                             message: msg,
                             senderId: userId,
@@ -715,7 +717,7 @@ io.on("connection", function (socket) {
                         });
                     })
                     .catch((err) => {
-                        console.log("error in getMessageSender", err);
+                        console.log("error in getPrivateMessageSender", err);
                     });
             })
             .catch((err) => {

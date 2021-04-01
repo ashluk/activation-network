@@ -133,7 +133,7 @@ module.exports.getFriends = (userid) => {
     JOIN users
     ON (accepted = false AND recipient_id = $1 AND sender_id = users.id)
     OR (accepted = true AND recipient_id = $1 AND sender_id = users.id)
-    OR (accepted = true AND recipient_id = $1 AND sender_id = users.id);`;
+    OR (accepted = true AND sender_id = $1 AND recipient_id = users.id);`;
     const params = [userid];
     return db.query(q, params);
 };
@@ -157,6 +157,28 @@ module.exports.getLastTenMessages = () => {
 
 module.exports.newMessage = (message, senderId) => {
     const q = `INSERT INTO chat (message, senderId) 
+    VALUES ($1, $2)
+    RETURNING *`;
+    const params = [message, senderId];
+    return db.query(q, params);
+};
+///////////////////PRIVATE MESSAGE///////////////////////
+module.exports.getLastTenPrivateMessages = () => {
+    const q = ` SELECT private_message.id, private_message.message, private_message.senderId, private_message.created_at,
+    users.first, users.last, users.imageurl
+    FROM private_message
+    JOIN users
+    ON (private_message.senderId = users.id)
+    ORDER BY private_message.id DESC LIMIT 10`;
+    return db.query(q);
+};
+module.exports.getPrivateMessageSender = (userid) => {
+    const q = `SELECT first, last, imageurl from users WHERE id = $1`;
+    const params = [userid];
+    return db.query(q, params);
+};
+module.exports.newPrivateMessage = (message, senderId) => {
+    const q = `INSERT INTO private_message (message, senderId) 
     VALUES ($1, $2)
     RETURNING *`;
     const params = [message, senderId];

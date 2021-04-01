@@ -34,11 +34,34 @@ body {
     font-display: swap;
     text-transform: uppercase;
 }
-audio {
+/*audio {
     filter: pink(80%) saturate(70%) grayscale(10) contrast(99%) invert(12%);
     border-radius: 0%;
     width: 400px;
     height: 35px;
+}*/
+audio {
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+    -moz-box-shadow: 2px 2px 4px 0px #f5139e;
+    -webkit-box-shadow: 2px 2px 4px 0px #9b59f0;
+    box-shadow: 2px 2px 4px 0px #c74df7;
+    -moz-border-radius: 7px 7px 7px 7px;
+    -webkit-border-radius: 7px 7px 7px 7px;
+    border-radius: 7px 7px 7px 7px;
+    -webkit-filter: invert(100%) !important;
+}
+audio:hover,
+audio:focus,
+audio:active {
+    -webkit-box-shadow: 15px 15px 20px rgba(240, 222, 252, 0.4);
+    -moz-box-shadow: 15px 15px 20px rgba(222, 198, 245, 0.4);
+    box-shadow: 15px 15px 20px rgba(243, 220, 248, 0.4);
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    transform: scale(1.05);
 }
 video {
     position: relative;
@@ -194,6 +217,15 @@ a {
 
 .edit textarea {
     height: 100px;
+    background-color: black;
+    color: ghostwhite;
+    outline: none;
+}
+.add textarea {
+    height: 100px;
+    background-color: black;
+    color: ghostwhite;
+    outline: none;
 }
 
 .modal {
@@ -547,12 +579,16 @@ img.profile-pic {
 }
 #display-video h3 {
     position: relative;
-    top: 450px;
-    left: 550px;
+    top: 680px;
+    left: 620px;
+    width: 300px;
 }
-#display-video p {
+#display-video h6 {
     position: relative;
-    left: 200px;
+    top: 700px;
+    left: 600px;
+    width: 300px;
+    color: violet;
 }
 #display-collaborations p {
     position: relative;
@@ -564,11 +600,30 @@ img.profile-pic {
     left: 0;
 }
 #display-collaborations #other-profile video {
-    position: fixed;
-    left: 0;
-    top: 500px;
+    position: absolute;
+    left: -1185px;
+    top: 200px;
 }
-#display-collaborations #other-profile button {
+#display-collaborations #other-profile audio {
+    position: absolute;
+
+    left: -180px;
+    top: 450px;
+}
+
+#display-collaborations #other-profile h1 {
+    position: relative;
+    font-weight: 100;
+    top: 310px;
+    left: -130px;
+}
+#display-collaborations #other-profile h2 {
+    position: relative;
+    z-index: 100;
+    font-weight: 200;
+    font-size: 15px;
+    top: 320px;
+    left: -130px;
 }
 #other-profile button {
     position: absolute;
@@ -591,11 +646,11 @@ img.profile-pic {
     display: none;
 }
 #display-collaborations #other-profile .profile-pic {
-    position: fixed;
+    position: absolute;
     width: 300px;
     height: 300px;
-    left: 10px;
-    top: 140px;
+    left: -180px;
+    top: 10px;
 }
 #artworkimage {
     position: relative;
