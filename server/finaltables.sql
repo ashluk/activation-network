@@ -15,6 +15,7 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL UNIQUE CHECK(email <> ''),
     password VARCHAR NOT NULL CHECK (password <> ''),
     imageUrl VARCHAR,
+    links VARCHAR,
     bio VARCHAR, 
     artistormusician BOOLEAN DEFAULT false,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -39,6 +40,8 @@ CREATE TABLE tags (
 CREATE TABLE private_message (
       id SERIAL PRIMARY KEY,
       senderId INT NOT NULL REFERENCES users(id),
+        recipient_id INT REFERENCES users(id) , 
+
       message VARCHAR,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

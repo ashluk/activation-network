@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "./axios";
 import OtherProfile from "./otherprofile";
-
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Collaborations from "./collaborations";
@@ -52,6 +51,7 @@ export default function Displaycollaborations(props) {
                                 </video>
                             </Link>
                             <a id="hidebutton" href="/login"></a>
+                            <a id="hidebutton2" href="/login"></a>
 
                             <h3>{user.title}</h3>
                             <h6>{user.description}</h6>
@@ -60,6 +60,13 @@ export default function Displaycollaborations(props) {
                                     params: { id: user.collaborator_id },
                                 }}
                             />
+                            <div id="second-profile">
+                                <OtherProfile
+                                    match={{
+                                        params: { id: user.userid },
+                                    }}
+                                />
+                            </div>
                         </div>
                     );
                 })}

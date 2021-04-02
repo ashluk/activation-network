@@ -31,8 +31,6 @@ export default function FindPeople() {
     return (
         <>
             <div id="find-people">
-                <h1>looking to collaborate?</h1>
-
                 <select
                     name="tags"
                     onChange={({ target }) => setSearchTerm(target.value)}
@@ -40,9 +38,13 @@ export default function FindPeople() {
                     <option value="select">select</option>
 
                     <option value="3d">3d</option>
+                    <option value="vhs">vhs</option>
+                    <option value="cyberpunk">cyberpunk</option>
+
                     <option value="animation">animation</option>
                     <option value="drawing">drawing</option>
                     <option value="gan">gan</option>
+                    <option value="fashion">fashion</option>
                     <option value="responsive">responsive</option>
                 </select>
 

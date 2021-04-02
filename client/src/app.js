@@ -9,6 +9,7 @@ import Backgroundimage from "./backgroundimage";
 import Artistimages from "./artistimages";
 import Collaborations from "./collaborations";
 import Displaycollaborations from "./displaycollaborations";
+import Links from "./links";
 
 import { BrowserRouter, Route } from "react-router-dom";
 import OtherProfile from "./otherprofile";
@@ -45,13 +46,17 @@ export default class App extends Component {
         axios
             .get("/user")
             .then(({ data }) => {
-                console.log("data.rows", data.rows[0]);
-                this.setState({
-                    first: data.rows[0].first,
-                    last: data.rows[0].last,
-                    imageUrl: data.rows[0].imageurl,
-                    bio: data.rows[0].bio,
-                });
+                console.log("data.rows APP", data.rows[0]);
+                this.setState(
+                    {
+                        first: data.rows[0].first,
+                        last: data.rows[0].last,
+                        imageUrl: data.rows[0].imageurl,
+                        bio: data.rows[0].bio,
+                        userId: data.rows[0].id,
+                    },
+                    () => console.log("state in app js", this.state)
+                );
             })
             .catch((err) => {
                 console.log("error in axios user get", err);
@@ -166,6 +171,7 @@ export default class App extends Component {
                         <div className="linktext"> COLLABORATORS</div>{" "}
                     </div>
                 </Link>
+
                 <Link to="/" id="yourprofile">
                     <div id="newlinkto">
                         <img
@@ -174,7 +180,7 @@ export default class App extends Component {
                             height="100px"
                             className="object"
                         />
-                        <div className="linktext"> PROFILE</div>{" "}
+                        <div className="linktext"> PROFILE</div>
                     </div>
                 </Link>
                 <div id="top-left">
@@ -185,6 +191,7 @@ export default class App extends Component {
                             imageUrl={this.state.imageUrl}
                             toggleUploader={() => this.toggleUploader()} //whatever we call these on the left hand side will become the name of the property
                         />
+
                         <Logout />
                     </div>
 
@@ -251,6 +258,7 @@ export default class App extends Component {
                             key={props.match.url}
                             match={props.match}
                             history={props.history}
+                            userId={this.state.userId}
                         />
                     )}
                 />

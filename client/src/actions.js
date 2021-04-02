@@ -60,6 +60,7 @@ export async function mostRecentPrivateMessages(messages) {
     };
 }
 export async function newPrivateMessage(message) {
+    console.log("message in NEW", message);
     return {
         type: `ADD_PRIVATEMESSAGE`,
         newPrivateMessage: message,

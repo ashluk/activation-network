@@ -69,9 +69,17 @@ module.exports.addBio = (bio, userId) => {
     const params = [bio, userId];
     return db.query(q, params);
 };
+////////////LINKS//////////////////
+module.exports.addLinks = (links, userId) => {
+    const q = `UPDATE users
+    SET links = $1
+    WHERE id = $2 `;
+    const params = [links, userId];
+    return db.query(q, params);
+};
 ////////////GET USER////////////
 module.exports.getUser = (id) => {
-    const q = `SELECT first, last, imageurl, bio FROM users WHERE id = $1`;
+    const q = `SELECT first, last, imageurl, bio, id FROM users WHERE id = $1`;
     const params = [id];
     return db.query(q, params);
 };
@@ -164,12 +172,12 @@ module.exports.newMessage = (message, senderId) => {
 };
 ///////////////////PRIVATE MESSAGE///////////////////////
 module.exports.getLastTenPrivateMessages = () => {
-    const q = ` SELECT private_message.id, private_message.message, private_message.senderId, private_message.created_at,
+    const q = ` SELECT private_message.id, private_message.message, private_message.senderId, private_message.recipient_id, private_message.created_at,
     users.first, users.last, users.imageurl
     FROM private_message
     JOIN users
     ON (private_message.senderId = users.id)
-    ORDER BY private_message.id DESC LIMIT 10`;
+    ORDER BY private_message.id DESC`;
     return db.query(q);
 };
 module.exports.getPrivateMessageSender = (userid) => {
@@ -177,11 +185,11 @@ module.exports.getPrivateMessageSender = (userid) => {
     const params = [userid];
     return db.query(q, params);
 };
-module.exports.newPrivateMessage = (message, senderId) => {
-    const q = `INSERT INTO private_message (message, senderId) 
-    VALUES ($1, $2)
+module.exports.newPrivateMessage = (message, senderId, recipient_id) => {
+    const q = `INSERT INTO private_message (message, senderId, recipient_id) 
+    VALUES ($1, $2, $3)
     RETURNING *`;
-    const params = [message, senderId];
+    const params = [message, senderId, recipient_id];
     return db.query(q, params);
 };
 ///////////////DELETE ACCOUNT//////////////

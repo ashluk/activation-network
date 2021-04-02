@@ -77,6 +77,7 @@ export default class Bioeditor extends Component {
                         onChange={(e) => this.handleChange(e)}
                         defaultValue={this.props.bio}
                     ></textarea>
+
                     <button
                         onClick={(e) => this.bioEditorMethod(e)}
                         id="bio-button"

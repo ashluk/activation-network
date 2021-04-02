@@ -10,7 +10,7 @@ export default function Friends(props) {
     var collaborations = props.collaborations;
     var [newPrivateMessages, setNewPrivateMessages] = useState([]);
     var privatemessages = props.privatemessages;
-    console.log("Collaborations!!", props);
+    console.log("Props in friends component!!", props);
     const dispatch = useDispatch();
     const friend = useSelector(
         (state) =>
@@ -76,7 +76,10 @@ export default function Friends(props) {
                                 } //this puts the url in state
                                 title={props.title}
                             />
-                            <Private />
+                            <Private
+                                otherUserId={user.id}
+                                userId={props.userId}
+                            />
                         </div>
                     );
                 })}

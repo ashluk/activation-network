@@ -114,9 +114,10 @@ export default class OtherProfile extends Component {
     render() {
         return (
             <div id="other-profile">
-                <h1>
+                <h2>
                     {this.state.otherUser.first} {this.state.otherUser.last}
-                </h1>
+                </h2>
+                <h4>{this.state.otherUser.bio}</h4>
                 <img
                     className="profile-pic"
                     src={this.state.otherUser.imageurl}
@@ -125,7 +126,7 @@ export default class OtherProfile extends Component {
                     width="350"
                     height="350"
                 />
-                <h2>{this.state.otherUser.bio}</h2>
+
                 <div id="artwork-table">
                     {this.state.artwork &&
                         this.state.artwork.map(function (artwork) {

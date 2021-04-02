@@ -55,6 +55,7 @@ export default function reducer(state = {}, action) {
         };
     }
     if (action.type == "ADD_PRIVATEMESSAGE") {
+        console.log("action in reduver", action);
         state = {
             ...state,
             mostRecentPrivateMessages: [

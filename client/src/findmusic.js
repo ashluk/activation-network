@@ -24,13 +24,18 @@ export default function FindMusic() {
     return (
         <>
             <div id="find-people">
-                <h1>looking to collaborate with musicians?</h1>
-
                 <select
                     name="tags"
                     onChange={({ target }) => setSearchTerm(target.value)}
                 >
                     <option value="select">select</option>
+
+                    <option value="breakbeat">breakbeat</option>
+                    <option value="vocal">vocal</option>
+                    <option value="hardcore">hardcore</option>
+                    <option value="newbeat">newbeat</option>
+                    <option value="doom">doom</option>
+                    <option value="house">house</option>
 
                     <option value="metal">metal</option>
                     <option value="industrial">industrial</option>

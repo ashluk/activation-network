@@ -1,4 +1,4 @@
-import { mostRecentMessages, newMessage } from "./actions";
+import { mostRecentPrivateMessages, newPrivateMessage } from "./actions";
 import { io } from "socket.io-client";
 export let socket;
 
@@ -9,11 +9,14 @@ export const init = (store) => {
             console.log("sending back to socket.js", data);
         });
 
-        socket.on("chatMessages", (msgs) =>
-            store.dispatch(mostRecentMessages(msgs))
+        socket.on("privateMessages", (msgs) =>
+            store.dispatch(mostRecentPrivateMessages(msgs))
         );
 
-        socket.on("chatMessage", (msg) => store.dispatch(newMessage(msg)));
+        socket.on("privateMessage", (msg) => {
+            console.log("message in SOCKETJS", msg);
+            store.dispatch(newPrivateMessage(msg));
+        });
         //whenever chatMessage or Messages gets emitted we run the chatMessage/Messages function . store.dispatch is dispatching an action, like an onClick
     }
 };

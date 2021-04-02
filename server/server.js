@@ -420,8 +420,9 @@ app.post("/updatebio", (req, res) => {
     console.log("req.body", req.body.bio);
     db.addBio(req.body.bio, req.session.userId)
         .then(({ rows }) => {
+            console.log("rows in bio", rows);
             res.json({
-                //bio: rows[0].bio,
+                // bio: rows[0].bio,
                 success: true,
             });
             console.log("rows in bio upload", rows);
@@ -430,7 +431,17 @@ app.post("/updatebio", (req, res) => {
             console.log("err in addImages", err);
         });
 });
-
+/////////////////////LINKS////////////////////////
+app.post("./links", (req, res) => {
+    console.log("what is in here", req.body);
+    db.addLinks(req.body.links, req.session.userId)
+        .then(({ rows }) => {
+            res.json({ success: true });
+        })
+        .catch((err) => {
+            console.log("error in links", err);
+        });
+});
 ///////////////////////GET USER//////////////////////////////
 app.get("/user", (req, res) => {
     // console.log("i am in user req session userId", req.session.userId);
@@ -676,7 +687,7 @@ server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
 });
 ///////////////////CHAT////////////////////////////
-
+const onlineUsers = {};
 io.on("connection", function (socket) {
     //console.log("socket with id connected", socket.id);
     if (!socket.request.session.userId) {
@@ -684,37 +695,44 @@ io.on("connection", function (socket) {
     }
     const socketId = socket.id;
     const userId = socket.request.session.userId;
-
+    onlineUsers[userId] = socketId;
+    //this route links userId and socketId
+    console.log("onlineUsers", onlineUsers);
     console.log("userid in sockets", userId);
 
     db.getLastTenPrivateMessages()
         .then((result) => {
-            console.log("result.rows", result.rows);
+            // console.log("result.rows", result.rows);
             socket.emit("privateMessages", result.rows.reverse());
         })
         .catch((err) => {
             console.log("error in getLastTen", err);
         });
 
-    socket.on("my amazing private message", (msg) => {
+    socket.on("my amazing private message", ([msg, otherUserId]) => {
         console.log("message inside of amazing private", msg);
-
-        db.newPrivateMessage(msg, userId)
+        console.log("my user id in private message", userId);
+        db.newPrivateMessage(msg, userId, otherUserId)
             .then((result) => {
-                console.log("results in new privatemessage", result.rows[0].id);
+                console.log("results in new privatemessage", result.rows);
                 db.getMessageSender(userId)
                     .then(({ rows }) => {
-                        console.log("rows in getMessageSender", rows);
-
-                        io.emit("privateMessage", {
-                            id: result.rows[0].id,
-                            message: msg,
-                            senderId: userId,
-                            created_at: rows[0].created_at,
-                            first: rows[0].first,
-                            last: rows[0].last,
-                            imageurl: rows[0].imageurl,
-                        });
+                        console.log(
+                            "ONLINErows",
+                            onlineUsers[result.rows[0].recipient_id]
+                        );
+                        io.to(onlineUsers[result.rows[0].recipient_id])
+                            .to(onlineUsers[userId])
+                            .emit("privateMessage", {
+                                id: result.rows[0].id,
+                                message: msg,
+                                senderid: userId,
+                                recipient_id: result.rows[0].recipient_id,
+                                created_at: rows[0].created_at,
+                                first: rows[0].first,
+                                last: rows[0].last,
+                                imageurl: rows[0].imageurl,
+                            });
                     })
                     .catch((err) => {
                         console.log("error in getPrivateMessageSender", err);

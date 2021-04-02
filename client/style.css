@@ -293,12 +293,22 @@ a {
 #other-profile video {
     position: relative;
     left: 0;
-    top: 350px;
+    top: 450px;
 }
 #other-profile audio {
     position: relative;
     left: 0;
     top: 350px;
+}
+#other-profile h2 {
+    position: relative;
+    top: 400px;
+}
+#other-profile h4 {
+    position: relative;
+    font-weight: 200;
+    top: 400px;
+    width: 350px;
 }
 #collaborations-table {
     position: absolute;
@@ -309,6 +319,7 @@ a {
 }
 #collaborations-table #collaborations-text {
     position: relative;
+    top: 50px;
     font-size: 40px;
     text-align: center;
 }
@@ -377,8 +388,11 @@ img.profile-pic {
     width: 260px;
     height: 300px;
 }
-#find-people input {
-    width: 250px;
+#find-people select {
+    position: relative;
+    width: 350px;
+    height: 30px;
+    top: 100px;
 }
 #find-people h1 {
     font-size: 30px;
@@ -579,6 +593,7 @@ img.profile-pic {
 }
 #display-video h3 {
     position: relative;
+    font-family: "Druk Wide Cy Web";
     top: 680px;
     left: 620px;
     width: 300px;
@@ -587,6 +602,7 @@ img.profile-pic {
     position: relative;
     top: 700px;
     left: 600px;
+    font-size: 14px;
     width: 300px;
     color: violet;
 }
@@ -599,16 +615,17 @@ img.profile-pic {
     position: relative;
     left: 0;
 }
+
 #display-collaborations #other-profile video {
     position: absolute;
     left: -1185px;
-    top: 200px;
+    top: 300px;
 }
-#display-collaborations #other-profile audio {
+#display-collaborations audio {
     position: absolute;
 
     left: -180px;
-    top: 450px;
+    top: 500px;
 }
 
 #display-collaborations #other-profile h1 {
@@ -622,8 +639,14 @@ img.profile-pic {
     z-index: 100;
     font-weight: 200;
     font-size: 15px;
+    width: 250px;
     top: 320px;
     left: -130px;
+}
+#display-collaborations #second-profile {
+    position: relative;
+    left: 300px;
+    top: 350px;
 }
 #other-profile button {
     position: absolute;
@@ -636,10 +659,16 @@ img.profile-pic {
 
     width: 175px;
     height: 50px;
+    border-radius: 2%;
     position: absolute;
-    top: 380px;
+    top: 40px;
     left: 76px;
     z-index: 100;
+}
+#second-profile #other-profile {
+    position: absolute;
+    top: 500px;
+    left: -300px;
 }
 
 #display-collaborations #other-profile #collaborations-text {
@@ -652,6 +681,13 @@ img.profile-pic {
     left: -180px;
     top: 10px;
 }
+#private-message textarea {
+    width: 380px;
+}
+#private-message {
+    width: 380px;
+}
+
 #artworkimage {
     position: relative;
     left: 30px;
@@ -659,8 +695,10 @@ img.profile-pic {
 }
 
 #find-music {
+    position: relative;
     width: 400px;
     height: 100px;
+    top: 250px;
 }
 #find-music a {
     display: flex;

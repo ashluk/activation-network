@@ -2,6 +2,8 @@ import Profilepic from "./profilepic";
 import Bioeditor from "./bioeditor";
 import Artistimages from "./artistimages";
 import Musicupload from "./musicupload";
+import Links from "./links";
+
 import Collaborations from "./collaborations";
 import { useState, useEffect } from "react";
 import axios from "./axios";
@@ -64,7 +66,13 @@ export default function Profile(props) {
 
             {newImages.map(function (url, id) {
                 return (
-                    <video width="500" height="500" key={id} controls>
+                    <video
+                        width="500"
+                        height="500"
+                        key={id}
+                        loop
+                        autoPlay="autoplay"
+                    >
                         <source src={url} type="video/mp4"></source>;
                     </video>
                 );
