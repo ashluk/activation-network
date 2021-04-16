@@ -42,7 +42,7 @@ export default class Musicupload extends React.Component {
                     //i want to call something here passed to it by profile.
                     console.log("what is data in uploadmusic after", data);
                     this.props.handleMusicInProfile(data.url);
-                    console.log(data);
+                    console.log("Music in profile data", data.url);
                 } else {
                     this.setState({
                         error: true,

@@ -84,7 +84,7 @@ export default class App extends Component {
             .then(({ data }) => {
                 var music = [];
                 for (var i = 0; i < data.rows.length; i++) {
-                    console.log("data.rows[i", data.rows[i]);
+                    console.log("data.rows[i]MUSIC", data.rows[i]);
                     music.push(data.rows[i].file);
                 }
 
@@ -204,6 +204,8 @@ export default class App extends Component {
                                 last={this.state.last}
                                 imageUrl={this.state.imageUrl}
                                 artwork={this.state.artwork}
+                                music={this.state.music}
+                                collaborations={this.state.collaborations}
                                 bio={this.state.bio}
                                 bioInApp={(bio) => this.bioInApp(bio)}
                                 toggleUploader={() => this.toggleUploader()}
@@ -262,8 +264,8 @@ export default class App extends Component {
                         />
                     )}
                 />
-                <div id="line">
-                    <img src="new_horizon.png"></img>
+                <div id="line2">
+                    <img src="newhorizons4.png"></img>
                 </div>
                 <Logo />
                 <Route

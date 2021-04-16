@@ -88,12 +88,31 @@ input {
 h1 {
     font-size: 35px;
 }
-#line {
+#line img {
     position: fixed;
     top: 300px;
     width: 100%;
+    height: 8%;
+    opacity: 60%;
     z-index: 10;
 }
+#line img:hover {
+    transition: 5s;
+    transform: skew(-90deg);
+}
+#line2 img {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 8%;
+    opacity: 60%;
+    z-index: 10;
+}
+#line2 img:hover {
+    transition: 5s;
+    transform: skew(-90deg);
+}
+
 #chat-room h1 {
     font-family: "Terminal Grotesque Open";
     font-size: 40px;
@@ -298,7 +317,8 @@ a {
 #other-profile audio {
     position: relative;
     left: 0;
-    top: 350px;
+    top: 450px;
+    width: 500px;
 }
 #other-profile h2 {
     position: relative;
@@ -319,7 +339,7 @@ a {
 }
 #collaborations-table #collaborations-text {
     position: relative;
-    top: 50px;
+    top: 20px;
     font-size: 40px;
     text-align: center;
 }
@@ -362,22 +382,24 @@ img.profile-pic {
 }
 .logout {
     position: fixed;
-    top: 150px;
-    right: 0;
+    top: 5px;
+    right: 5px;
 }
 .currentuser .profile-name {
-    font-size: 18px;
+    font-size: 15px;
+    display: none;
 }
 .currentuser {
     position: fixed;
     object-fit: cover;
 
-    top: 0px;
-    right: 0px;
+    top: 150px;
+    right: 10px;
     align-content: center;
     text-align: center;
     width: 100px;
     height: 100px;
+    outline: ghostwhite solid 1px;
 }
 
 #find-people {
@@ -409,6 +431,10 @@ img.profile-pic {
     display: flex;
     flex-direction: column;
     align-content: center;
+}
+#friends-inside button {
+    display: flex;
+    align-content: flex-end;
 }
 #friends-and-wannabes button {
     position: relative;
@@ -608,8 +634,8 @@ img.profile-pic {
 }
 #display-collaborations p {
     position: relative;
-    top: 580px;
-    left: 550px;
+    top: 100px;
+    left: 0px;
 }
 #display-collaborations #other-profile {
     position: relative;
@@ -618,13 +644,13 @@ img.profile-pic {
 
 #display-collaborations #other-profile video {
     position: absolute;
-    left: -1185px;
+    left: 0px;
     top: 300px;
 }
 #display-collaborations audio {
     position: absolute;
 
-    left: -180px;
+    left: 0px;
     top: 500px;
 }
 
@@ -632,7 +658,7 @@ img.profile-pic {
     position: relative;
     font-weight: 100;
     top: 310px;
-    left: -130px;
+    left: 0px;
 }
 #display-collaborations #other-profile h2 {
     position: relative;
@@ -641,7 +667,7 @@ img.profile-pic {
     font-size: 15px;
     width: 250px;
     top: 320px;
-    left: -130px;
+    left: 0px;
 }
 #display-collaborations #second-profile {
     position: relative;
@@ -654,32 +680,29 @@ img.profile-pic {
     left: 76px;
     z-index: 70;
 }
-#hidebutton {
-    background: black;
 
-    width: 175px;
-    height: 50px;
-    border-radius: 2%;
-    position: absolute;
-    top: 40px;
-    left: 76px;
-    z-index: 100;
-}
 #second-profile #other-profile {
     position: absolute;
     top: 500px;
-    left: -300px;
+    left: 0px;
 }
 
 #display-collaborations #other-profile #collaborations-text {
     display: none;
 }
 #display-collaborations #other-profile .profile-pic {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    left: -180px;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    left: 0px;
     top: 10px;
+}
+#collabcards {
+    position: absolute;
+    background-color: ghostwhite;
+    width: 400px;
+    left: -200px;
+    height: 100vmax;
 }
 #private-message textarea {
     width: 380px;

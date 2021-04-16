@@ -44,12 +44,12 @@ export default function Profile(props) {
         },
         [collaborations]
     );
-    useEffect(function () {
+    /* useEffect(function () {
         axios.get(`/collaborations/${props.id}.json`).then(({ data }) => {
             setNewCollaborations(data.rows);
             console.log("CurrentUser in displaycollab", data.rows);
         });
-    }, []);
+    }, []);*/
     console.log("props in profile", props);
     return (
         <div id="profile-in-profile">
@@ -77,6 +77,7 @@ export default function Profile(props) {
                     </video>
                 );
             })}
+
             {newCollaborations &&
                 newCollaborations.map(function (user) {
                     return (
@@ -143,7 +144,6 @@ export default function Profile(props) {
             })}
             */
 /*
-
  <Collaborations
                 className="collaborations"
                 handleCollaborationsInProfile={(url) =>
@@ -151,5 +151,6 @@ export default function Profile(props) {
                 } //this puts the url in state
                 title={props.title}
             />
+ 
            
             */

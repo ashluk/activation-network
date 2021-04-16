@@ -14,7 +14,7 @@ export default function Welcome() {
     return (
         <div>
             <div id="line">
-                <img src="new_horizon.png"></img>
+                <img src="newhorizons4.png"></img>
             </div>
 
             <HashRouter>

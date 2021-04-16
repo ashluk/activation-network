@@ -14,6 +14,7 @@ export default class OtherProfile extends Component {
             otherUser: "",
             artwork: [],
             music: [],
+            collaborations: [],
         };
         console.log("actually what is this state", this.state);
     }
