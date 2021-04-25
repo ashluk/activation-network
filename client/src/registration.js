@@ -107,6 +107,17 @@ export default class Registration extends React.Component {
                         <div className="linktext">LOGIN</div>
                     </Link>
                 </div>
+                <div id="aboutlinkto">
+                    <Link to="/about">
+                        <img
+                            src="object9.png"
+                            width="100px"
+                            height="100px"
+                            className="object"
+                        />
+                        <div className="aboutlinktext">ABOUT</div>
+                    </Link>
+                </div>
             </div>
         );
     }

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getFriends, unFriend, acceptFriend } from "./actions";
 import Collaborations from "./collaborations";
 import Private from "./privatemessage";
+import axios from "./axios";
 
 export default function Friends(props) {
     var [newCollaborations, setNewCollaborations] = useState([]);
@@ -44,6 +45,15 @@ export default function Friends(props) {
         [privatemessages]
     );
 
+    useEffect(function () {
+        axios
+            .get(`/collaborations/${props.match.params.id}.json`)
+            .then(({ data }) => {
+                setNewCollaborations(data.rows);
+                console.log("CurrentUser in displaycollab", data.rows);
+            });
+    }, []);
+
     if (!friend && !wannabe) {
         return null;
     }
@@ -76,6 +86,33 @@ export default function Friends(props) {
                                 } //this puts the url in state
                                 title={props.title}
                             />
+                            <div id="display-collaborations">
+                                {newCollaborations &&
+                                    newCollaborations.map(function (user) {
+                                        return (
+                                            <div
+                                                key={user.id}
+                                                id="display-video"
+                                            >
+                                                <Link
+                                                    to={`/user/${user.userId}`}
+                                                >
+                                                    <video
+                                                        width="500"
+                                                        height="500"
+                                                        loop
+                                                        autoPlay="autoplay"
+                                                    >
+                                                        <source
+                                                            src={user.file}
+                                                            type="video/mp4"
+                                                        ></source>
+                                                    </video>
+                                                </Link>
+                                            </div>
+                                        );
+                                    })}
+                            </div>
                             <Private
                                 otherUserId={user.id}
                                 userId={props.userId}
@@ -102,6 +139,11 @@ export default function Friends(props) {
                         </div>
                     );
                 })}
+            <img
+                className="linedivider"
+                src="linedivider.png"
+                alt="linedivider"
+            />
         </div>
     );
 }

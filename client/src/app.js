@@ -10,6 +10,8 @@ import Artistimages from "./artistimages";
 import Collaborations from "./collaborations";
 import Displaycollaborations from "./displaycollaborations";
 import Links from "./links";
+import Artistinfo from "./artistinfo";
+import FindArt from "./findart";
 
 import { BrowserRouter, Route } from "react-router-dom";
 import OtherProfile from "./otherprofile";
@@ -35,6 +37,7 @@ export default class App extends Component {
             error: false,
             uploaderIsVisible: false,
             bio: "",
+            links: undefined,
         };
         this.imageUploadInApp = this.imageUploadInApp.bind(this);
 
@@ -53,6 +56,8 @@ export default class App extends Component {
                         last: data.rows[0].last,
                         imageUrl: data.rows[0].imageurl,
                         bio: data.rows[0].bio,
+                        links: data.rows[0].links,
+
                         userId: data.rows[0].id,
                     },
                     () => console.log("state in app js", this.state)
@@ -134,11 +139,15 @@ export default class App extends Component {
             bio: bio,
         });
     }
-
+    linksInApp(links) {
+        this.setState({
+            links: links,
+        });
+    }
     render() {
         return (
             <BrowserRouter>
-                <Link to="/users/" id="stalkpeople">
+                <Link to="/findart" id="stalkpeople">
                     <div id="newlinkto">
                         <img
                             src="object3.png"
@@ -208,6 +217,8 @@ export default class App extends Component {
                                 collaborations={this.state.collaborations}
                                 bio={this.state.bio}
                                 bioInApp={(bio) => this.bioInApp(bio)}
+                                links={this.state.links}
+                                linksInApp={(links) => this.linksInApp(links)}
                                 toggleUploader={() => this.toggleUploader()}
                             />
                         )}
@@ -244,6 +255,16 @@ export default class App extends Component {
                             />
                         )}
                     />
+                    <Route
+                        path="/findart"
+                        render={(props) => (
+                            <FindArt
+                                key={props.match.url}
+                                match={props.match}
+                                history={props.history}
+                            />
+                        )}
+                    />
                 </div>
                 <h2 onClick={() => this.toggleUploader()}></h2>
                 {this.state.uploaderIsVisible && (
@@ -268,6 +289,10 @@ export default class App extends Component {
                     <img src="newhorizons4.png"></img>
                 </div>
                 <Logo />
+                <footer>
+                    <Backgroundimage />
+                </footer>
+
                 <Route
                     path="/collaborations/:id"
                     render={(props) => (

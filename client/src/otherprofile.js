@@ -16,7 +16,6 @@ export default class OtherProfile extends Component {
             music: [],
             collaborations: [],
         };
-        console.log("actually what is this state", this.state);
     }
     componentDidMount() {
         //this is the prop that is automatically passed down when we have a dynamic route
@@ -102,6 +101,7 @@ export default class OtherProfile extends Component {
                         data.rows[i]
                     );
                     collaborations.push(data.rows[i].file);
+                    console.log("collaboration after push", collaborations);
                 }
 
                 this.setState({
@@ -113,20 +113,34 @@ export default class OtherProfile extends Component {
             });
     }
     render() {
+        console.log("OTHERUSERLINKS", this.state.otherUser.links);
+
         return (
             <div id="other-profile">
-                <h2>
-                    {this.state.otherUser.first} {this.state.otherUser.last}
-                </h2>
-                <h4>{this.state.otherUser.bio}</h4>
-                <img
-                    className="profile-pic"
-                    src={this.state.otherUser.imageurl}
-                    id="profilepic"
-                    alt={this.state.otherUser.first}
-                    width="350"
-                    height="350"
-                />
+                <div id="biobox">
+                    <h2>
+                        {this.state.otherUser.first} {this.state.otherUser.last}
+                    </h2>
+                    <h4>{this.state.otherUser.bio}</h4>
+                    <a href={this.state.otherUser.links}>
+                        {this.state.otherUser.links}
+                    </a>
+                </div>
+                <div id="imageandbutton">
+                    <img
+                        className="profile-pic"
+                        src={this.state.otherUser.imageurl}
+                        id="profilepic"
+                        alt={this.state.otherUser.first}
+                        width="350"
+                        height="350"
+                    />
+                    <div id="friendbutton">
+                        <FriendshipButton
+                            otherUserId={this.props.match.params.id}
+                        />
+                    </div>
+                </div>
 
                 <div id="artwork-table">
                     {this.state.artwork &&
@@ -164,16 +178,20 @@ export default class OtherProfile extends Component {
                             );
                         })}
                 </div>
-                {this.state.music &&
-                    this.state.music.map(function (music) {
-                        return (
-                            // eslint-disable-next-line react/jsx-key
-                            <audio controls>
-                                <source src={music} type="audio/mpeg"></source>
-                            </audio>
-                        );
-                    })}
-                <FriendshipButton otherUserId={this.props.match.params.id} />
+                <div id="audiotable">
+                    {this.state.music &&
+                        this.state.music.map(function (music) {
+                            return (
+                                // eslint-disable-next-line react/jsx-key
+                                <audio controls>
+                                    <source
+                                        src={music}
+                                        type="audio/mpeg"
+                                    ></source>
+                                </audio>
+                            );
+                        })}
+                </div>
             </div>
         );
     }

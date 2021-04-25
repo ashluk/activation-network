@@ -63,6 +63,15 @@ export default function Profile(props) {
                 bio={props.bio}
                 bioInApp={(bio) => props.bioInApp(bio)}
             />
+            <Links
+                links={props.links}
+                linksInApp={(links) => props.linksInApp(links)}
+            />
+            <img
+                className="linedivider"
+                src="linedivider.png"
+                alt="linedivider"
+            />
 
             {newImages.map(function (url, id) {
                 return (
@@ -72,6 +81,7 @@ export default function Profile(props) {
                         key={id}
                         loop
                         autoPlay="autoplay"
+                        muted
                     >
                         <source src={url} type="video/mp4"></source>;
                     </video>

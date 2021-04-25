@@ -86,7 +86,8 @@ app.get("./welcome", (req, res) => {
     }
     res.sendFile(path.join(__dirname, "..", "client", "index.html"));
 });
-
+/////////////ABOUT///////////////
+app.get("./about", (req, res) => {});
 /////////////////REGISTER ROUTE///////////////////////
 //app.get("/registration", (req, res) => {});
 
@@ -408,7 +409,10 @@ app.get("/featuredartwork", (req, res) => {
     db.featuredCollaborations()
         .then(({ rows }) => {
             console.log("rows in featuredcollaborations", rows);
-            res.json({ rows });
+            const revrow = rows.reverse();
+            console.log("revrow", revrow);
+
+            res.json({ revrow });
         })
         .catch((err) => {
             console.log("err in featuredcollab", err);
@@ -432,8 +436,13 @@ app.post("/updatebio", (req, res) => {
         });
 });
 /////////////////////LINKS////////////////////////
-app.post("./links", (req, res) => {
+app.post("/links", (req, res) => {
     console.log("what is in here", req.body);
+    let links = req.body.links;
+    if (!links.startsWith("http://") && !links.startsWith("https://")) {
+        links = "http://" + links;
+    }
+    console.log("LINKS", links);
     db.addLinks(req.body.links, req.session.userId)
         .then(({ rows }) => {
             res.json({ success: true });
@@ -444,9 +453,10 @@ app.post("./links", (req, res) => {
 });
 ///////////////////////GET USER//////////////////////////////
 app.get("/user", (req, res) => {
-    // console.log("i am in user req session userId", req.session.userId);
     db.getUser(req.session.userId)
         .then(({ rows }) => {
+            console.log("i am in user ROWS", rows);
+
             res.json({ rows });
         })
         .catch((err) => {

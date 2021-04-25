@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Artistinfo from "./artistinfo";
 
 export default function FindPeople() {
     const [searchTerm, setSearchTerm] = useState();
@@ -30,6 +31,13 @@ export default function FindPeople() {
                 />*/
     return (
         <>
+            <div id="infotext">
+                <img
+                    className="artistcollab"
+                    src="artistcollab.png"
+                    alt="artistcollab"
+                />
+            </div>
             <div id="find-people">
                 <select
                     name="tags"
@@ -56,7 +64,13 @@ export default function FindPeople() {
                             <div key={user.id} id="found-people">
                                 <Link to={`/user/${user.artist_id}`}>
                                     {user.title}
-                                    <video width="500" height="500" controls>
+                                    <video
+                                        width="500"
+                                        height="500"
+                                        loop
+                                        autoPlay="autoplay"
+                                        muted
+                                    >
                                         <source
                                             src={user.file}
                                             type="video/mp4"
@@ -64,8 +78,8 @@ export default function FindPeople() {
                                         ;
                                     </video>
                                 </Link>
+
                                 <div id="findtext">
-                                    {" "}
                                     {user.first} {user.last}
                                 </div>
                             </div>

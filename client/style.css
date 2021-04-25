@@ -34,6 +34,20 @@ body {
     font-display: swap;
     text-transform: uppercase;
 }
+@font-face {
+    font-family: "Compacta ICG Light";
+    src: url("/path-to/Compacta ICG Light.woff2") format("woff2"),
+        url("/path-to/Compacta ICG Light.woff") format("woff"),
+        url("/path-to/Compacta ICG Light.ttf") format("truetype");
+}
+footer .footer {
+    position: fixed;
+    z-index: 9;
+    width: 400px;
+    height: 40px;
+    bottom: 0px;
+    right: 0px;
+}
 /*audio {
     filter: pink(80%) saturate(70%) grayscale(10) contrast(99%) invert(12%);
     border-radius: 0%;
@@ -103,10 +117,11 @@ h1 {
 #line2 img {
     position: fixed;
     bottom: 0px;
-    width: 100%;
+    right: 0;
+    width: 25%;
     height: 8%;
-    opacity: 60%;
-    z-index: 10;
+    opacity: 50%;
+    z-index: 8;
 }
 #line2 img:hover {
     transition: 5s;
@@ -138,14 +153,20 @@ h1 {
 
 .logo {
     z-index: 40;
+    animation: moving 3s ease-in-out;
+    animation: moving 3s cubic-bezier(ease-in-out);
 
     position: fixed;
     font-family: Arial, Helvetica, sans-serif;
     top: 0px;
     left: 550px;
 }
+
 #logoinwelcome {
     z-index: 100;
+
+    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
+
     position: fixed;
     top: 0px;
     left: 350px;
@@ -180,6 +201,16 @@ a {
 
     width: 200px;
 }
+#infotext {
+    animation: movingtext 4s ease-in;
+
+    position: absolute;
+    top: 120px;
+    left: 100px;
+}
+.artistcollab {
+}
+
 #stalkpeople {
     position: fixed;
     color: ghostwhite;
@@ -202,6 +233,13 @@ a {
     left: 340px;
     font-size: 20px;
     width: 230px;
+}
+.linedivider {
+    position: fixed;
+    top: 50px;
+    left: 600px;
+    height: 630px;
+    width: 30px;
 }
 #yourprofile {
     position: fixed;
@@ -292,75 +330,149 @@ a {
     /*visibility: invisible;*/
 }
 
-/*#other-profile {
-    position: absolute;
-    text-align: center;
-    align-content: center;
-    top: 50px;
-    left: 50px;
-    width: 300px;
-    height: 300px;
-    font-size: 15px;
-}*/
-#other-profile #profilepic {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    top: 30px;
-    left: 0px;
-}
+/*/////////OTHER PROFILE/////////*/
+
 #other-profile video {
     position: relative;
     left: 0;
-    top: 450px;
+    top: 650px;
+}
+#other-profile #audiotable {
+    position: absolute;
+    top: 750px;
+    width: 500px;
+    left: 10px;
 }
 #other-profile audio {
     position: relative;
     left: 0;
-    top: 450px;
     width: 500px;
 }
-#other-profile h2 {
-    position: relative;
-    top: 400px;
+#other-profile #imageandbutton {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    top: 30px;
+    left: 10px;
+    height: 300px;
+    width: 400px;
 }
-#other-profile h4 {
+#imageandbutton #profilepic {
     position: relative;
+    width: 300px;
+    height: 300px;
+    justify-self: center;
+    top: 100px;
+    left: 10px;
+    padding-bottom: 10px;
+}
+#other-profile #friendbutton button {
+    visibility: visible;
+    position: relative;
+    top: 100px;
+    left: 0;
+}
+#other-profile #biobox {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    height: 600px;
+    left: 30px;
+    top: 100px;
+    padding: auto;
+}
+#other-profile #biobox h2 {
+    position: absolute;
+    font-family: "Druk Wide Cy Web";
+    top: 350px;
+    left: 0px;
+}
+#biobox a {
+    position: relative;
+    align-self: center;
+    font-weight: 400;
+    font-size: 15px;
+    top: 80px;
+    left: -25px;
+}
+#other-profile #biobox h4 {
+    position: relative;
+    align-self: centre;
+    text-align: left;
     font-weight: 200;
     top: 400px;
-    width: 350px;
-}
-#collaborations-table {
-    position: absolute;
-    top: 250px;
-    right: 10px;
     width: 400px;
+    height: 300px;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+    color: greenyellow;
+}
+
+/*/ //////////COLLABORATIONS TABLE ////////*/
+#collaborations-table {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    top: 0px;
+    right: 150px;
+    width: 500px;
     height: 800px;
 }
 #collaborations-table #collaborations-text {
     position: relative;
-    top: 20px;
+    top: 0px;
     font-size: 40px;
+    left: 20px;
+    padding-bottom: 10px;
     text-align: center;
+    align-self: center;
 }
-#artwork-table {
-    display: inline;
-    width: 800px;
-    left: 0;
+#collaborations-table video {
+    position: relative;
+    top: 10px;
+    right: 400px;
+
+    align-self: center;
+    width: 500px;
+    height: 500px;
 }
 #other-profile #collaborations {
     position: relative;
     left: 40px;
     top: 20px;
 }
+/*////////ARTWORK TABLE/////////*/
+#artwork-table {
+    position: relative;
+    top: 50px;
+    display: inline;
+    width: 800px;
+    left: 20px;
+}
 #profile-in-profile .profile-name {
-    font-size: 28px;
+    font-size: 25px;
+    font-weight: 300;
+    display: none;
+    color: greenyellow;
 }
 
 #profile-in-profile .profile-pic {
     width: 300px;
     height: 300px;
     object-fit: cover;
+}
+#profile-in-profile .linedivider {
+    position: fixed;
+    left: 500px;
+    top: 50px;
+    height: 630px;
+    width: 30px;
 }
 img.profile-pic {
     border-radius: 50%;
@@ -372,6 +484,21 @@ img.profile-pic {
 #profile-in-profile video {
     position: relative;
     left: -100px;
+    top: 100px;
+}
+#profile-in-profile #editlinks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 30px;
+}
+#profile-in-profile #linkforms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 30px;
 }
 #profile-in-profile {
     position: absolute;
@@ -381,25 +508,30 @@ img.profile-pic {
     height: 300px;
 }
 .logout {
+    transition: transform 0.7s ease-in-out;
     position: fixed;
     top: 5px;
-    right: 5px;
+    right: 29px;
+}
+.logout:hover {
+    transform: rotate(360deg);
 }
 .currentuser .profile-name {
-    font-size: 15px;
-    display: none;
+    position: absolute;
+    font-size: 20px;
+    top: 100px;
 }
 .currentuser {
     position: fixed;
     object-fit: cover;
 
     top: 150px;
-    right: 10px;
+    right: 15px;
     align-content: center;
     text-align: center;
     width: 100px;
     height: 100px;
-    outline: ghostwhite solid 1px;
+    /*outline: ghostwhite solid 1px;*/
 }
 
 #find-people {
@@ -431,6 +563,12 @@ img.profile-pic {
     display: flex;
     flex-direction: column;
     align-content: center;
+    outline: greenyellow solid 3px;
+    padding-bottom: 5px;
+}
+#friends-inside img {
+    width: 400px;
+    height: 400px;
 }
 #friends-inside button {
     display: flex;
@@ -442,32 +580,53 @@ img.profile-pic {
     left: 78px;
     margin-bottom: 5px;
 }
+#newlinks {
+    position: fixed;
+    left: 300px;
+    top: 300px;
+    height: 100px;
+    width: 200px;
+    background-color: greenyellow;
+}
 
-#findimage {
+/*/ ///////////FIND ART////////////*/
+/*#findimage {
     width: 400px;
     height: 400px;
     object-fit: cover;
 
     padding-top: 5px;
+}*/
+#found-people {
+    display: flex;
+    flex-direction: row;
+    width: 500px;
 }
 #found-people video {
     position: relative;
-    left: -4px;
+
+    top: 30px;
+    left: 0px;
+    height: 400px;
+    padding-top: 0px;
 }
 #found-people a {
     font-family: "Druk Wide Cy Web";
-    font-size: 30px;
-    padding-top: 150px;
-
-    text-align: left;
+    font-size: 27px;
+    padding-top: 100px;
+    width: 500px;
+    text-align: start;
     display: flex;
     flex-direction: column;
     width: 300px;
-    height: 300px;
+    height: 500px;
 }
-#findtext {
-    padding-top: 20px;
-    font-size: 22px;
+#found-people #findtext {
+    padding-top: 10px;
+    align-self: center;
+    justify-self: center;
+    font-size: 28px;
+    width: 400px;
 }
 
 #top-right {
@@ -477,43 +636,76 @@ img.profile-pic {
     font: 200;
     text-decoration: none;
 }
-
+/*////////REGISTRATION/////////*/
 #regforms {
     z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
     position: fixed;
-    top: 180px;
-    left: 350px;
+    top: 200px;
+    left: 550px;
 }
-#artistormusicanbuttons {
-    position: fixed;
-    bottom: 50px;
-    left: 350px;
+#regforms h1 {
+    align-self: flex-start;
+    font-size: 33px;
+    font-family: "Druk Wide Cy Web";
 }
+#regforms select {
+    width: 357px;
+}
+#regforms button {
+    width: 357px;
+}
+/*/ ///////LOGIN/////////*/
+
 #loginforms {
     z-index: 100;
-
+    display: flex;
+    flex-direction: column;
+    align-content: center;
     position: fixed;
-    top: 180px;
-    left: 450px;
+    top: 200px;
+    left: 550px;
+}
+#loginforms h1 {
+    align-self: center;
+    font-size: 33px;
+    font-family: "Druk Wide Cy Web";
+}
+#loginforms button {
+    width: 357px;
 }
 #resetforms {
     z-index: 100;
-
+    display: flex;
+    flex-direction: column;
+    align-content: center;
     position: fixed;
-    top: 180px;
-    left: 500px;
+    top: 200px;
+    left: 450px;
+}
+#resetforms h1 {
+    align-self: center;
+    font-size: 33px;
+    font-family: "Druk Wide Cy Web";
+}
+#resetforms button {
+    align-self: center;
+    height: 28px;
 }
 
 #linktologin {
     position: fixed;
-    top: 250px;
-    left: 450px;
+    top: 350px;
+    left: 580px;
+
     font-size: 18px;
 }
 #linktologininreset {
     position: fixed;
-    top: 250px;
-    left: 500px;
+    top: 280px;
+    left: 450px;
     font-size: 18px;
 }
 #navlinks {
@@ -524,44 +716,12 @@ img.profile-pic {
     top: 5px;
     left: 30px;
 }
-.chat-container {
-    height: 300px;
-    width: 470px;
-    overflow-y: auto;
+#artistormusicanbuttons {
+    position: fixed;
+    bottom: 50px;
+    left: 350px;
 }
-#chat-room {
-    position: relative;
-    text-align: center;
-    top: 170px;
-    left: 590px;
-    width: 480px;
 
-    background-color: ghostwhite;
-    color: black;
-}
-#chat-room textarea {
-    width: 480px;
-}
-#chat-message {
-    display: flex;
-    flex-direction: column;
-    font-family: monospace;
-    padding-top: 8px;
-    font-size: 16px;
-}
-#chat-name {
-    text-align: left;
-    padding-left: 3px;
-    color: royalblue;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-}
-#created-at {
-    text-align: center;
-    font-size: 9px;
-}
 #artist-images {
     position: fixed;
     width: 410px;
@@ -571,7 +731,7 @@ img.profile-pic {
     align-items: center;
     background-color: ghostwhite;
     color: black;
-    left: 10px;
+    left: 40px;
     top: 150px;
 }
 #music-upload {
@@ -583,7 +743,7 @@ img.profile-pic {
     align-items: center;
     background-color: ghostwhite;
     color: black;
-    left: 10px;
+    left: 40px;
     top: 400px;
 }
 
@@ -616,69 +776,123 @@ img.profile-pic {
     position: absolute;
     left: 500px;
     top: 150px;
+    width: 600px;
+    height: 600px;
 }
 #display-video h3 {
     position: relative;
-    font-family: "Druk Wide Cy Web";
-    top: 680px;
+    top: 780px;
     left: 620px;
     width: 300px;
 }
 #display-video h6 {
     position: relative;
-    top: 700px;
+    top: 800px;
     left: 600px;
     font-size: 14px;
     width: 300px;
     color: violet;
 }
-#display-collaborations p {
-    position: relative;
-    top: 100px;
-    left: 0px;
+
+#featured-collaborations {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
 }
-#display-collaborations #other-profile {
+#featured-collaborations video {
     position: relative;
-    left: 0;
+    align-self: center;
+    padding: 5px;
+}
+/*//////////DISPLAY COLLABORATIONS//////////*/
+
+#display-collaborations #other-profile #profilepic {
+    border-radius: 0%;
+    align-self: center;
+    width: 450px;
+    height: 450px;
+    left: 90px;
+    padding: auto;
+}
+#display-collaborations #video-text {
+    text-align: left;
+    align-content: center;
+    position: absolute;
+    left: -90px;
+    top: -27px;
+}
+#display-collaborations #video-text h3 {
+    left: 600px;
+    font-size: 35px;
+    width: 500px;
+}
+.meet {
+    animation: movingrev 3s ease-in-out;
+
+    position: absolute;
+    top: 50px;
+    left: -190px;
+}
+#display-collaborations .linedivider {
+    display: none;
+    position: fixed;
+    left: 600px;
+    top: 20px;
+    height: 400px;
+    width: 30px;
+}
+
+#collabcards #first-profile {
+    position: relative;
+    top: 200px;
+    left: -200px;
+}
+#collabcards #second-profile {
+    position: relative;
+
+    top: 250px;
+    left: -200px;
+}
+#collabcards #other-profile button {
+    visibility: hidden;
+}
+
+#display-collaborations #other-profile a {
+    top: 100px;
+    left: 15px;
+    font-weight: 100;
+    font-size: 25px;
+    color: greenyellow;
+}
+#display-collaborations #other-profile h2 {
+    left: 40px;
+    font-size: 30px;
+    top: 450px;
+    width: 550px;
+    line-height: 24px;
+}
+#display-collaborations #other-profile h4 {
+    visibility: hidden;
+
+    width: 300px;
+    height: 300px;
+    left: -10px;
+    top: 450px;
+    text-align: left;
+    color: mintcream;
 }
 
 #display-collaborations #other-profile video {
+    visibility: hidden;
     position: absolute;
-    left: 0px;
-    top: 300px;
 }
 #display-collaborations audio {
     position: absolute;
-
-    left: 0px;
-    top: 500px;
+    visibility: hidden;
 }
-
-#display-collaborations #other-profile h1 {
-    position: relative;
-    font-weight: 100;
-    top: 310px;
-    left: 0px;
-}
-#display-collaborations #other-profile h2 {
-    position: relative;
-    z-index: 100;
-    font-weight: 200;
-    font-size: 15px;
-    width: 250px;
-    top: 320px;
-    left: 0px;
-}
-#display-collaborations #second-profile {
-    position: relative;
-    left: 300px;
-    top: 350px;
-}
-#other-profile button {
-    position: absolute;
-    top: 350px;
-    left: 76px;
-    z-index: 70;
+#display-collaborations #collaborations-text {
+    visibility: hidden;
 }
 
 #second-profile #other-profile {
@@ -686,24 +900,91 @@ img.profile-pic {
     top: 500px;
     left: 0px;
 }
+/*////////////////ABOUT//////////////////*/
+#about {
+    animation: moving 3s cubic-bezier(ease-in-out);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    align-content: center;
+    justify-content: center;
+}
+@keyframes moving {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+@keyframes movingrev {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+#about #abouttext {
+    animation: movingtext 2s ease-in;
 
-#display-collaborations #other-profile #collaborations-text {
-    display: none;
-}
-#display-collaborations #other-profile .profile-pic {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    left: 0px;
-    top: 10px;
-}
-#collabcards {
     position: absolute;
-    background-color: ghostwhite;
-    width: 400px;
-    left: -200px;
-    height: 100vmax;
+    left: 100px;
+    top: 50px;
 }
+@keyframes movingtext {
+    0% {
+        transform: translateX(0%);
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+#about #dreamtext {
+    animation: dreamtext 5s ease-in;
+
+    position: relative;
+    left: 700px;
+    top: 50px;
+}
+@keyframes dreamtext {
+    0% {
+        transform: translatex(100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+#about #work {
+    animation: worktext 3s ease-in;
+
+    position: absolute;
+    left: 700px;
+    top: 200px;
+}
+
+@keyframes worktext {
+    0% {
+        transform: translatey(100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+#about #color {
+    width: 40vw;
+    height: 100vh;
+    background-color: greenyellow;
+}
+#about h1 {
+    align-self: center;
+    justify-self: center;
+}
+
+/*/ /////////PRIVATE MESSAGE/////////////*/
+
 #private-message textarea {
     width: 380px;
 }
@@ -716,7 +997,7 @@ img.profile-pic {
     left: 30px;
     top: 0;
 }
-
+/*////////////FIND MUSIC////////////////*/
 #find-music {
     position: relative;
     width: 400px;
@@ -735,7 +1016,7 @@ img.profile-pic {
     position: relative;
 }
 
-/*////////ICONS//////////*/
+/*/ ///////ICONS//////////*/
 #registrationlinkto {
     position: fixed;
     z-index: 100;
@@ -801,6 +1082,40 @@ img.profile-pic {
 #linkto:hover .linktext {
     opacity: 1;
 }
+#aboutlinkto {
+    z-index: 100;
+
+    position: fixed;
+    font-family: "Druk Wide Cy Web";
+    top: 200px;
+    width: 80;
+    height: 80; /*dimensions of image*/
+}
+#aboutlinkto .object,
+#aboutlinkto .aboutlinktext {
+    z-index: 100;
+
+    transition: opacity 0.5s ease-in-out;
+    color: ghostwhite;
+
+    width: 300;
+    height: 100;
+}
+#aboutlinkto .aboutlinktext {
+    z-index: 100;
+
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    opacity: 0;
+}
+
+#aboutlinkto:hover .object {
+    opacity: 0;
+}
+#aboutlinkto:hover .aboutlinktext {
+    opacity: 1;
+}
 #newlinkto {
     z-index: 100;
 
@@ -834,4 +1149,44 @@ img.profile-pic {
 }
 #newlinkto:hover .linktext {
     opacity: 1;
+}
+
+/*CHAT ROOM*/
+.chat-container {
+    height: 300px;
+    width: 400px;
+    overflow-y: auto;
+}
+#chat-room {
+    position: relative;
+    text-align: center;
+    top: 170px;
+    left: 590px;
+    width: 480px;
+
+    background-color: ghostwhite;
+    color: black;
+}
+#chat-room textarea {
+    width: 480px;
+}
+#chat-message {
+    display: flex;
+    flex-direction: column;
+    font-family: monospace;
+    padding-top: 8px;
+    font-size: 16px;
+}
+#chat-name {
+    text-align: left;
+    padding-left: 3px;
+    color: royalblue;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+}
+#created-at {
+    text-align: center;
+    font-size: 9px;
 }

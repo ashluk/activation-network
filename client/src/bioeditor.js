@@ -5,11 +5,10 @@ export default class Bioeditor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editMode: true,
+            editMode: false,
             //bio: this.props.bio,
             bio: undefined,
         };
-        console.log("writing", this.state.bio);
     }
 
     componentDidMount() {
@@ -35,8 +34,9 @@ export default class Bioeditor extends Component {
     editBio() {
         this.setState({
             editMode: true,
-            bio: this.state.bio,
+            // bio: this.state.bio,
         });
+        console.log("EDIT BIO WAS PUSHED");
     }
 
     bioEditorMethod() {
@@ -47,6 +47,7 @@ export default class Bioeditor extends Component {
                 console.log("response from post", response.data);
                 console.log("this.props", this.props);
                 this.props.bioInApp(this.state.bio);
+                this.setState({ editMode: false });
             })
             .catch(function (err) {
                 console.log("err in axios catch", err);
@@ -54,18 +55,12 @@ export default class Bioeditor extends Component {
     }
 
     render() {
-        if (this.props.bio) {
+        if (!this.state.editMode) {
             return (
                 <div className="edit">
-                    <textarea
-                        onChange={(e) => this.handleChange(e)}
-                        defaultValue={this.props.bio}
-                    ></textarea>
+                    <div>{this.props.bio}</div>
 
-                    <button
-                        onClick={(e) => this.bioEditorMethod(e)}
-                        id="bio-button"
-                    >
+                    <button onClick={() => this.editBio()} id="bio-button">
                         EDIT BIO
                     </button>
                 </div>

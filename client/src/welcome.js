@@ -5,6 +5,10 @@ import Artistregistration from "./artistregistration";
 import Login from "./login";
 import Reset from "./reset";
 import Logo from "./logo";
+import Backgroundimage from "./backgroundimage";
+import About from "./about";
+import { Link } from "react-router-dom";
+
 import Featuredartwork from "./featuredartwork";
 import Backgroundwelcome from "./backgroundwelcome";
 import Displaycollaborations from "./displaycollaborations";
@@ -27,6 +31,7 @@ export default function Welcome() {
                     />
                     <Route path="/registration" component={Registration} />
                     <Route path="/login" component={Login} />
+                    <Route path="/about" component={About} />
 
                     <Route
                         path="/collaborations/:id"
@@ -38,6 +43,7 @@ export default function Welcome() {
                             />
                         )}
                     />
+
                     <Route
                         path="/user/:id"
                         render={(props) => (
@@ -48,12 +54,15 @@ export default function Welcome() {
                             />
                         )}
                     />
-
+                    <footer>
+                        <Backgroundimage />
+                    </footer>
                     <div id="resetforms">
                         <Route path="/reset" component={Reset} />
                     </div>
                 </div>
             </HashRouter>
+
             <div id="logoinwelcome">
                 <a href="/">
                     <Logo />

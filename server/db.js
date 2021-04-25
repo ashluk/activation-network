@@ -79,7 +79,7 @@ module.exports.addLinks = (links, userId) => {
 };
 ////////////GET USER////////////
 module.exports.getUser = (id) => {
-    const q = `SELECT first, last, imageurl, bio, id FROM users WHERE id = $1`;
+    const q = `SELECT first, last, imageurl, bio, links, id FROM users WHERE id = $1`;
     const params = [id];
     return db.query(q, params);
 };

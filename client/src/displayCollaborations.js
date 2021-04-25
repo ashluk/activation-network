@@ -50,15 +50,32 @@ export default function Displaycollaborations(props) {
                                     ></source>
                                 </video>
                             </Link>
-
-                            <div id="collabcards">
+                            <div id="video-text">
                                 <h3>{user.title}</h3>
                                 <h6>{user.description}</h6>
-                                <OtherProfile
-                                    match={{
-                                        params: { id: user.collaborator_id },
-                                    }}
+                            </div>
+                            <div id="whitebox"></div>
+                            <div id="collabcards">
+                                <div id="first-profile">
+                                    <OtherProfile
+                                        match={{
+                                            params: {
+                                                id: user.collaborator_id,
+                                            },
+                                        }}
+                                    />
+                                </div>
+                                <img
+                                    className="linedivider"
+                                    src="linedivider.png"
+                                    alt="linedivider"
                                 />
+                                <img
+                                    className="meet"
+                                    src="meet.png"
+                                    alt="meet"
+                                />
+
                                 <div id="second-profile">
                                     <OtherProfile
                                         match={{

@@ -3,10 +3,10 @@ export default function Logo() {
         <div>
             <img
                 className="logo"
-                src="activationnetwork2.png"
+                src="activationnetworknewlogo.png"
                 alt="logo"
                 width="800"
-                height="200"
+                height="130"
             />
         </div>
     );

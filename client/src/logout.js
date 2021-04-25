@@ -20,8 +20,8 @@ export default class Logout extends React.Component {
             <div>
                 <img
                     src="object7.png"
-                    width="100px"
-                    height="100px"
+                    width="70px"
+                    height="70px"
                     className="logout"
                     onClick={this.handleClick}
                 />

@@ -17,8 +17,8 @@ export default function Featuredartwork() {
             } else {
             }*/
         axios.get("/featuredartwork").then(({ data }) => {
-            setResultUsers(data.rows);
-            console.log("setResultUsers", data.rows);
+            setResultUsers(data.revrow);
+            console.log("setResultUsers", data.revrow);
         });
     }, []);
     return (

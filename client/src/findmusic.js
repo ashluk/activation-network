@@ -23,6 +23,13 @@ export default function FindMusic() {
                 />*/
     return (
         <>
+            <div id="infotext">
+                <img
+                    className="musiccollab"
+                    src="musiciancollab.png"
+                    alt="musiccollab"
+                />
+            </div>
             <div id="find-people">
                 <select
                     name="tags"
