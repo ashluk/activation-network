@@ -2,7 +2,7 @@ const spicedPg = require("spiced-pg");
 
 const db = spicedPg(
     process.env.DATABASE_URL ||
-        "postgres:postgres:postgres@localhost:5432/finalproject"
+        "postgres://fhodeumjqqupdn:623941877d65c5ed49830332b4cd9b76e61c154b9e0f4149371a6aa8a8a5a805@ec2-54-74-156-137.eu-west-1.compute.amazonaws.com:5432/ddg9dtsn7ovsjm"
 );
 //////////////////REGISTER//////////////////////////
 module.exports.addUser = (first, last, email, password, artistormusician) => {
@@ -79,7 +79,7 @@ module.exports.addLinks = (links, userId) => {
 };
 ////////////GET USER////////////
 module.exports.getUser = (id) => {
-    const q = `SELECT first, last, imageurl, bio, id FROM users WHERE id = $1`;
+    const q = `SELECT first, last, imageurl, bio, links, id FROM users WHERE id = $1`;
     const params = [id];
     return db.query(q, params);
 };
