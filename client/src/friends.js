@@ -147,6 +147,8 @@ export default function Friends(props) {
                 src="linedivider.png"
                 alt="linedivider"
             />
+            <img className="work2" src="uploadwork2.png" alt="work2" />
+
             <img className="uploadwork" src="uploadwork.png" alt="uploadwork" />
         </div>
     );

@@ -248,6 +248,14 @@ a {
     left: 650px;
     top: 150px;
 }
+.work2 {
+    animation: worktext 4s ease-in;
+
+    position: fixed;
+    left: 650px;
+    top: 150px;
+}
+
 #yourprofile {
     position: fixed;
     color: ghostwhite;
