@@ -41,10 +41,8 @@ export default function FindMusic() {
                     <option value="vocal">vocal</option>
                     <option value="hardcore">hardcore</option>
                     <option value="newbeat">newbeat</option>
-                    <option value="doom">doom</option>
+                    <option value="experimental">experimental</option>
                     <option value="house">house</option>
-
-                    <option value="metal">metal</option>
                     <option value="industrial">industrial</option>
                     <option value="ambient">ambient</option>
                     <option value="jungle">jungle</option>

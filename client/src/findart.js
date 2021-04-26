@@ -42,10 +42,9 @@ export default function FindArt() {
                     <option value="cyberpunk">cyberpunk</option>
 
                     <option value="animation">animation</option>
-                    <option value="drawing">drawing</option>
+                    <option value="dance">dance</option>
                     <option value="gan">gan</option>
                     <option value="fashion">fashion</option>
-                    <option value="responsive">responsive</option>
                 </select>
 
                 <input type="hidden" name="_csrf" value="{{csrfToken}}" />

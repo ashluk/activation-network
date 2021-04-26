@@ -241,6 +241,13 @@ a {
     height: 630px;
     width: 30px;
 }
+.uploadwork {
+    animation: dreamtext 2s ease-in;
+
+    position: fixed;
+    left: 650px;
+    top: 150px;
+}
 #yourprofile {
     position: fixed;
     color: ghostwhite;
@@ -486,6 +493,11 @@ img.profile-pic {
     left: -100px;
     top: 100px;
 }
+#profile-in-profile audio {
+    position: relative;
+    left: 0px;
+    top: 100px;
+}
 #profile-in-profile #editlinks {
     display: flex;
     flex-direction: column;
@@ -571,6 +583,13 @@ img.profile-pic {
     height: 400px;
 }
 #friends-inside button {
+    display: flex;
+    align-content: flex-end;
+}
+#friends-inside #accept button {
+    position: relative;
+    left: 200px;
+    color: darkorange;
     display: flex;
     align-content: flex-end;
 }

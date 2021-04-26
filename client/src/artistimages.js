@@ -103,10 +103,9 @@ export default class Artistimages extends React.Component {
                         <option value="cyberpunk">cyberpunk</option>
 
                         <option value="animation">animation</option>
-                        <option value="drawing">drawing</option>
+                        <option value="dance">dance</option>
                         <option value="gan">gan</option>
                         <option value="fashion">fashion</option>
-                        <option value="responsive">responsive</option>
                     </select>
                     <button onClick={() => this.handleClick()}>submit</button>
                 </div>

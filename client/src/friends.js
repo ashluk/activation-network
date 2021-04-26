@@ -132,10 +132,13 @@ export default function Friends(props) {
                             />
                             <button
                                 onClick={() => dispatch(acceptFriend(user.id))}
+                                id="accept"
                             >
                                 ACCEPT
                             </button>
-                            {user.first} {user.last}
+                            <div id="names">
+                                {user.first} {user.last}
+                            </div>
                         </div>
                     );
                 })}
@@ -144,6 +147,7 @@ export default function Friends(props) {
                 src="linedivider.png"
                 alt="linedivider"
             />
+            <img className="uploadwork" src="uploadwork.png" alt="uploadwork" />
         </div>
     );
 }
