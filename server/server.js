@@ -11,7 +11,12 @@ const s3 = require("./s3");
 const server = require("http").Server(app);
 const io = require("socket.io")(server, {
     allowRequest: (req, callback) =>
-        callback(null, req.headers.referer.startsWith()),
+        callback(
+            null,
+            req.headers.referer.startsWith(
+                "https://activationnetwork.herokuapp.com/"
+            )
+        ),
 });
 
 const cryptoRandomString = require("crypto-random-string");
