@@ -43,7 +43,7 @@ export default function FindArt() {
 
                     <option value="animation">animation</option>
                     <option value="dance">dance</option>
-                    <option value="gan">gan</option>
+                    <option value="gan">GAN</option>
                     <option value="fashion">fashion</option>
                 </select>
 
