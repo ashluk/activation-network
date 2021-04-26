@@ -54,7 +54,6 @@ export default function FindArt() {
                         return (
                             <div key={user.id} id="found-people">
                                 <Link to={`/user/${user.artist_id}`}>
-                                    {user.title}
                                     <video
                                         width="500"
                                         height="500"
@@ -70,9 +69,7 @@ export default function FindArt() {
                                     </video>
                                 </Link>
 
-                                <div id="findtext">
-                                    {user.first} {user.last}
-                                </div>
+                                <div id="findtext">{user.title}</div>
                             </div>
                         );
                     })}

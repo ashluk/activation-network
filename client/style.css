@@ -55,6 +55,8 @@ footer .footer {
     height: 35px;
 }*/
 audio {
+    position: relative;
+    left: 20px;
     -webkit-transition: all 0.5s linear;
     -moz-transition: all 0.5s linear;
     -o-transition: all 0.5s linear;
@@ -202,11 +204,27 @@ a {
     width: 200px;
 }
 #infotext {
-    animation: movingtext 4s ease-in;
+    animation: movingtext 2s ease-in;
 
     position: absolute;
     top: 120px;
     left: 100px;
+}
+.searchby {
+    animation: searchby 3s ease-in;
+
+    position: absolute;
+    top: -100px;
+    left: 0px;
+}
+@keyframes searchby {
+    0% {
+        transform: translateY(0%);
+        transform: translateX(-150%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
 }
 .artistcollab {
 }
@@ -231,6 +249,17 @@ a {
 
     top: 10px;
     left: 340px;
+    font-size: 20px;
+    width: 230px;
+}
+#findfriends {
+    position: fixed;
+    color: ghostwhite;
+    font-family: "Druk Wide Cy Web";
+    text-align: start;
+
+    top: 10px;
+    left: 440px;
     font-size: 20px;
     width: 230px;
 }
@@ -485,7 +514,7 @@ a {
 #profile-in-profile .linedivider {
     position: fixed;
     left: 500px;
-    top: 50px;
+    top: 55px;
     height: 630px;
     width: 30px;
 }
@@ -568,6 +597,12 @@ img.profile-pic {
     height: 30px;
     top: 100px;
 }
+#find-people input {
+    position: relative;
+    width: 350px;
+    height: 30px;
+    top: 100px;
+}
 #find-people h1 {
     font-size: 30px;
 }
@@ -587,6 +622,8 @@ img.profile-pic {
     padding-bottom: 5px;
 }
 #friends-inside img {
+    position: relative;
+    top: -20px;
     width: 400px;
     height: 400px;
 }
@@ -624,20 +661,43 @@ img.profile-pic {
 
     padding-top: 5px;
 }*/
+#found-friends {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+#found-friends #findtext {
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    width: 160px;
+    height: 30px;
+    padding-top: 10px;
+    background-color: rgb(8, 8, 8);
+    outline: yellowgreen dotted 1px;
+}
+#findimage {
+    position: relative;
+
+    top: 100px;
+    left: 0px;
+    padding-top: 10px;
+}
 #found-people {
     display: flex;
     flex-direction: row;
     width: 500px;
 }
+
 #found-people video {
     position: relative;
 
-    top: 30px;
+    top: 150px;
     left: 0px;
     height: 400px;
     padding-top: 0px;
 }
-#found-people a {
+/*#found-people a {
     font-family: "Druk Wide Cy Web";
     font-size: 27px;
     padding-top: 100px;
@@ -647,13 +707,20 @@ img.profile-pic {
     flex-direction: column;
     width: 300px;
     height: 500px;
-}
+}*/
 #found-people #findtext {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 10;
+    width: 160px;
+    height: 30px;
+    left: -400px;
+    top: 250px;
+
     padding-top: 10px;
-    align-self: center;
-    justify-self: center;
-    font-size: 28px;
-    width: 400px;
+    background-color: rgb(8, 8, 8);
+    outline: yellowgreen dotted 1px;
 }
 
 #top-right {
@@ -1033,14 +1100,15 @@ img.profile-pic {
 }
 #find-music a {
     display: flex;
-    font-family: "Druk Wide Cy Web";
-
+    font-size: 15px;
     flex-direction: column;
-    text-align: left;
-    content-align: center;
-    padding-top: 10px;
-    color: cyan;
+    align-content: center;
+    text-align: center;
+    padding-top: 0px;
+    color: ghostwhite;
     position: relative;
+    background-color: rgb(8, 8, 8);
+    outline: yellowgreen dotted 1px;
 }
 
 /*/ ///////ICONS//////////*/

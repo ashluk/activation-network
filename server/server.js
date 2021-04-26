@@ -535,7 +535,7 @@ app.get("/music/:id.json", (req, res) => {
             console.log("error in mostrecent", err);
         });
 });*/
-/*app.get("/users/:val", (req, res) => {
+app.get("/findfriends/:val", (req, res) => {
     // console.log("req.params.val", req.params.val);
     db.findUser(req.params.val)
         .then(({ rows }) => {
@@ -545,7 +545,7 @@ app.get("/music/:id.json", (req, res) => {
         .catch((err) => {
             console.log("error in finduser", err);
         });
-});*/
+});
 app.get("/users/:val", (req, res) => {
     console.log("req.params.val", req.params.val);
     db.searchByTag(req.params.val)

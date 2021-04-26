@@ -12,6 +12,7 @@ import Displaycollaborations from "./displaycollaborations";
 import Links from "./links";
 import Artistinfo from "./artistinfo";
 import FindArt from "./findart";
+import FindFriends from "./findfriends";
 
 import { BrowserRouter, Route } from "react-router-dom";
 import OtherProfile from "./otherprofile";
@@ -155,7 +156,7 @@ export default class App extends Component {
                             height="100px"
                             className="object"
                         />
-                        <div className="linktext"> ART</div>{" "}
+                        <div className="linktext"> ART</div>
                     </div>
                 </Link>
                 <Link to="/findmusic" id="findmusicians">
@@ -166,7 +167,7 @@ export default class App extends Component {
                             height="100px"
                             className="object"
                         />
-                        <div className="linktext"> MUSIC</div>{" "}
+                        <div className="linktext"> MUSIC</div>
                     </div>
                 </Link>
                 <Link to="/friends" id="friendsandwannabes">
@@ -177,7 +178,18 @@ export default class App extends Component {
                             height="100px"
                             className="object"
                         />
-                        <div className="linktext"> COLLABORATORS</div>{" "}
+                        <div className="linktext"> COLLABORATORS</div>
+                    </div>
+                </Link>
+                <Link to="/findfriends" id="findfriends">
+                    <div id="newlinkto">
+                        <img
+                            src="object10.png"
+                            width="100px"
+                            height="100px"
+                            className="object"
+                        />
+                        <div className="linktext"> PEOPLE </div>
                     </div>
                 </Link>
 
@@ -249,6 +261,16 @@ export default class App extends Component {
                         path="/findmusic"
                         render={(props) => (
                             <FindMusic
+                                key={props.match.url}
+                                match={props.match}
+                                history={props.history}
+                            />
+                        )}
+                    />
+                    <Route
+                        path="/findfriends"
+                        render={(props) => (
+                            <FindFriends
                                 key={props.match.url}
                                 match={props.match}
                                 history={props.history}

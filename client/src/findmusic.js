@@ -66,7 +66,6 @@ export default function FindMusic() {
                                     </audio>
                                 </Link>
                                 <div id="findtext">
-                                    {" "}
                                     {user.first} {user.last}
                                 </div>
                             </div>

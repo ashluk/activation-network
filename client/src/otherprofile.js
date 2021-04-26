@@ -113,7 +113,7 @@ export default class OtherProfile extends Component {
             });
     }
     render() {
-        console.log("OTHERUSERLINKS", this.state.otherUser.links);
+        console.log("OTHERUSERLINKS", this.state.otherUser);
 
         return (
             <div id="other-profile">

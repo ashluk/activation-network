@@ -65,12 +65,14 @@ export default function Friends(props) {
                 friend.map(function (user) {
                     return (
                         <div id="friends-inside" key={user.id}>
-                            <img
-                                src={user.imageurl}
-                                id="findimage"
-                                width="200"
-                                height="200"
-                            />
+                            <Link to={`/user/${user.id}`}>
+                                <img
+                                    src={user.imageurl}
+                                    id="findimage"
+                                    width="200"
+                                    height="200"
+                                />
+                            </Link>
                             {user.first} {user.last}
                             <button onClick={() => dispatch(unFriend(user.id))}>
                                 UNFRIEND
