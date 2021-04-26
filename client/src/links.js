@@ -4,17 +4,22 @@ export default class Links extends React.Component {
     constructor() {
         super();
         this.state = {
+            editMode: false,
+            links: undefined,
+
             error: false,
         };
     }
     handleClick() {
-        console.log("user clicked linksubmit button");
+        console.log("user clicked linksubmit button", this.state);
         axios
             .post("/links", this.state)
             .then(({ data }) => {
                 console.log("what is links data", data);
                 if (data.success) {
-                    console.log("data in links", data);
+                    this.props.linksInApp(this.state.links);
+
+                    this.setState({ editMode: false });
                 } else {
                     this.setState({
                         error: true,
@@ -33,26 +38,46 @@ export default class Links extends React.Component {
         console.log("the name of input field user is typing in", e.target.name);
         this.setState(
             {
-                [e.target.name]: e.target.value,
+                links: e.target.value,
             },
-            () => console.log("this. state after setState", this.state)
+            () => console.log("this. state after setState", this.state.links)
         );
+        console.log("this.props.links", this.props.links);
     }
+    editLinks() {
+        this.setState({
+            editMode: true,
+        });
+        console.log("EDIT LINKS WAS PUSHED");
+    }
+
     render() {
-        return (
-            <div>
-                <div id="linkforms">
-                    <h1>Links Here</h1>
-                    <input
-                        type="url"
-                        id="links"
-                        name="links"
-                        placeholder="got links???"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <button onClick={() => this.handleClick()}>submit</button>
+        if (!this.state.editMode) {
+            return (
+                <div id="editlinks">
+                    {this.props.links}
+                    <button onClick={() => this.editLinks()}>
+                        EDIT WEBSITE LINK
+                    </button>
                 </div>
-            </div>
-        );
+            );
+        } else {
+            return (
+                <div>
+                    <div id="linkforms">
+                        <input
+                            type="url"
+                            id="links"
+                            name="links"
+                            placeholder="got links???"
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                        <button onClick={() => this.handleClick()}>
+                            ADD WEBSITE
+                        </button>
+                    </div>
+                </div>
+            );
+        }
     }
 }
